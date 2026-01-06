@@ -1,5 +1,6 @@
-function App() {
-    return <>LangGo</>
-}
+import { RouterProvider } from 'react-router/dom'
+import { router } from '@/app/RouterProvider.tsx'
 
-export default App
+export const App = () => {
+    return <RouterProvider router={router} />
+}
