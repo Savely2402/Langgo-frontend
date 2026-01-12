@@ -37,6 +37,15 @@ export default defineConfig([
             '@typescript-eslint/no-explicit-any': 'warn',
             'eqeqeq': ['error', 'always'],
             'prefer-const': 'error',
+            'object-curly-newline': [
+                'error',
+                {
+                    ObjectExpression: { multiline: true, minProperties: 2 },
+                    ObjectPattern: { multiline: true, minProperties: 2 },
+                    ImportDeclaration: { multiline: true, minProperties: 2 },
+                    ExportDeclaration: { multiline: true, minProperties: 2 },
+                },
+            ],
             'no-restricted-imports': [
                 'error',
                 {
