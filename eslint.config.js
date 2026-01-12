@@ -28,7 +28,7 @@ export default defineConfig([
             'import/resolver': {
                 typescript: {
                     alwaysTryTypes: true,
-                    project: 'tsconfig.json',
+                    project: './tsconfig.json',
                 },
             },
         },
@@ -37,6 +37,18 @@ export default defineConfig([
             '@typescript-eslint/no-explicit-any': 'warn',
             'eqeqeq': ['error', 'always'],
             'prefer-const': 'error',
+            'no-restricted-imports': [
+                'error',
+                {
+                    patterns: [
+                        {
+                            group: ['../**'],
+                            message:
+                                'Do not use parent relative imports. Use @/ alias instead.',
+                        },
+                    ],
+                },
+            ],
             'import/order': [
                 'error',
                 {
