@@ -21,8 +21,8 @@ export default defineConfig([
             eslintConfigPrettier,
         ],
         languageOptions: {
-            ecmaVersion: 2020,
-            globals: globals.browser,
+            ecmaVersion: 2022,
+            globals: { ...globals.browser },
         },
         settings: {
             'import/resolver': {
@@ -41,9 +41,9 @@ export default defineConfig([
                 'error',
                 {
                     ObjectExpression: { multiline: true, minProperties: 2 },
-                    ObjectPattern: { multiline: true, minProperties: 2 },
-                    ImportDeclaration: { multiline: true, minProperties: 2 },
-                    ExportDeclaration: { multiline: true, minProperties: 2 },
+                    ObjectPattern: { multiline: true, minProperties: 3 },
+                    ImportDeclaration: { multiline: false, minProperties: 4 },
+                    ExportDeclaration: { multiline: true, minProperties: 4 },
                 },
             ],
             'no-restricted-imports': [
@@ -69,6 +69,7 @@ export default defineConfig([
                         'sibling',
                         'index',
                         'type',
+                        'unknown',
                     ],
                     'pathGroups': [
                         {
@@ -81,12 +82,18 @@ export default defineConfig([
                             group: 'internal',
                             position: 'after',
                         },
+                        {
+                            pattern: '*.css',
+                            group: 'unknown',
+                            position: 'after',
+                        },
                     ],
                     'newlines-between': 'never',
                     'alphabetize': {
                         order: 'asc',
                         caseInsensitive: true,
                     },
+                    'warnOnUnassignedImports': true,
                 },
             ],
             // 'no-console':
