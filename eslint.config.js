@@ -42,7 +42,7 @@ export default defineConfig([
                 {
                     ObjectExpression: { multiline: true, minProperties: 2 },
                     ObjectPattern: { multiline: true, minProperties: 3 },
-                    ImportDeclaration: { multiline: false, minProperties: 4 },
+                    ImportDeclaration: { multiline: true, minProperties: 4 },
                     ExportDeclaration: { multiline: true, minProperties: 4 },
                 },
             ],
