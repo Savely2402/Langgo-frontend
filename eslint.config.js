@@ -88,6 +88,7 @@ export default defineConfig([
                             position: 'after',
                         },
                     ],
+                    'pathGroupsExcludedImportTypes': ['react'],
                     'newlines-between': 'never',
                     'alphabetize': {
                         order: 'asc',
