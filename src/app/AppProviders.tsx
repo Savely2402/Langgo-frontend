@@ -1,4 +1,4 @@
-import { Provider as ReduxProvider } from 'react-redux'
+import { Provider as StoreProvider } from 'react-redux'
 import { store } from './store'
 
 type Props = {
@@ -6,5 +6,5 @@ type Props = {
 }
 
 export const AppProviders = ({ children }: Props) => {
-    return <ReduxProvider store={store}>{children}</ReduxProvider>
+    return <StoreProvider store={store}>{children}</StoreProvider>
 }
