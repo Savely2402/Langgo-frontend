@@ -46,18 +46,6 @@ export default defineConfig([
                     ExportDeclaration: { multiline: true, minProperties: 4 },
                 },
             ],
-            'no-restricted-imports': [
-                'error',
-                {
-                    patterns: [
-                        {
-                            group: ['../**'],
-                            message:
-                                'Do not use parent relative imports. Use @/ alias instead.',
-                        },
-                    ],
-                },
-            ],
             'import/order': [
                 'error',
                 {
