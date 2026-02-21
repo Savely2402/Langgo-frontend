@@ -10,7 +10,6 @@ const userApi = baseApi.injectEndpoints({
                 url: 'auth/login',
                 method: 'POST',
                 body,
-                credentials: 'include',
             }),
             transformResponse: mapAuthResponseToUser,
         }),

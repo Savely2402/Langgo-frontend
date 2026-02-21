@@ -8,7 +8,6 @@ const userApi = baseApi.injectEndpoints({
             query: () => ({
                 url: 'auth/me',
                 method: 'GET',
-                credentials: 'include',
             }),
             transformResponse: mapAuthResponseToUser,
         }),
