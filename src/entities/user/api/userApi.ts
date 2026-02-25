@@ -6,7 +6,7 @@ const userApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         getMe: build.query<User, void>({
             query: () => ({
-                url: 'auth/me',
+                url: 'api/auth/me',
                 method: 'GET',
             }),
             transformResponse: mapAuthResponseToUser,
@@ -14,4 +14,4 @@ const userApi = baseApi.injectEndpoints({
     }),
 })
 
-export const { useGetMeQuery } = userApi
+export const { useGetMeQuery, useLazyGetMeQuery } = userApi
