@@ -1,13 +1,13 @@
 import { HttpResponse } from 'msw'
-import { MOCK_USER } from './userMocks'
+import { type MockUser } from './userMocks'
 import type { AuthResponseDTO } from '../api/types'
 
-export function sendUserData() {
+export function sendUserData(user: MockUser) {
     const response = HttpResponse.json<AuthResponseDTO>(
         {
             user: {
-                ...MOCK_USER.userData,
-                email: MOCK_USER.email,
+                ...user.userData,
+                email: user.email,
             },
         },
         {
@@ -15,8 +15,8 @@ export function sendUserData() {
         },
     )
 
-    document.cookie = 'accessToken=123; Path=/; Max-Age=3600'
-    document.cookie = 'refreshToken=12345; Path=/; Max-Age=3600'
+    document.cookie = `accessToken=${user.userData.id}; Path=/; Max-Age=3600`
+    document.cookie = `refreshToken=${user.userData.id}; Path=/; Max-Age=3600`
 
     return response
 }
