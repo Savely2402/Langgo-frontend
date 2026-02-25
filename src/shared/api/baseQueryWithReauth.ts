@@ -18,12 +18,20 @@ export const baseQueryWithReauth: BaseQueryFn<
 
     let result = await baseQuery(args, api, extraOptions)
 
-    if (result.error && result.error.status === 401) {
+    const url = typeof args === 'string' ? args : args.url
+
+    const AUTH_ENDPOINTS = ['api/auth/login', 'api/auth/register']
+
+    if (
+        result.error &&
+        result.error.status === 401 &&
+        !AUTH_ENDPOINTS.includes(url)
+    ) {
         if (!mutex.isLocked()) {
             const release = await mutex.acquire()
             try {
                 const refreshResult = await baseQuery(
-                    '/auth/refresh',
+                    'api/auth/refresh',
                     api,
                     extraOptions,
                 )
