@@ -23,18 +23,18 @@ export const router = createBrowserRouter([
                             }
                         },
                     },
+                    {
+                        path: '*',
+                        lazy: async () => {
+                            const { NotFoundPage } =
+                                await import('@/pages/not-found')
+
+                            return {
+                                Component: NotFoundPage,
+                            }
+                        },
+                    },
                 ],
-            },
-
-            {
-                path: '*',
-                lazy: async () => {
-                    const { NotFoundPage } = await import('@/pages/not-found')
-
-                    return {
-                        Component: NotFoundPage,
-                    }
-                },
             },
         ],
     },
