@@ -90,7 +90,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
             <Field className="mt-5">
                 <Button type="submit" className="w-full h-[42px] ">
                     Sign in
-                    {isLoading ? <Spinner /> : ''}
+                    {isLoading && <Spinner />}
                 </Button>
             </Field>
         </form>

@@ -12,7 +12,7 @@ import {
     CardFooter,
 } from '@/shared/ui'
 
-interface AuthFormProps {
+interface AuthCardProps {
     title: string
     description: string
     children: React.ReactNode
@@ -24,7 +24,7 @@ export const AuthCard = ({
     description,
     children,
     footer,
-}: AuthFormProps) => {
+}: AuthCardProps) => {
     return (
         <Card className="w-full max-w-[420px]">
             <CardHeader className="flex flex-col items-center">

@@ -6,7 +6,7 @@ const LoginCardFooter = () => {
     return (
         <>
             Don't have an account?&nbsp;
-            <Link className="text-primary font-bold hover:underline " to={'/'}>
+            <Link className="text-primary font-bold hover:underline" to={'/'}>
                 Register for free
             </Link>
         </>
