@@ -41,7 +41,9 @@ export const AuthCard = ({
                 </Button>
                 <div className="flex w-full items-center gap-2 my-6">
                     <Separator className="flex-1" />
-                    <span>or continue with</span>
+                    <span className="font-normal text-xs text-muted-foreground">
+                        OR CONTINUE WITH
+                    </span>
                     <Separator className="flex-1" />
                 </div>
                 {children}
