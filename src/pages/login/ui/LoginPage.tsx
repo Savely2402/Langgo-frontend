@@ -1,13 +1,17 @@
 import { Link, useNavigate } from 'react-router'
 import { LoginForm } from '@/features/auth-login'
+import { HoverUnderline } from '@/shared/ui'
 import { AuthCard } from '@/widgets/auth-card'
 
 const LoginCardFooter = () => {
     return (
         <>
             Don't have an account?&nbsp;
-            <Link className="text-primary font-bold hover:underline" to={'/'}>
-                Register for free
+            <Link
+                className="transition-all text-primary/80 hover:text-primary font-bold hover:underline"
+                to={'/'}
+            >
+                <HoverUnderline>Register for free</HoverUnderline>
             </Link>
         </>
     )
