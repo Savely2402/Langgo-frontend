@@ -14,7 +14,7 @@ export const userHandlers = [
             }
         }
 
-        return sendBadAuthorization('Токен истек или отстутвует')
+        return sendBadAuthorization('Токен истек или отсутствует')
     }),
     http.get('/api/auth/refresh', ({ cookies }) => {
         if (cookies.refreshToken) {
@@ -26,6 +26,6 @@ export const userHandlers = [
             }
         }
 
-        return sendBadAuthorization('Токен истек или отстутвует')
+        return sendBadAuthorization('Токен истек или отсутствует')
     }),
 ]
