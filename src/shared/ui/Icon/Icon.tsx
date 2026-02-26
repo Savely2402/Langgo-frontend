@@ -1,6 +1,6 @@
 import { cn } from '../../lib/classNames'
 
-interface IconProps {
+interface IconProps extends React.SVGProps<SVGSVGElement> {
     Svg: React.FC<React.SVGProps<SVGSVGElement>>
     className?: string
 }
