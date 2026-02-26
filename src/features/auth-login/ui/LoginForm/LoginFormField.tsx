@@ -14,6 +14,7 @@ interface LoginFormFieldProps {
     fieldType: keyof LoginFormSchema
     fieldLabelText: string
     placeholder: string
+    autoComplete: React.HTMLInputAutoCompleteAttribute
     icon: JSX.Element
 }
 
@@ -23,6 +24,7 @@ export const LoginFormField = ({
     fieldType,
     fieldLabelText,
     placeholder,
+    autoComplete,
     icon,
 }: LoginFormFieldProps) => {
     return (
@@ -41,6 +43,7 @@ export const LoginFormField = ({
                             id={`login-${fieldType}-input`}
                             className=" h-full w-full"
                             placeholder={placeholder}
+                            autoComplete={autoComplete}
                             name={field.name}
                             onBlur={field.onBlur}
                             onChange={field.onChange}

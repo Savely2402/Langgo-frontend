@@ -70,6 +70,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
                         fieldType="email"
                         fieldLabelText="Email address"
                         placeholder="you@example.com"
+                        autoComplete="email"
                         icon={<Icon Svg={EmailSvg} />}
                     />
                 </Field>
@@ -80,6 +81,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
                         fieldType="password"
                         fieldLabelText="Password"
                         placeholder="Enter password"
+                        autoComplete="off"
                         icon={<Icon Svg={LockSvg} />}
                     />
                     <ForgotPasswordLink />
