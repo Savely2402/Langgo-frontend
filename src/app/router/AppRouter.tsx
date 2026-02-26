@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router'
 import { AppLayout } from '@/app/layouts/AppLayout'
 import { HomePage } from '@/pages/home'
+import { AuthGuard } from './AuthGuard'
 
 export const router = createBrowserRouter([
     {
@@ -19,7 +20,11 @@ export const router = createBrowserRouter([
                             const { LoginPage } = await import('@/pages/login')
 
                             return {
-                                Component: LoginPage,
+                                Component: () => (
+                                    <AuthGuard>
+                                        <LoginPage />
+                                    </AuthGuard>
+                                ),
                             }
                         },
                     },

@@ -1,7 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { AppProviders } from './app/AppProviders.tsx'
-import { App } from './App.tsx'
+import { AppProviders } from './AppProviders.tsx'
 import './index.css'
 
 async function initApp() {
@@ -13,9 +12,7 @@ async function initApp() {
 initApp().then(() =>
     createRoot(document.getElementById('root')!).render(
         <StrictMode>
-            <AppProviders>
-                <App />
-            </AppProviders>
+            <AppProviders />
         </StrictMode>,
     ),
 )
