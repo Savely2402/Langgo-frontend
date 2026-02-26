@@ -26,31 +26,27 @@ export const AuthCard = ({
     footer,
 }: AuthFormProps) => {
     return (
-        <>
-            <Card className="w-full max-w-[420px]">
-                <CardHeader className="flex flex-col items-center">
-                    <CardTitle>{title}</CardTitle>
-                    <CardDescription>{description}</CardDescription>
-                </CardHeader>
-                <CardContent className="w-full">
-                    <Button
-                        className="w-full bg-white h-10.5 text-muted-foreground"
-                        variant="outline"
-                    >
-                        <Icon Svg={GoogleSvg} />
-                        Sign in with google
-                    </Button>
-                    <div className="flex w-full items-center gap-2 my-6">
-                        <Separator className="flex-1" />
-                        <span>or continue with</span>
-                        <Separator className="flex-1" />
-                    </div>
-                    {children}
-                </CardContent>
-                <CardFooter className="flex justify-center">
-                    {footer}
-                </CardFooter>
-            </Card>
-        </>
+        <Card className="w-full max-w-[420px]">
+            <CardHeader className="flex flex-col items-center">
+                <CardTitle>{title}</CardTitle>
+                <CardDescription>{description}</CardDescription>
+            </CardHeader>
+            <CardContent className="w-full">
+                <Button
+                    className="w-full bg-white h-[42px] text-muted-foreground"
+                    variant="outline"
+                >
+                    <Icon Svg={GoogleSvg} />
+                    Sign in with google
+                </Button>
+                <div className="flex w-full items-center gap-2 my-6">
+                    <Separator className="flex-1" />
+                    <span>or continue with</span>
+                    <Separator className="flex-1" />
+                </div>
+                {children}
+            </CardContent>
+            <CardFooter className="flex justify-center">{footer}</CardFooter>
+        </Card>
     )
 }
