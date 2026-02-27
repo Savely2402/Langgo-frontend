@@ -1,10 +1,12 @@
 import { Provider as StoreProvider } from 'react-redux'
+import { RouterProvider } from 'react-router'
+import { router } from './router/AppRouter'
 import { store } from './store'
 
-type Props = {
-    children: React.ReactNode
-}
-
-export const AppProviders = ({ children }: Props) => {
-    return <StoreProvider store={store}>{children}</StoreProvider>
+export const AppProviders = () => {
+    return (
+        <StoreProvider store={store}>
+            <RouterProvider router={router} />
+        </StoreProvider>
+    )
 }

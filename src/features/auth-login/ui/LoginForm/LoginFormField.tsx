@@ -32,7 +32,7 @@ export const LoginFormField = ({
             <FieldLabel htmlFor={`login-${fieldType}-input`}>
                 <span className="font-medium">{fieldLabelText}</span>
             </FieldLabel>
-            <InputGroup className="bg-background hover:bg-card focus-within:bg-card  overflow-hidden h-[46px]">
+            <InputGroup className="bg-background transition-all hover:bg-card focus-within:bg-card  overflow-hidden h-[46px]">
                 <Controller
                     control={control}
                     name={fieldType}

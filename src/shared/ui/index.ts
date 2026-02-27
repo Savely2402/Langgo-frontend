@@ -35,3 +35,4 @@ export {
 } from './Card'
 export { Spinner } from './Spinner'
 export { Alert, AlertDescription, AlertTitle } from './Alert'
+export { HoverUnderline } from './HoverUnderline'

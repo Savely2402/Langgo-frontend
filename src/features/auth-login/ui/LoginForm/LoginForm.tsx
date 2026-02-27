@@ -4,7 +4,14 @@ import { Link } from 'react-router'
 import { getErrorMessage, isRtkQueryError } from '@/shared/api'
 import EmailSvg from '@/shared/assets/icons/email.svg?react'
 import LockSvg from '@/shared/assets/icons/lock.svg?react'
-import { Field, FieldGroup, Icon, Button, Spinner } from '@/shared/ui'
+import {
+    Field,
+    FieldGroup,
+    Icon,
+    Button,
+    Spinner,
+    HoverUnderline,
+} from '@/shared/ui'
 import { useLoginMutation } from '../../api/loginApi'
 import { loginFormSchema, type LoginFormSchema } from '../../model/login-schema'
 import { LoginAlert } from './LoginAlert'
@@ -14,10 +21,10 @@ const ForgotPasswordLink = () => {
     return (
         <div className="flex justify-end -mt-2">
             <Link
-                className="text-primary/80 hover:text-primary text-sm transition-colors hover:underline font-semibold"
+                className="group text-primary/80 hover:text-primary text-sm transition-colors relative font-semibold"
                 to={'/'}
             >
-                Forgot Password?
+                <HoverUnderline>Forgot Password?</HoverUnderline>
             </Link>
         </div>
     )
@@ -88,7 +95,10 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
                 </Field>
             </FieldGroup>
             <Field className="mt-5">
-                <Button type="submit" className="w-full h-[42px] ">
+                <Button
+                    type="submit"
+                    className="w-full h-[42px] transition-all active:scale-95"
+                >
                     Sign in
                     {isLoading && <Spinner />}
                 </Button>
