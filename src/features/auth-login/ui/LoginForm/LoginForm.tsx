@@ -95,10 +95,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
                 </Field>
             </FieldGroup>
             <Field className="mt-5">
-                <Button
-                    type="submit"
-                    className="w-full h-[42px] transition-all active:scale-95"
-                >
+                <Button type="submit" className="w-full h-[42px]">
                     Sign in
                     {isLoading && <Spinner />}
                 </Button>
