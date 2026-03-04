@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router'
-import { AppLayout } from '@/app/layouts/AppLayout'
 import { HomePage } from '@/pages/home'
+import { AppLayout } from '../layouts/AppLayout'
+import { AuthLayout } from '../layouts/AuthLayout'
 import { AuthGuard } from './AuthGuard'
 
 export const router = createBrowserRouter([
@@ -14,6 +15,23 @@ export const router = createBrowserRouter([
                         index: true,
                         Component: HomePage,
                     },
+
+                    {
+                        path: '*',
+                        lazy: async () => {
+                            const { NotFoundPage } =
+                                await import('@/pages/not-found')
+
+                            return {
+                                Component: NotFoundPage,
+                            }
+                        },
+                    },
+                ],
+            },
+            {
+                Component: AuthLayout,
+                children: [
                     {
                         path: 'login',
                         lazy: async () => {
@@ -25,17 +43,6 @@ export const router = createBrowserRouter([
                                         <LoginPage />
                                     </AuthGuard>
                                 ),
-                            }
-                        },
-                    },
-                    {
-                        path: '*',
-                        lazy: async () => {
-                            const { NotFoundPage } =
-                                await import('@/pages/not-found')
-
-                            return {
-                                Component: NotFoundPage,
                             }
                         },
                     },

@@ -21,6 +21,9 @@ const config: Config = {
             },
         },
     ],
+    plugins: ['prettier-plugin-tailwindcss'],
+    tailwindFunctions: ['cn', 'cva', 'clsx'],
+    tailwindStylesheet: './src/app/index.css',
 }
 
 export default config

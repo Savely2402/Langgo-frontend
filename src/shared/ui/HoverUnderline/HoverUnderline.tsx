@@ -12,7 +12,7 @@ export const HoverUnderline = ({
     return (
         <span className={cn('group relative inline-flex', className)}>
             {children}
-            <span className="absolute left-0 bottom-0 h-px w-full scale-0 bg-primary transition-all duration-300 group-hover:scale-100" />
+            <span className="absolute bottom-0 left-0 h-px w-full scale-0 bg-primary transition-all duration-300 group-hover:scale-100" />
         </span>
     )
 }
