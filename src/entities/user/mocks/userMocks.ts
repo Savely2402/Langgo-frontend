@@ -1,10 +1,7 @@
+import type { User } from '../model/types'
+
 export type MockUser = {
-    userData: {
-        id: number
-        username: string
-        fullName: string
-        avatar: string
-    }
+    userData: Omit<User, 'email'>
     email: string
     password: string
 }
@@ -14,8 +11,8 @@ export const MOCK_USERS: MockUser[] = [
         userData: {
             id: 1,
             username: 'john_doe',
-            fullName: 'John Doe',
-            avatar: 'https://i.pravatar.cc/150?u=1',
+            fullname: 'John Doe',
+            avatarUrl: 'https://i.pravatar.cc/150?u=1',
         },
         email: 'user@gmail.com',
         password: 'user123',
@@ -24,8 +21,8 @@ export const MOCK_USERS: MockUser[] = [
         userData: {
             id: 2,
             username: 'jane_smith',
-            fullName: 'Jane Smith',
-            avatar: 'https://i.pravatar.cc/150?u=2',
+            fullname: 'Jane Smith',
+            avatarUrl: 'https://i.pravatar.cc/150?u=2',
         },
         email: 'jane@gmail.com',
         password: 'jane123',
@@ -34,10 +31,10 @@ export const MOCK_USERS: MockUser[] = [
         userData: {
             id: 3,
             username: 'alex_admin',
-            fullName: 'Alex Johnson',
-            avatar: 'https://i.pravatar.cc/150?u=3',
+            fullname: 'Alex Johnson',
+            avatarUrl: 'https://i.pravatar.cc/150?u=3',
         },
-        email: 'john@gmail.com',
-        password: 'john123',
+        email: 'alex@gmail.com',
+        password: 'alex123',
     },
 ]

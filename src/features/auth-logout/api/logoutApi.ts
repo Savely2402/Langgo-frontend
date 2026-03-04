@@ -1,3 +1,4 @@
+import { userApi } from '@/entities/user'
 import { baseApi } from '@/shared/api'
 
 const logoutApi = baseApi.injectEndpoints({
@@ -7,9 +8,10 @@ const logoutApi = baseApi.injectEndpoints({
                 url: 'api/auth/logout',
                 method: 'POST',
             }),
-            onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
                 await queryFulfilled
-                dispatch(baseApi.util.resetApiState())
+
+                dispatch(userApi.util.upsertQueryData('getMe', undefined, null))
             },
         }),
     }),

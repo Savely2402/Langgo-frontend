@@ -16,7 +16,7 @@ export const userHandlers = [
 
         return sendBadAuthorization('Токен истек или отсутствует')
     }),
-    http.get('/api/auth/refresh', ({ cookies }) => {
+    http.post('/api/auth/refresh', ({ cookies }) => {
         if (cookies.refreshToken) {
             const user = MOCK_USERS.find(
                 (user) => user.userData.id === Number(cookies.refreshToken),
