@@ -13,8 +13,14 @@ const loginApi = baseApi.injectEndpoints({
             }),
             transformResponse: mapAuthResponseToUser,
             async onQueryStarted(_, { dispatch, queryFulfilled }) {
-                const { data: user } = await queryFulfilled
-                dispatch(userApi.util.upsertQueryData('getMe', undefined, user))
+                try {
+                    const { data: user } = await queryFulfilled
+                    dispatch(
+                        userApi.util.upsertQueryData('getMe', undefined, user),
+                    )
+                } catch {
+                    // ignore errors
+                }
             },
         }),
     }),

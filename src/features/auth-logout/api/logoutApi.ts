@@ -3,15 +3,21 @@ import { baseApi } from '@/shared/api'
 
 const logoutApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        logout: build.mutation({
+        logout: build.mutation<void, void>({
             query: () => ({
                 url: 'api/auth/logout',
                 method: 'POST',
             }),
             async onQueryStarted(_, { dispatch, queryFulfilled }) {
-                await queryFulfilled
+                try {
+                    await queryFulfilled
 
-                dispatch(userApi.util.upsertQueryData('getMe', undefined, null))
+                    dispatch(
+                        userApi.util.upsertQueryData('getMe', undefined, null),
+                    )
+                } catch {
+                    // ignore errors
+                }
             },
         }),
     }),

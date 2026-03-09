@@ -2,10 +2,18 @@ import { Button } from '@/shared/ui/Button'
 import { useLogoutMutation } from '../api/logoutApi'
 
 export const LogoutButton = () => {
-    const [logout] = useLogoutMutation()
+    const [logout, { isLoading }] = useLogoutMutation()
+
+    const handleClickLogout = async () => {
+        try {
+            await logout().unwrap()
+        } catch (err) {
+            console.error('Ошибка при выходе: ', err)
+        }
+    }
 
     return (
-        <Button onClick={async () => await logout(null).unwrap()}>
+        <Button disabled={isLoading} onClick={handleClickLogout}>
             Sign out
         </Button>
     )

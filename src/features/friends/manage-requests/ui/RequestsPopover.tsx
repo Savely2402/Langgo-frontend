@@ -11,6 +11,7 @@ export const RequestsPopover = () => {
                 <Button
                     variant="ghost"
                     className="text-secondary-foreground hover:text-primary has-[>svg]:p-2 min-[450px]:has-[>svg]:p-3"
+                    aria-label="friend requests"
                 >
                     <LucideBell className="size-5 sm:size-6" />
                 </Button>

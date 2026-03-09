@@ -26,7 +26,7 @@ export const UserDropdown = () => {
             >
                 <DropdownMenuTrigger>
                     <Avatar className="size-6 sm:size-7">
-                        <AvatarImage src={user.avatarUrl} />
+                        <AvatarImage src={user.avatarUrl} alt="Avatar" />
                         <AvatarFallback>
                             {user.username[0].toUpperCase()}
                         </AvatarFallback>

@@ -92,7 +92,11 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
                 </Field>
             </FieldGroup>
             <Field className="mt-5">
-                <Button type="submit" className="h-[42px] w-full">
+                <Button
+                    disabled={isLoading}
+                    type="submit"
+                    className="h-[42px] w-full"
+                >
                     Sign in
                     {isLoading && <Spinner />}
                 </Button>

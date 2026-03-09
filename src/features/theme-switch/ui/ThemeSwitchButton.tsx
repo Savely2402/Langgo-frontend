@@ -6,6 +6,7 @@ export const ThemeSwitchButton = () => {
         <Button
             variant="ghost"
             className="gap-1 text-secondary-foreground hover:text-primary has-[>svg]:p-2 min-[450px]:has-[>svg]:p-3"
+            aria-label="Toggle theme"
         >
             <Moon className="size-5 sm:size-6" />
         </Button>

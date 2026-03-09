@@ -8,7 +8,7 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
 export const Icon = ({ Svg, className, ...props }: IconProps) => {
     return (
         <Svg
-            className={cn('`w-6 h-6 fill-current', className)}
+            className={cn('h-6 w-6 fill-current', className)}
             preserveAspectRatio="none"
             {...props}
         />

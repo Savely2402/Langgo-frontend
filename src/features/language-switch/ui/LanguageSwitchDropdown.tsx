@@ -24,6 +24,7 @@ export const LanguageSwitchDropdown = () => {
             <Button
                 variant={'ghost'}
                 className="gap-1 text-secondary-foreground hover:text-primary has-[>svg]:p-2 data-[state=open]:bg-accent data-[state=open]:text-primary min-[450px]:has-[>svg]:p-3"
+                aria-label="Switch language"
                 asChild
             >
                 <DropdownMenuTrigger>
