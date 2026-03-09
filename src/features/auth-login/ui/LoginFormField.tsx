@@ -1,12 +1,11 @@
 import { Controller, type Control, type FieldErrors } from 'react-hook-form'
+import { FieldError, FieldLabel } from '@/shared/ui/Field'
 import {
-    FieldError,
-    FieldLabel,
     InputGroup,
     InputGroupAddon,
     InputGroupInput,
-} from '@/shared/ui'
-import type { LoginFormSchema } from '../../model/login-schema'
+} from '@/shared/ui/InputGroup'
+import type { LoginFormSchema } from '../model/login-schema'
 
 interface LoginFormFieldProps {
     control: Control<LoginFormSchema, any, LoginFormSchema>
@@ -32,7 +31,7 @@ export const LoginFormField = ({
             <FieldLabel htmlFor={`login-${fieldType}-input`}>
                 <span className="font-medium">{fieldLabelText}</span>
             </FieldLabel>
-            <InputGroup className="bg-background transition-all hover:bg-card focus-within:bg-card  overflow-hidden h-[46px]">
+            <InputGroup className="h-[46px] overflow-hidden bg-background transition-all focus-within:bg-card hover:bg-card">
                 <Controller
                     control={control}
                     name={fieldType}

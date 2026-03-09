@@ -1,6 +1,5 @@
 import { Mutex } from 'async-mutex'
 import { baseQuery } from './baseQuery'
-import { REDUCER_PATH } from './constants'
 import type {
     BaseQueryFn,
     FetchArgs,
@@ -31,16 +30,12 @@ export const baseQueryWithReauth: BaseQueryFn<
             const release = await mutex.acquire()
             try {
                 const refreshResult = await baseQuery(
-                    'api/auth/refresh',
+                    { url: 'api/auth/refresh', method: 'POST' },
                     api,
                     extraOptions,
                 )
                 if (refreshResult.data) {
                     result = await baseQuery(args, api, extraOptions)
-                } else {
-                    api.dispatch({
-                        type: `${REDUCER_PATH}/resetApiState`,
-                    })
                 }
             } finally {
                 release()
