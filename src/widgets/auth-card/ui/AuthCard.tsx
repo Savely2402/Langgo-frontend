@@ -1,16 +1,16 @@
 import type React from 'react'
 import GoogleSvg from '@/shared/assets/icons/google.svg?react'
+import { Button } from '@/shared/ui/Button'
 import {
-    Button,
     Card,
     CardContent,
     CardDescription,
     CardHeader,
     CardTitle,
-    Separator,
-    Icon,
     CardFooter,
-} from '@/shared/ui'
+} from '@/shared/ui/Card'
+import { Icon } from '@/shared/ui/Icon'
+import { Separator } from '@/shared/ui/Separator'
 
 interface AuthCardProps {
     title: string
@@ -33,15 +33,15 @@ export const AuthCard = ({
             </CardHeader>
             <CardContent className="w-full">
                 <Button
-                    className="w-full bg-white h-[42px] text-muted-foreground"
+                    className="h-[42px] w-full bg-white text-muted-foreground"
                     variant="outline"
                 >
                     <Icon Svg={GoogleSvg} />
                     Sign in with google
                 </Button>
-                <div className="flex w-full items-center gap-2 my-6">
+                <div className="my-6 flex w-full items-center gap-2">
                     <Separator className="flex-1" />
-                    <span className="font-normal text-xs text-muted-foreground">
+                    <span className="text-xs font-normal text-muted-foreground">
                         OR CONTINUE WITH
                     </span>
                     <Separator className="flex-1" />

@@ -1,5 +1,6 @@
 import * as z from 'zod'
 import type { SerializedError } from '@reduxjs/toolkit'
+
 /**
  * Схема в соответствии с типом FetchBaseQueryError
  */

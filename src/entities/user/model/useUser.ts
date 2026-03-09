@@ -1,10 +1,9 @@
-import { useLazyGetMeQuery } from '../api/userApi'
+import { useGetMeQuery } from '../api/userApi'
 
 export const useUser = () => {
-    const [getMe, { data: user, isError, isLoading }] = useLazyGetMeQuery()
+    const { data: user, isError, isLoading } = useGetMeQuery()
 
     return {
-        getMe,
         user,
         isError,
         isLoading,

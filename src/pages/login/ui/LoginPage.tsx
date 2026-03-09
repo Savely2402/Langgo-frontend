@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router'
 import { LoginForm } from '@/features/auth-login'
-import { HoverUnderline } from '@/shared/ui'
+import { HoverUnderline } from '@/shared/ui/HoverUnderline'
 import { AuthCard } from '@/widgets/auth-card'
 
 const LoginCardFooter = () => {
@@ -8,7 +8,7 @@ const LoginCardFooter = () => {
         <>
             Don't have an account?&nbsp;
             <Link
-                className="transition-all text-primary/80 hover:text-primary font-bold hover:underline"
+                className="font-bold text-primary/80 transition-all hover:text-primary hover:underline"
                 to={'/'}
             >
                 <HoverUnderline>Register for free</HoverUnderline>
@@ -21,7 +21,7 @@ export const LoginPage = () => {
     const navigate = useNavigate()
 
     return (
-        <div className="w-full min-h-dvh flex items-center justify-center">
+        <div className="flex min-h-dvh w-full items-center justify-center">
             <AuthCard
                 title="Welcome back"
                 description="Please sign in to your LangGo account"

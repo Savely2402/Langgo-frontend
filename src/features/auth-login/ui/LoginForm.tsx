@@ -4,24 +4,21 @@ import { Link } from 'react-router'
 import { getErrorMessage, isRtkQueryError } from '@/shared/api'
 import EmailSvg from '@/shared/assets/icons/email.svg?react'
 import LockSvg from '@/shared/assets/icons/lock.svg?react'
-import {
-    Field,
-    FieldGroup,
-    Icon,
-    Button,
-    Spinner,
-    HoverUnderline,
-} from '@/shared/ui'
-import { useLoginMutation } from '../../api/loginApi'
-import { loginFormSchema, type LoginFormSchema } from '../../model/login-schema'
+import { Button } from '@/shared/ui/Button'
+import { Field, FieldGroup } from '@/shared/ui/Field'
+import { HoverUnderline } from '@/shared/ui/HoverUnderline'
+import { Icon } from '@/shared/ui/Icon'
+import { Spinner } from '@/shared/ui/Spinner'
+import { useLoginMutation } from '../api/loginApi'
+import { loginFormSchema, type LoginFormSchema } from '../model/login-schema'
 import { LoginAlert } from './LoginAlert'
 import { LoginFormField } from './LoginFormField'
 
 const ForgotPasswordLink = () => {
     return (
-        <div className="flex justify-end -mt-2">
+        <div className="-mt-2 flex justify-end">
             <Link
-                className="group text-primary/80 hover:text-primary text-sm transition-colors relative font-semibold"
+                className="group relative text-sm font-semibold text-primary/80 transition-colors hover:text-primary"
                 to={'/'}
             >
                 <HoverUnderline>Forgot Password?</HoverUnderline>
@@ -96,8 +93,9 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
             </FieldGroup>
             <Field className="mt-5">
                 <Button
+                    disabled={isLoading}
                     type="submit"
-                    className="w-full h-[42px] transition-all active:scale-95"
+                    className="h-[42px] w-full"
                 >
                     Sign in
                     {isLoading && <Spinner />}
