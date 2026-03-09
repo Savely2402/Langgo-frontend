@@ -8,7 +8,7 @@ const LoginCardFooter = () => {
         <>
             Don't have an account?&nbsp;
             <Link
-                className="font-bold text-primary/80 transition-all hover:text-primary hover:underline"
+                className="font-bold text-primary/80 transition-all hover:text-primary"
                 to={'/'}
             >
                 <HoverUnderline>Register for free</HoverUnderline>
