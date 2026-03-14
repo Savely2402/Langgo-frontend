@@ -5,7 +5,7 @@ import { Separator } from '@/shared/ui/Separator'
 import { CancelSearchButton } from '../CancelSearchButton/CancelSearchButton'
 
 interface MatchToastContentProps {
-    toastId: number
+    toastId: number | string
     startSearchTime: number
     handleToastClose: () => void
 }

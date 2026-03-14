@@ -20,7 +20,7 @@ export const FindMatchButton = ({
         toast.custom(
             (toastId) => (
                 <MatchToastContent
-                    toastId={Number(toastId)}
+                    toastId={toastId}
                     startSearchTime={startSearchTime}
                     handleToastClose={() => setIsOpen(false)}
                 />
