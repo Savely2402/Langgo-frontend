@@ -1,3 +1,9 @@
+import { FindMatchButton } from '@/features/find-match'
+
 export const HomePage = () => {
-    return <div></div>
+    return (
+        <div>
+            <FindMatchButton />
+        </div>
+    )
 }

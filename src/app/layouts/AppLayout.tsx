@@ -4,6 +4,7 @@ import { useUser } from '@/entities/user'
 import { RequestsPopover } from '@/features/friends/manage-requests'
 import { Button } from '@/shared/ui/Button'
 import { Separator } from '@/shared/ui/Separator'
+import { Toaster } from '@/shared/ui/Toaster'
 import { AppHeader } from '@/widgets/app-header'
 import { UserDropdown } from '@/widgets/user-dropdown'
 
@@ -59,6 +60,7 @@ export const AppLayout = () => {
         <>
             <AppHeader rightSlot={user ? <UserState /> : <GuestState />} />
             <Outlet />
+            <Toaster position="top-center" />
         </>
     )
 }
