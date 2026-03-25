@@ -1,5 +1,13 @@
 import * as z from 'zod'
 import type { SerializedError } from '@reduxjs/toolkit'
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
+
+const rtkErrorList = [
+    'CUSTOM_ERROR',
+    'FETCH_ERROR',
+    'PARSING_ERROR',
+    'TIMEOUT_ERROR',
+] as const satisfies readonly Exclude<FetchBaseQueryError['status'], number>[]
 
 /**
  * Схема в соответствии с типом FetchBaseQueryError
@@ -12,7 +20,7 @@ const RtkErrorSchema = z.union([
         }),
     }),
     z.object({
-        status: z.string(),
+        status: z.enum(rtkErrorList),
         data: z.unknown().optional(), // data опциональная, так как это системная ошибка
         error: z.string(),
         originalStatus: z.number().optional(),
@@ -35,4 +43,15 @@ export function isSerializedError(error: unknown): error is SerializedError {
                 typeof (error as Record<string, unknown>)[key] === 'string',
         )
     )
+}
+
+const abortErrorSchema = z.object({
+    message: z.string().optional(),
+    name: z.literal('AbortError'),
+})
+
+type AbortError = z.infer<typeof abortErrorSchema>
+
+export function isAbortError(error: unknown): error is AbortError {
+    return abortErrorSchema.safeParse(error).success
 }
