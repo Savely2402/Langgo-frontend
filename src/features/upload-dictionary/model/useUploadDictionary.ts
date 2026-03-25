@@ -118,7 +118,7 @@ export const useUploadDictionary = ({
 
     const allErrors = [
         ...fileErrors,
-        ...(isRealError ? getErrorMessage(error) : []),
+        ...(isRealError ? [getErrorMessage(error)] : []),
     ]
 
     return {

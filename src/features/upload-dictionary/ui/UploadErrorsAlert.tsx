@@ -18,7 +18,7 @@ export const UploadErrorsAlert = ({ errors, className }: UploadErrorProps) => {
             <AlertCircle />
             <AlertTitle>Ошибка загрузки</AlertTitle>
             <AlertDescription>
-                <ul className='space-y-1" ml-4 list-disc'>
+                <ul className="ml-4 list-disc space-y-1">
                     {errors.map((error, index) => (
                         <li key={index}>{error}</li>
                     ))}

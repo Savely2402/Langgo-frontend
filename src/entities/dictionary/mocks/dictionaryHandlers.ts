@@ -4,7 +4,7 @@ import { CUSTOM_DICTIONARIES } from './dictionaryMocks'
 import type { UploadDictionaryRequest } from '../api/types'
 
 export const dictionaryHandlers = [
-    http.get<{ id: string }>('/api/dictionaries/me', ({ cookies }) => {
+    http.get('/api/dictionaries/me', ({ cookies }) => {
         if (cookies.accessToken) {
             const userDictionaries = CUSTOM_DICTIONARIES.filter(
                 (dictionary) =>
@@ -17,7 +17,7 @@ export const dictionaryHandlers = [
         return sendBadAuthorization('Токен не найден')
     }),
     http.post<never, UploadDictionaryRequest, object>(
-        'api/dictionaries/upload',
+        '/api/dictionaries/upload',
         async ({ request }) => {
             const data = await request.formData()
             const file = data.get('file')
@@ -39,7 +39,7 @@ export const dictionaryHandlers = [
         },
     ),
     http.delete<{ id: string }, null, object>(
-        'api/dictionaries/:id',
+        '/api/dictionaries/:id',
         async ({ params }) => {
             return HttpResponse.json(
                 { message: `Словарь с id: ${params.id} успешно удален` },
