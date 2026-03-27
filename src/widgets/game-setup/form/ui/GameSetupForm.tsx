@@ -16,7 +16,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/Tabs'
 
 interface GameSetupFormValues {
     dictionaryId: number | null
-    roundsAmount: number
+    roundsAmount: number | null
 }
 
 const DRAFT_KEY = 'game-setup-draft'
@@ -68,11 +68,11 @@ export const GameSetupForm = () => {
     const handleUploadStatusChange = useCallback(
         (status: UploadStatus) => {
             setUploadStatus(status)
-            if (uploadStatus === 'idle' || uploadStatus === 'error') {
+            if (status === 'idle' || status === 'error') {
                 setValue('dictionaryId', null)
             }
         },
-        [uploadStatus, setValue],
+        [setValue],
     )
 
     return (
@@ -214,11 +214,12 @@ export const GameSetupForm = () => {
                                         id="rounds-amount"
                                         type="number"
                                         placeholder="Type a number..."
+                                        value={field.value ?? ''}
                                         onChange={(e) =>
                                             field.onChange(
                                                 e.target.value
                                                     ? Number(e.target.value)
-                                                    : '',
+                                                    : null,
                                             )
                                         }
                                     />

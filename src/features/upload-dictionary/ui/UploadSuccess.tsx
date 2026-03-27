@@ -59,7 +59,7 @@ export const UploadSuccess = ({
                         className="line-clamp-2 text-2xl font-extrabold wrap-break-word"
                         title={dictionaryName}
                     >
-                        Hello it's me - {dictionaryName}
+                        {dictionaryName}
                     </h3>
                     <div className="flex flex-col items-center gap-2 min-[400px]:flex-row">
                         <Badge

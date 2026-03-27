@@ -10,7 +10,7 @@ export const routes = {
     login: `/${routeSegments.login}`,
     customGame: {
         root: `/${routeSegments.gameSetup}`,
-        lobby: `${routeSegments.gameSetup}/${routeSegments.lobby}`,
+        lobby: `/${routeSegments.gameSetup}/${routeSegments.lobby}`,
     },
     notFound: '*',
 } as const
