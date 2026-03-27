@@ -11,6 +11,7 @@ import {
     useDeleteDictionaryMutation,
 } from '@/entities/dictionary'
 import { getErrorMessage, isAbortError } from '@/shared/api'
+import type { UploadStatus } from './types'
 
 const FILE_ERROR_MESSAGES = {
     [ErrorCode.FileInvalidType]: 'Тип файла должен быть .json',
@@ -22,8 +23,6 @@ const FILE_ERROR_MESSAGES = {
 interface UseUploadDictionaryProps {
     onSuccess?: (dictionaryId: BaseDictionary['id']) => void
 }
-
-export type UploadStatus = 'idle' | 'loading' | 'error' | 'success'
 
 export const useUploadDictionary = ({
     onSuccess,
