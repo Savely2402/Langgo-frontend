@@ -13,8 +13,9 @@ export const UploadLoading = ({
 }: UploadLoadingProps) => {
     return (
         <DropzoneLayout variant="loading" className={className}>
-            <span className="flex items-center gap-3 text-xl font-semibold">
-                <Spinner className="size-6" /> Загружаем словарь...
+            <span className="flex items-center gap-3 text-center text-xl font-semibold">
+                <Spinner className="size-6" />
+                Загружаем словарь...
             </span>
             <Button variant="outline" onClick={handleCancel}>
                 Отменить загрузку

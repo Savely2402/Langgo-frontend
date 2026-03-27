@@ -25,8 +25,10 @@ export const UploadIdle = ({
         >
             <FileUp className="size-10 text-slate-400 transition-colors group-hover:text-primary" />
             <div className="flex flex-col gap-2 font-semibold">
-                <p className="text-[18px]">Перетащите или выберите файл</p>
-                <p className="text-sm text-muted-foreground/70">
+                <p className="text-center text-[18px]">
+                    Перетащите или выберите файл
+                </p>
+                <p className="text-center text-sm text-muted-foreground/70">
                     Поддерживаются .json файлы до 5 MB
                 </p>
             </div>
