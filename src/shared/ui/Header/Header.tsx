@@ -7,9 +7,11 @@ interface HeaderProps {
 
 export const Header = ({ leftSlot, rightSlot }: HeaderProps) => {
     return (
-        <header className="flex w-full items-center justify-between bg-white px-8 py-3.5">
-            {leftSlot}
-            {rightSlot}
+        <header className="w-full bg-white px-4 py-3.5">
+            <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between">
+                {leftSlot}
+                {rightSlot}
+            </div>
         </header>
     )
 }

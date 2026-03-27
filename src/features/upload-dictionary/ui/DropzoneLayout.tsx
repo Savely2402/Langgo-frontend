@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 import type React from 'react'
 import { cn } from '@/shared/lib/classNames'
-import type { UploadStatus } from '../model/useUploadDictionary'
+import type { UploadStatus } from '../model/types'
 
 interface DropzoneLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
     variant: UploadStatus
