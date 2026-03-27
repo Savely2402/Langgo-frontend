@@ -21,8 +21,17 @@ interface GameSetupFormValues {
 
 const DRAFT_KEY = 'game-setup-draft'
 
+const parseDraft = (): GameSetupFormValues | null => {
+    try {
+        return JSON.parse(sessionStorage.getItem(DRAFT_KEY) || 'null')
+    } catch {
+        sessionStorage.removeItem(DRAFT_KEY)
+        return null
+    }
+}
+
 export const GameSetupForm = () => {
-    const savedDraft = JSON.parse(sessionStorage.getItem(DRAFT_KEY) || 'null')
+    const savedDraft = parseDraft()
 
     const navigate = useNavigate()
 
