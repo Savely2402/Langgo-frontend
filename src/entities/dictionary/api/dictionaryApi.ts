@@ -5,11 +5,11 @@ import type { CustomDictionary } from '../model/types'
 export const dictionaryApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         getUserDictionaries: build.query<CustomDictionary[], void>({
-            query: () => 'api/dictionaries/me',
+            query: () => 'dictionaries/me',
         }),
         deleteDictionary: build.mutation<void, number>({
             query: (id) => ({
-                url: `api/dictionaries/${id}`,
+                url: `dictionaries/${id}`,
                 method: 'DELETE',
             }),
         }),
@@ -18,7 +18,7 @@ export const dictionaryApi = baseApi.injectEndpoints({
             UploadDictionaryRequest
         >({
             query: ({ body }) => ({
-                url: 'api/dictionaries/upload',
+                url: 'dictionaries/upload',
                 method: 'POST',
                 body,
             }),
