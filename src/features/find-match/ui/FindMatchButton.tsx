@@ -2,11 +2,12 @@ import { useState, type ComponentProps } from 'react'
 import { Swords } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/shared/ui/Button'
-import { MatchToastContent } from '../MatchToastContent/MatchToastContent'
+import { MatchToastContent } from './MatchToastContent'
 
-type FindMatchButtonProps = Omit<ComponentProps<typeof Button>, 'children'>
+type FindMatchButtonProps = ComponentProps<typeof Button>
 
 export const FindMatchButton = ({
+    children,
     onClick,
     disabled,
     ...props
@@ -36,8 +37,12 @@ export const FindMatchButton = ({
 
     return (
         <Button disabled={isOpen || disabled} onClick={handleClick} {...props}>
-            <Swords />
-            <span>Find match</span>
+            {children ?? (
+                <>
+                    <Swords />
+                    <span>Find match</span>
+                </>
+            )}
         </Button>
     )
 }

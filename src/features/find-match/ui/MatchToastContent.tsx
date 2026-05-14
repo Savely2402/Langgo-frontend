@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { formatDuration } from '@/shared/lib/formatters'
 import { Separator } from '@/shared/ui/Separator'
-import { CancelSearchButton } from '../CancelSearchButton/CancelSearchButton'
+import { CancelSearchButton } from './CancelSearchButton'
 
 interface MatchToastContentProps {
     toastId: number | string
@@ -43,9 +43,7 @@ export const MatchToastContent = ({
                 <span className="relative inline-flex h-full w-full rounded-full bg-[#94A3B8]" />
             </span>
 
-            <span className="hidden min-[600px]:block">
-                Searching opponent...
-            </span>
+            <span className="hidden min-[600px]:block">Поиск оппонента...</span>
             <Separator
                 orientation="vertical"
                 className="hidden h-4! bg-[#475569] min-[600px]:block"
