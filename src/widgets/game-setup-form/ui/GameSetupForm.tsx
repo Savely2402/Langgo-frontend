@@ -7,6 +7,7 @@ import {
     UploadDictionaryDropzone,
     type UploadStatus,
 } from '@/features/upload-dictionary'
+import { routes } from '@/shared/config'
 import { Button } from '@/shared/ui/Button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/Card'
 import { Field, FieldError, FieldLabel } from '@/shared/ui/Field'
@@ -71,7 +72,8 @@ export const GameSetupForm = () => {
 
     const onSubmit = (data: GameSetupFormValues) => {
         console.log('Отправляем на бэк:', data)
-        navigate('/')
+
+        navigate(routes.lobby)
     }
 
     const handleUploadStatusChange = useCallback(
@@ -246,7 +248,7 @@ export const GameSetupForm = () => {
                 <Button
                     type="submit"
                     disabled={isUploading}
-                    className="h-16 w-full rounded-3xl border-b-4 border-[#047857] text-xl"
+                    className="btn-3d h-16 w-full rounded-3xl text-xl"
                 >
                     Next: Manage Players
                     <ArrowRight className="size-6" />
