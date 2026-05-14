@@ -1,11 +1,13 @@
 import { baseApi } from '@/shared/api'
+import { mapDictionaries } from '../lib/mapDictionaries'
 import type { UploadDictionaryRequest, UploadDictionaryResponse } from './types'
-import type { CustomDictionary } from '../model/types'
+import type { BaseDictionary } from '../model/types'
 
 export const dictionaryApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        getUserDictionaries: build.query<CustomDictionary[], void>({
-            query: () => 'dictionaries',
+        getUserDictionaries: build.query<BaseDictionary[], number>({
+            query: (userId) => `user/${userId}/dictionaries`,
+            transformResponse: mapDictionaries,
         }),
         deleteDictionary: build.mutation<void, number>({
             query: (id) => ({

@@ -1,3 +1,8 @@
+export const DictionaryType = {
+    0: 'custom',
+    1: 'system',
+} as const
+
 export interface DictionaryContent {
     id: number
     original: string
@@ -11,16 +16,16 @@ export interface BaseDictionary {
     wordsAmount: number
     langFrom: string
     langTo: string
-    content: DictionaryContent[]
+    type: (typeof DictionaryType)[keyof typeof DictionaryType]
 }
 
 export interface SystemDictionary extends BaseDictionary {
-    type: 'system'
+    type: (typeof DictionaryType)['1']
     difficulty: number
 }
 
 export interface CustomDictionary extends BaseDictionary {
-    type: 'custom'
+    type: (typeof DictionaryType)['0']
     ownerId: number
 }
 
