@@ -1,7 +1,8 @@
-import { ChevronDown } from 'lucide-react'
-import { useUser } from '@/entities/user'
+import { BookOpenText, ChevronDown } from 'lucide-react'
+import { Link } from 'react-router'
+import { UserAvatar, useUser } from '@/entities/user'
 import { LogoutButton } from '@/features/auth-logout'
-import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/Avatar'
+import { routes } from '@/shared/config'
 import { Button } from '@/shared/ui/Button'
 import {
     DropdownMenu,
@@ -25,12 +26,10 @@ export const UserDropdown = () => {
                 asChild
             >
                 <DropdownMenuTrigger>
-                    <Avatar className="size-6 sm:size-7">
-                        <AvatarImage src={user.avatarUrl} alt="Avatar" />
-                        <AvatarFallback>
-                            {user.username[0].toUpperCase()}
-                        </AvatarFallback>
-                    </Avatar>
+                    <UserAvatar
+                        username={user.username}
+                        avatarUrl={user.avatarUrl}
+                    />
                     <span className="hidden text-sm font-semibold md:block">
                         {user.fullname}
                     </span>
@@ -38,6 +37,14 @@ export const UserDropdown = () => {
                 </DropdownMenuTrigger>
             </Button>
             <DropdownMenuContent onCloseAutoFocus={(e) => e.preventDefault()}>
+                <DropdownMenuItem>
+                    <Button variant="ghost" asChild>
+                        <Link to={routes.dictionaries}>
+                            <BookOpenText />
+                            Мои словари
+                        </Link>
+                    </Button>
+                </DropdownMenuItem>
                 <DropdownMenuItem>
                     <LogoutButton />
                 </DropdownMenuItem>

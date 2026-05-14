@@ -1,13 +1,13 @@
 import { mapAuthResponseToUser, userApi } from '@/entities/user'
 import type { AuthResponseDto, User } from '@/entities/user'
 import { baseApi } from '@/shared/api'
-import { type RequestLoginBody } from './types'
+import type { RequestRegisterBody } from './types'
 
-const loginApi = baseApi.injectEndpoints({
+const registerApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        login: build.mutation<User, RequestLoginBody>({
+        register: build.mutation<User, RequestRegisterBody>({
             query: (body) => ({
-                url: 'auth/auth',
+                url: 'api/auth/register',
                 method: 'POST',
                 body,
             }),
@@ -33,4 +33,4 @@ const loginApi = baseApi.injectEndpoints({
     }),
 })
 
-export const { useLoginMutation } = loginApi
+export const { useRegisterMutation } = registerApi

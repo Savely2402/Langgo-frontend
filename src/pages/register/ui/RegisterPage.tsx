@@ -1,25 +1,25 @@
 import { Link, useNavigate } from 'react-router'
-import { LoginForm } from '@/features/auth-login'
+import { RegisterForm } from '@/features/auth-register'
 import { routes } from '@/shared/config'
 import { HoverUnderline } from '@/shared/ui/HoverUnderline'
 import { AppHeader } from '@/widgets/app-header'
 import { AuthCard } from '@/widgets/auth-card'
 
-const LoginCardFooter = () => {
+const RegisterCardFooter = () => {
     return (
         <>
-            Don't have an account?&nbsp;
+            Already have an account?&nbsp;
             <Link
                 className="font-bold text-primary/80 transition-all hover:text-primary"
-                to={routes.register}
+                to={routes.login}
             >
-                <HoverUnderline>Register for free</HoverUnderline>
+                <HoverUnderline>Sign in</HoverUnderline>
             </Link>
         </>
     )
 }
 
-export const LoginPage = () => {
+export const RegisterPage = () => {
     const navigate = useNavigate()
 
     return (
@@ -28,11 +28,12 @@ export const LoginPage = () => {
 
             <div className="flex min-h-dvh w-full items-center justify-center">
                 <AuthCard
-                    title="Welcome back"
-                    description="Please sign in to your LangGo account"
-                    footer={<LoginCardFooter />}
+                    title="Create account"
+                    description="Create your LangGo account to start learning"
+                    footer={<RegisterCardFooter />}
+                    socialAuthLabel="Sign up with Google"
                 >
-                    <LoginForm
+                    <RegisterForm
                         onSuccess={() => {
                             navigate(routes.home)
                         }}

@@ -1,11 +1,16 @@
-export type UserDTO = {
+export interface UserResponseDTO {
     id: number
+    email: string
     username: string
     fullname: string
-    avatarUrl: string
-    email: string
+    avatar: string
+    learningLanguage: string
+    nativeLanguage: string
+    rating: number
 }
 
-export type AuthResponseDTO = {
-    user: UserDTO
+export interface AuthResponseDto {
+    accessToken: string
+    refreshToken: string
+    user: UserResponseDTO
 }

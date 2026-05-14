@@ -17,6 +17,7 @@ interface AuthCardProps {
     description: string
     children: React.ReactNode
     footer: React.ReactNode
+    socialAuthLabel?: string
 }
 
 export const AuthCard = ({
@@ -24,6 +25,7 @@ export const AuthCard = ({
     description,
     children,
     footer,
+    socialAuthLabel = 'Sign in with Google',
 }: AuthCardProps) => {
     return (
         <Card className="w-full max-w-[420px]">
@@ -37,7 +39,7 @@ export const AuthCard = ({
                     variant="outline"
                 >
                     <Icon Svg={GoogleSvg} />
-                    Sign in with google
+                    {socialAuthLabel}
                 </Button>
                 <div className="my-6 flex w-full items-center gap-2">
                     <Separator className="flex-1" />
