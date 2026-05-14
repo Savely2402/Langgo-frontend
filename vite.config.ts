@@ -22,6 +22,17 @@ export default defineConfig({
             '@': path.resolve(__dirname, './src'),
         },
     },
+    server: {
+        port: 5500,
+        strictPort: true,
+        proxy: {
+            '/gameHub': {
+                target: 'http://localhost:8080',
+                ws: true, // Важно для WebSocket (SignalR)
+                changeOrigin: true,
+            },
+        },
+    },
     test: {
         projects: [
             {

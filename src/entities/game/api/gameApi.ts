@@ -1,12 +1,16 @@
 import { baseApi } from '@/shared/api'
-import type { CreateGameResponse } from './types'
+import type { CreateGameRequest, CreateGameResponse } from './types'
 
 export const dictionaryApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        createGame: build.query<CreateGameResponse, void>({
-            query: () => 'api/games/room',
+        createGame: build.mutation<CreateGameResponse, CreateGameRequest>({
+            query: (body) => ({
+                url: 'games/room',
+                method: 'POST',
+                body,
+            }),
         }),
     }),
 })
 
-export const { useLazyCreateGameQuery } = dictionaryApi
+export const { useCreateGameMutation } = dictionaryApi

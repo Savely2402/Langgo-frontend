@@ -14,6 +14,7 @@ import {
 import { RegisterAlert } from './RegisterAlert'
 import { RegisterFormField } from './RegisterFormField'
 import { RegisterLanguageSelectField } from './RegisterLanguageSelectField'
+import type { RequestRegisterBody } from '../api/types'
 
 interface RegisterFormProps {
     onSuccess: () => void
@@ -44,13 +45,13 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
     const [register, { isLoading, isError, error }] = useRegisterMutation()
 
     const onSubmit = async (values: RegisterFormSchema) => {
-        const registerBody = {
+        const registerBody: RequestRegisterBody = {
             fullname: values.fullname,
             username: values.username,
             email: values.email,
             password: values.password,
-            langFrom: values.langFrom,
-            langTo: values.langTo,
+            nativeLanguage: values.langFrom,
+            learningLanguage: values.langTo,
         }
 
         try {

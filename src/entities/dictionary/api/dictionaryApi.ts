@@ -5,7 +5,7 @@ import type { CustomDictionary } from '../model/types'
 export const dictionaryApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         getUserDictionaries: build.query<CustomDictionary[], void>({
-            query: () => 'dictionaries/me',
+            query: () => 'dictionaries',
         }),
         deleteDictionary: build.mutation<void, number>({
             query: (id) => ({

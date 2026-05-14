@@ -5,6 +5,6 @@ export interface RequestRegisterBody {
     username: string
     email: string
     password: string
-    langFrom: AuthLanguageCode
-    langTo: AuthLanguageCode
+    learningLanguage: AuthLanguageCode
+    nativeLanguage: AuthLanguageCode
 }

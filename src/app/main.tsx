@@ -5,8 +5,8 @@ import './index.css'
 
 async function initApp() {
     // Move @mswjs worker to lazy import
-    const { worker } = await import('@/app/apiMockWorker')
-    await worker.start()
+    // const { worker } = await import('@/app/apiMockWorker')
+    // await worker.start()
 }
 
 initApp().then(() =>

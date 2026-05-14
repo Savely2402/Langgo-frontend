@@ -1,15 +1,15 @@
-export const authLanguageCodes = ['ru', 'en'] as const
+export const authLanguageCodes = ['Ru', 'Es'] as const
 
 export type AuthLanguageCode = (typeof authLanguageCodes)[number]
 
 export const authLanguageOptions = [
     {
-        value: 'ru',
+        value: 'Ru',
         label: 'RU',
         countryCode: 'RU',
     },
     {
-        value: 'en',
+        value: 'Es',
         label: 'EN',
         countryCode: 'GB',
     },

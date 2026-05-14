@@ -9,10 +9,8 @@ export interface BaseDictionary {
     id: number
     name: string
     wordsAmount: number
-    languagePair: {
-        langFrom: string
-        langTo: string
-    }
+    langFrom: string
+    langTo: string
     content: DictionaryContent[]
 }
 

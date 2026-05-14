@@ -2,17 +2,25 @@ import { useCallback, useEffect, useState } from 'react'
 import { Settings, Upload, Files, ArrowRight } from 'lucide-react'
 import { Controller, useForm, useWatch } from 'react-hook-form'
 import { useNavigate } from 'react-router'
+import {
+    initGameConnection,
+    useCreateGameMutation,
+    type CreateGameRequest,
+} from '@/entities/game'
 import { SelectDictionary } from '@/features/select-dictionary'
 import {
     UploadDictionaryDropzone,
     type UploadStatus,
 } from '@/features/upload-dictionary'
+import { getErrorMessage } from '@/shared/api'
 import { routes } from '@/shared/config'
+import { useAppDispatch } from '@/shared/lib/store'
 import { Button } from '@/shared/ui/Button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/Card'
 import { Field, FieldError, FieldLabel } from '@/shared/ui/Field'
 import { Input } from '@/shared/ui/Input'
 import { LeavePrompt } from '@/shared/ui/LeavePrompt'
+import { Spinner } from '@/shared/ui/Spinner'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/Tabs'
 
 interface GameSetupFormValues {
@@ -36,6 +44,8 @@ export const GameSetupForm = () => {
 
     const navigate = useNavigate()
 
+    const dispatch = useAppDispatch()
+
     const {
         handleSubmit,
         control,
@@ -51,6 +61,8 @@ export const GameSetupForm = () => {
 
     const formValues = useWatch({ control })
 
+    const [createGame, { isLoading }] = useCreateGameMutation()
+
     useEffect(() => {
         sessionStorage.setItem(DRAFT_KEY, JSON.stringify(formValues))
     }, [formValues])
@@ -62,7 +74,7 @@ export const GameSetupForm = () => {
     const [uploadStatus, setUploadStatus] = useState<UploadStatus>('idle')
     const [activeTab, setActiveTab] = useState('select')
 
-    const isUploading = uploadStatus === 'loading'
+    const isUploading = uploadStatus === 'loading' || isLoading
 
     const handleTabChange = (value: string) => {
         setActiveTab(value)
@@ -70,10 +82,24 @@ export const GameSetupForm = () => {
         clearErrors('dictionaryId')
     }
 
-    const onSubmit = (data: GameSetupFormValues) => {
-        console.log('Отправляем на бэк:', data)
+    const onSubmit = async (data: GameSetupFormValues) => {
+        if (!data.dictionaryId || !data.roundsAmount) return null
 
-        navigate(routes.lobby)
+        const createGameBody: CreateGameRequest = {
+            dictionaryId: data.dictionaryId,
+            maxRounds: data.roundsAmount,
+            mode: 0,
+        }
+
+        try {
+            const result = await createGame(createGameBody).unwrap()
+
+            dispatch(initGameConnection(result.roomId))
+
+            navigate(routes.lobby)
+        } catch (err) {
+            console.error('Не удалось создать игру: ', getErrorMessage(err))
+        }
     }
 
     const handleUploadStatusChange = useCallback(
@@ -251,7 +277,11 @@ export const GameSetupForm = () => {
                     className="btn-3d h-16 w-full rounded-3xl text-xl"
                 >
                     Next: Manage Players
-                    <ArrowRight className="size-6" />
+                    {isUploading ? (
+                        <Spinner />
+                    ) : (
+                        <ArrowRight className="size-6" />
+                    )}
                 </Button>
             </form>
         </>

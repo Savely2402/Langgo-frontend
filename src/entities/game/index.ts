@@ -33,10 +33,12 @@ export {
     selectWinnerResponseTime,
 } from './model/selectors'
 
-export { useLazyCreateGameQuery } from './api/gameApi'
+export { useCreateGameMutation } from './api/gameApi'
 
 export type { EndRoundPayload } from './model/types'
 
 export { default as gameReducer } from './model/slice'
 
 export { useAnswerSubmission } from './lib/useAnswerSubmission'
+
+export type { CreateGameRequest } from './api/types'

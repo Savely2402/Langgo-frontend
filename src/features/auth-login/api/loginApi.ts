@@ -22,6 +22,7 @@ const loginApi = baseApi.injectEndpoints({
             async onQueryStarted(_, { dispatch, queryFulfilled }) {
                 try {
                     const { data: user } = await queryFulfilled
+
                     dispatch(
                         userApi.util.upsertQueryData('getMe', undefined, user),
                     )

@@ -21,11 +21,7 @@ export const DictionaryCard = ({
     dictionary,
     actionsSlot,
 }: DictionaryCardProps) => {
-    const {
-        name,
-        languagePair: { langFrom, langTo },
-        wordsAmount,
-    } = dictionary
+    const { name, langFrom, langTo, wordsAmount } = dictionary
 
     const [langFromData, langToData] = [langFrom, langTo].map((lang) =>
         authLanguageOptions.find((option) => option.value === lang),
