@@ -30,7 +30,7 @@ export const baseQueryWithReauth: BaseQueryFn<
             const release = await mutex.acquire()
             try {
                 const refreshResult = await baseQuery(
-                    { url: 'api/auth/refresh', method: 'POST' },
+                    { url: 'auth/refresh', method: 'POST' },
                     api,
                     extraOptions,
                 )
