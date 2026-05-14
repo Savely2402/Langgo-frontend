@@ -5,7 +5,7 @@ import type { RequestLoginBody } from '../api/types'
 
 export const loginHandlers = [
     http.post<object, RequestLoginBody>(
-        '/api/auth/login',
+        '/api/auth/auth',
         async ({ request }) => {
             const loginFormData = await request.clone().json()
 

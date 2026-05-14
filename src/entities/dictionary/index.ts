@@ -10,3 +10,4 @@ export {
     useGetUserDictionariesQuery,
     useUploadDictionaryMutation,
 } from './api/dictionaryApi'
+export { DictionaryCard } from './ui/DictionaryCard'

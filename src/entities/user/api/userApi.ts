@@ -6,7 +6,7 @@ export const userApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         getMe: build.query<User | null, void>({
             query: () => ({
-                url: 'api/user/me',
+                url: 'user/profile',
                 method: 'GET',
             }),
             providesTags: (result) => (result ? [AUTH_TAG] : []),

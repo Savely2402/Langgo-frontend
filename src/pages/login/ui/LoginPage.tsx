@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router'
 import { LoginForm } from '@/features/auth-login'
+import { routes } from '@/shared/config'
 import { HoverUnderline } from '@/shared/ui/HoverUnderline'
 import { AppHeader } from '@/widgets/app-header'
 import { AuthCard } from '@/widgets/auth-card'
@@ -10,7 +11,7 @@ const LoginCardFooter = () => {
             Don't have an account?&nbsp;
             <Link
                 className="font-bold text-primary/80 transition-all hover:text-primary"
-                to={'/'}
+                to={routes.register}
             >
                 <HoverUnderline>Register for free</HoverUnderline>
             </Link>
@@ -33,7 +34,7 @@ export const LoginPage = () => {
                 >
                     <LoginForm
                         onSuccess={() => {
-                            navigate('/')
+                            navigate(routes.home)
                         }}
                     />
                 </AuthCard>

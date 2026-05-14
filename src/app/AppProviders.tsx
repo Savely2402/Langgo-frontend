@@ -1,7 +1,7 @@
 import { Provider as StoreProvider } from 'react-redux'
 import { RouterProvider } from 'react-router'
+import { store } from './providers/store/store'
 import { router } from './router/AppRouter'
-import { store } from './store'
 
 export const AppProviders = () => {
     return (

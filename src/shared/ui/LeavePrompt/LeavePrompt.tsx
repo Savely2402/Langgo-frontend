@@ -16,6 +16,7 @@ interface LeavePromptProps {
     title: string
     description?: string
     onConfirm?: () => void
+    onCancel?: () => void
 }
 
 export const LeavePrompt = ({
@@ -23,12 +24,18 @@ export const LeavePrompt = ({
     title,
     description,
     onConfirm,
+    onCancel,
 }: LeavePromptProps) => {
     const { isBlocked, proceed, cancel } = useNavigationBlocker(open)
 
     const handleProceed = () => {
         onConfirm?.()
         proceed()
+    }
+
+    const handleCancel = () => {
+        onCancel?.()
+        cancel()
     }
 
     return (
@@ -49,11 +56,11 @@ export const LeavePrompt = ({
                     className="h-14 rounded-3xl! border-b-4 border-[#B91C1C] text-[18px] font-semibold"
                     onClick={handleProceed}
                 >
-                    Все равно выйти
+                    Выйти
                 </AlertDialogAction>
                 <AlertDialogCancel
                     className="h-14 rounded-3xl! text-[18px] font-semibold"
-                    onClick={cancel}
+                    onClick={handleCancel}
                 >
                     Остаться
                 </AlertDialogCancel>
