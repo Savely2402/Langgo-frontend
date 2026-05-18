@@ -4,7 +4,6 @@ const selectAllPlayers = (state: RootState) => state.players
 const selectCurrentUserId = (_state: RootState, userId?: number) => userId
 
 export const selectCurrentPlayer = (state: RootState, userId?: number) => {
-    console.log('UserId: ', userId)
     if (!userId) return undefined
     return state.players.find((p) => p.id === userId)
 }
@@ -22,7 +21,6 @@ export const selectPlayersForLobby = createSelector(
     },
 )
 
-// 2. Мемоизированный селектор (выполнит sort ТОЛЬКО если изменится список игроков или твой ID)
 export const selectPlayersForGame = createSelector(
     [selectAllPlayers, selectCurrentUserId],
     (players, currentUserId) => {

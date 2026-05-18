@@ -7,6 +7,7 @@ import type {
     StartGamePayload,
     EndGamePayload,
     AnswerResultsPayload,
+    GameSettings,
 } from './types'
 
 const initialState: GameState = {
@@ -36,10 +37,13 @@ const gameSlice = createSlice({
         startGame: (state, action: PayloadAction<StartGamePayload>) => {
             state.status = 'starting'
             state.startTime = action.payload.startTime
-            state.settings = action.payload.settings
             state.currentRound = 1
             state.scores = {}
             state.gameWinnerId = null
+        },
+
+        setGameSettings: (state, action: PayloadAction<GameSettings>) => {
+            state.settings = action.payload
         },
 
         startNewRound: (state, action: PayloadAction<StartRoundPayload>) => {
@@ -78,12 +82,14 @@ const gameSlice = createSlice({
             state.lastRoundWinnerId = action.payload.lastRoundWinnerId
             state.scores = action.payload.scores
             state.nextRoundStartTime = action.payload.nextRoundStartTime
-            state.winnerResponseTime = action.payload.winnerResponseTime
+            // state.winnerResponseTime = action.payload.winnerResponseTime
         },
 
         endGame: (state, action: PayloadAction<EndGamePayload>) => {
             state.status = 'finished'
             state.scores = action.payload.scores
+
+            console.log('Scores in end: ', action.payload.scores)
             state.gameWinnerId = action.payload.gameWinnerId
         },
 

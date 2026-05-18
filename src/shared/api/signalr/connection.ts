@@ -1,7 +1,7 @@
 import * as signalR from '@microsoft/signalr'
 
 export const hubConnection = new signalR.HubConnectionBuilder()
-    .withUrl(import.meta.env.VITE_BASE_URL + '/gameHub', {
+    .withUrl(import.meta.env.VITE_BASE_URL + '/game', {
         accessTokenFactory: () => localStorage.getItem('accessToken') || '',
     })
     .withAutomaticReconnect()

@@ -37,7 +37,7 @@ export interface GameState {
     roundEndTime: string | null
     nextRoundStartTime: string | null
     scores: Record<string, number>
-    lastRoundWinnerId: string | number | null
+    lastRoundWinnerId?: number | null
     gameWinnerId: string | number | null
 }
 
@@ -50,15 +50,15 @@ export type StartRoundPayload = Pick<
     | 'options'
 >
 
-export type StartGamePayload = Pick<GameState, 'startTime' | 'settings'>
+export type StartGamePayload = Pick<GameState, 'startTime'>
 
 export type EndRoundPayload = Pick<
     GameState,
     | 'lastRoundWinnerId'
-    | 'correctAnswer'
+    // | 'correctAnswer'
     | 'scores'
     | 'nextRoundStartTime'
-    | 'winnerResponseTime'
+    // | 'winnerResponseTime'
 >
 
 export type EndGamePayload = Pick<GameState, 'scores' | 'gameWinnerId'>

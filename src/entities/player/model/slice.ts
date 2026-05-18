@@ -14,28 +14,13 @@ const playerSlice = createSlice({
         removePlayer: (state, action: PayloadAction<Player['id']>) => {
             return state.filter((player) => player.id !== action.payload)
         },
-        updatePlayerStatus: (
-            state,
-            action: PayloadAction<Pick<Player, 'id' | 'status'>>,
-        ) => {
-            const player = state.find((p) => p.id === action.payload.id)
-
-            if (player) {
-                player.status = action.payload.status
-            }
-        },
         clearPlayers: () => {
             return []
         },
     },
 })
 
-export const {
-    setPlayers,
-    addPlayer,
-    removePlayer,
-    updatePlayerStatus,
-    clearPlayers,
-} = playerSlice.actions
+export const { setPlayers, addPlayer, removePlayer, clearPlayers } =
+    playerSlice.actions
 
 export default playerSlice.reducer

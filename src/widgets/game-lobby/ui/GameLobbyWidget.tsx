@@ -1,24 +1,15 @@
-import { useEffect } from 'react'
 import { BookOpen, Timer } from 'lucide-react'
-import { setPlayers } from '@/entities/player'
-import { MOCK_PLAYERS } from '@/entities/player/testing'
 import { useUser } from '@/entities/user'
 import { CopyInviteLink } from '@/features/copyInviteLink'
 import { CancelLobby } from '@/features/lobby/cancel'
 import { LeaveLobby } from '@/features/lobby/leave'
 import { StartGameButton } from '@/features/start-game'
-import { useAppDispatch, useAppSelector } from '@/shared/lib/store'
+import { useAppSelector } from '@/shared/lib/store'
 import { Badge } from '@/shared/ui/Badge'
 import { Header } from '@/shared/ui/Header'
 import { GameLobbyPlayers } from './GameLobbyPlayers'
 
 export const GameLobbyWidget = () => {
-    const dispatch = useAppDispatch()
-
-    useEffect(() => {
-        dispatch(setPlayers(MOCK_PLAYERS))
-    }, [dispatch])
-
     const { user } = useUser()
     const players = useAppSelector((state) => state.players)
 

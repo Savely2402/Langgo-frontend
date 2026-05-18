@@ -2,11 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Settings, Upload, Files, ArrowRight } from 'lucide-react'
 import { Controller, useForm, useWatch } from 'react-hook-form'
 import { useNavigate } from 'react-router'
-import {
-    initGameConnection,
-    useCreateGameMutation,
-    type CreateGameRequest,
-} from '@/entities/game'
+import { useCreateGameMutation, type CreateGameRequest } from '@/entities/game'
 import { SelectDictionary } from '@/features/select-dictionary'
 import {
     UploadDictionaryDropzone,
@@ -14,7 +10,6 @@ import {
 } from '@/features/upload-dictionary'
 import { getErrorMessage } from '@/shared/api'
 import { routes } from '@/shared/config'
-import { useAppDispatch } from '@/shared/lib/store'
 import { Button } from '@/shared/ui/Button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/Card'
 import { Field, FieldError, FieldLabel } from '@/shared/ui/Field'
@@ -43,8 +38,6 @@ export const GameSetupForm = () => {
     const savedDraft = parseDraft()
 
     const navigate = useNavigate()
-
-    const dispatch = useAppDispatch()
 
     const {
         handleSubmit,
@@ -94,9 +87,7 @@ export const GameSetupForm = () => {
         try {
             const result = await createGame(createGameBody).unwrap()
 
-            dispatch(initGameConnection(result.roomId))
-
-            navigate(routes.lobby)
+            navigate(routes.lobby(result.roomId))
         } catch (err) {
             console.error('Не удалось создать игру: ', getErrorMessage(err))
         }

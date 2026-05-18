@@ -1,11 +1,10 @@
-export type PlayerStatus = 'waiting' | 'ready'
+import type { AuthLanguageCode } from '@/shared/config'
 
 export interface Player {
     id: number
     username: string
     isHost: boolean
-    status: PlayerStatus
     avatarUrl?: string
-    countryCode: 'ru' | 'en'
+    nativeLanguage: AuthLanguageCode
     rating: number
 }

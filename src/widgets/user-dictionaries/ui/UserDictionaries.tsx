@@ -1,11 +1,17 @@
+import { skipToken } from '@reduxjs/toolkit/query'
 import {
     DictionaryCard,
     useGetUserDictionariesQuery,
 } from '@/entities/dictionary'
+import { useUser } from '@/entities/user'
 import { DeleteDictionaryButton } from '@/features/delete-dictionary'
 
 export const UserDictionaries = () => {
-    const { data: dictionaries, isError } = useGetUserDictionariesQuery()
+    const { user } = useUser()
+
+    const { data: dictionaries, isError } = useGetUserDictionariesQuery(
+        user?.id ?? skipToken,
+    )
 
     if (isError) {
         return <>Не удалось загрузить словари :(</>

@@ -12,7 +12,7 @@ export const routes = {
     login: `/${routeSegments.login}`,
     register: `/${routeSegments.register}`,
     gameSetup: `/${routeSegments.gameSetup}`,
-    lobby: `/${routeSegments.lobby}`,
+    lobby: (roomId: string) => `/${routeSegments.lobby}/${roomId}`,
     dictionaries: `/${routeSegments.dictionaries}`,
     notFound: '*',
 } as const

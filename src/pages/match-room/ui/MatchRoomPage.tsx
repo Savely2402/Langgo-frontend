@@ -1,3 +1,4 @@
+import { useParams } from 'react-router'
 import { selectGameStatus } from '@/entities/game/model/selectors'
 import { useAppSelector } from '@/shared/lib/store'
 import { ActiveGameWidget } from '@/widgets/active-game'
@@ -6,9 +7,13 @@ import { GameLobbyWidget } from '@/widgets/game-lobby'
 import { MatchFoundOverlay } from '@/widgets/match-found'
 import { MatchResultsWidget } from '@/widgets/match-results'
 import { RoundResultsWidget } from '@/widgets/round-results'
+import { useGameConnection } from '../lib/useGameConnection'
 
 export const MatchRoomPage = () => {
-    // const { roomId } = useParams()
+    const { roomId } = useParams()
+
+    useGameConnection(roomId)
+
     const gameStatus = useAppSelector(selectGameStatus)
 
     if (gameStatus === 'idle') {
@@ -16,9 +21,10 @@ export const MatchRoomPage = () => {
     }
 
     if (gameStatus === 'starting') {
+        console.log('Hello')
+
         return (
             <>
-                <GameLobbyWidget />
                 <MatchFoundOverlay />
             </>
         )

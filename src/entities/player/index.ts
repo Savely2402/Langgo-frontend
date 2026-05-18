@@ -1,10 +1,9 @@
-export type { Player, PlayerStatus } from './model/types'
+export type { Player } from './model/types'
 
 export {
     setPlayers,
     addPlayer,
     removePlayer,
-    updatePlayerStatus,
     clearPlayers,
 } from './model/slice'
 

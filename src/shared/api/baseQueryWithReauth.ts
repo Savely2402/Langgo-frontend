@@ -47,7 +47,22 @@ export const baseQueryWithReauth: BaseQueryFn<
 
                 console.log(refreshResult)
 
-                if (refreshResult.data) {
+                if (
+                    refreshResult.data &&
+                    typeof refreshResult.data === 'object' &&
+                    'accessToken' in refreshResult.data &&
+                    'refreshToken' in refreshResult.data &&
+                    typeof refreshResult.data.accessToken === 'string' &&
+                    typeof refreshResult.data.refreshToken === 'string'
+                ) {
+                    localStorage.setItem(
+                        'refreshToken',
+                        refreshResult.data.refreshToken,
+                    )
+                    localStorage.setItem(
+                        'accessToken',
+                        refreshResult.data.accessToken,
+                    )
                     result = await baseQuery(args, api, extraOptions)
                 }
             } finally {

@@ -21,9 +21,10 @@ export const MatchFoundOverlay = () => {
     const players = useAppSelector((state) =>
         selectPlayersForGame(state, currentUser?.id),
     )
+
     const { secondsLeft, rawMs } = useCountdown(startTime)
 
-    if (status !== 'starting' || secondsLeft === null) return null
+    if (status !== 'starting') return null
 
     const [me, rival] = players
 
@@ -56,11 +57,13 @@ export const MatchFoundOverlay = () => {
                 <PlayerCard player={rival} isMe={false} />
             </div>
 
-            <MatchStartTimer
-                secondsLeft={secondsLeft}
-                rawMs={rawMs}
-                totalMs={TOTAL_MS}
-            />
+            {secondsLeft && (
+                <MatchStartTimer
+                    secondsLeft={secondsLeft}
+                    rawMs={rawMs}
+                    totalMs={TOTAL_MS}
+                />
+            )}
         </div>
     )
 }

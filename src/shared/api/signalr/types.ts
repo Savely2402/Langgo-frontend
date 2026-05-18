@@ -1,8 +1,34 @@
+import type { AuthLanguageCode } from '@/shared/config'
+
+export interface StartGameResponse {
+    gameStartTime: string
+}
+
 interface GameSettingsDto {
     dictionaryName: string
     langFrom: string
     langTo: string
     roundsAmount: number
+}
+
+export interface PlayerJoinedDto {
+    userId: number
+    username: string
+    isHost: boolean
+    avatarUrl: string
+    nativeLanguage: AuthLanguageCode
+    rating: number
+}
+
+export interface RoomStateDto {
+    players: {
+        userId: number
+        username: string
+        isHost: boolean
+        avatarUrl: string
+        nativeLanguage: AuthLanguageCode
+        rating: number
+    }[]
 }
 
 export interface StartGameDto {
@@ -19,16 +45,16 @@ export interface StartRoundDto {
 }
 
 export interface RoundResultDto {
-    lastRoundWinnerId: string | number | null
+    winnerId?: number
     scores: Record<string, number>
     newRoundTime: string
-    correctAnswer: string
-    winnerResponseTime: number
+    // correctAnswer: string
+    // winnerResponseTime: number
 }
 
 export interface EndGameDto {
-    finalScores: Record<string, number>
-    winnerId: string | number | null
+    scores: Record<string, number>
+    winner: number | null
 }
 
 export interface CheckAnswerDto {

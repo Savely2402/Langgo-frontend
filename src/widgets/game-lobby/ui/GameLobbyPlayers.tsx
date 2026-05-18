@@ -54,23 +54,6 @@ export const GameLobbyPlayers = ({ className }: GameLobbyPlayersProps) => {
                                     </Badge>
                                 )}
                             </ItemTitle>
-                            <ItemDescription className="flex items-center gap-2 text-sm font-bold">
-                                {p.status === 'waiting' ? (
-                                    <>
-                                        <span className="block size-2 rounded-full bg-[#F59E0B]" />
-                                        <span className="text-[#F59E0B]">
-                                            Waiting...{' '}
-                                        </span>
-                                    </>
-                                ) : (
-                                    <>
-                                        <span className="block size-2 rounded-full bg-primary" />
-                                        <span className="text-primary">
-                                            Ready
-                                        </span>
-                                    </>
-                                )}
-                            </ItemDescription>
                         </ItemContent>
                         <ItemActions>
                             {me.id !== p.id && me.isHost && (
@@ -96,13 +79,11 @@ export const GameLobbyPlayers = ({ className }: GameLobbyPlayersProps) => {
                         </ItemMedia>
                         <ItemContent>
                             <ItemTitle className="text-xl font-bold text-slate-400">
-                                Waiting for player...
+                                Ждем игроков...
                             </ItemTitle>
                             <ItemDescription className="flex items-center gap-2 text-sm font-bold">
                                 <span className="block size-2 rounded-full bg-slate-300" />
-                                <span className="text-slate-400">
-                                    Searching...
-                                </span>
+                                <span className="text-slate-400">Поиск...</span>
                             </ItemDescription>
                         </ItemContent>
                     </Item>

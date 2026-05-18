@@ -7,9 +7,6 @@ export const useCountdown = (targetDateIso: string | null) => {
         if (!targetDateIso) return
         const targetTime = new Date(targetDateIso).getTime()
 
-        console.log('TargetTime: ', targetTime)
-        console.log('Comp: ', targetTime - Date.now() <= 0)
-
         if (targetTime - Date.now() <= 0) return
 
         const intervalId = setInterval(() => {

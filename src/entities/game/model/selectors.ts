@@ -20,7 +20,7 @@ export const selectUserScore = (
     userId: string | number | undefined,
 ) => {
     if (!userId) return null
-    return state.game.scores[String(userId)] || 0
+    return String(userId) in state.game.scores ? state.game.scores : 0
 }
 
 export const selectUserAnswerResult = (

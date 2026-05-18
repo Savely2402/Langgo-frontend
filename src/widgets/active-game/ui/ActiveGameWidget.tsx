@@ -26,9 +26,9 @@ export const ActiveGameWidget = () => {
     const roundStatus = useAppSelector(selectRoundStatus)
 
     const roundEndTime = useAppSelector(selectRoundEndTime)
-    const totalMs = 15000
 
     const { secondsLeft, rawMs } = useCountdown(roundEndTime)
+    const [totalMs] = useState(() => rawMs)
 
     const [isFadingOut, setIsFadingOut] = useState(false)
 
@@ -36,13 +36,12 @@ export const ActiveGameWidget = () => {
         if (roundStatus === 'revealing') {
             const timer1 = setTimeout(() => setIsFadingOut(true), 1500)
             const timer2 = setTimeout(() => {
-                if (currentRound === 2) {
-                    dispatch(setRoundStatus('finished'))
-                } else {
-                    dispatch(setRoundStatus('intermission'))
-                }
+                console.log('Inter fucking mission')
+
+                dispatch(setRoundStatus('intermission'))
+
                 setIsFadingOut(false)
-            }, 3500)
+            }, 1500)
 
             return () => {
                 clearTimeout(timer1)
@@ -74,7 +73,7 @@ export const ActiveGameWidget = () => {
 
                     <TimerProgress
                         timeLeftMs={rawMs ?? 0}
-                        totalMs={totalMs}
+                        totalMs={totalMs ?? 1}
                         className="rounded-full"
                     />
                 </div>

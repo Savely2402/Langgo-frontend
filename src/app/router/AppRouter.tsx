@@ -61,7 +61,7 @@ export const router = createBrowserRouter([
                 Component: GameSetupPage,
             },
             {
-                path: routeSegments.lobby,
+                path: `${routeSegments.lobby}/:roomId`,
                 Component: MatchRoomPage,
             },
             { path: routeSegments.dictionaries, Component: MyDictionariesPage },

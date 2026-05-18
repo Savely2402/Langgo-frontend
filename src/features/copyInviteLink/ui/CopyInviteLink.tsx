@@ -6,7 +6,7 @@ import { Button } from '@/shared/ui/Button'
 
 export const CopyInviteLink = () => {
     const { roomId } = useParams()
-    const inviteUrl = `langgo.com/lobby/${roomId}`
+    const inviteUrl = `http://localhost:5500/lobby/${roomId}`
     const { isCopied, copy } = useCopyToClipboard()
 
     return (
