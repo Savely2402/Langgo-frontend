@@ -46,7 +46,7 @@ export const UserDropdown = () => {
                     </Button>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                    <LogoutButton />
+                    <LogoutButton className="w-full" />
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

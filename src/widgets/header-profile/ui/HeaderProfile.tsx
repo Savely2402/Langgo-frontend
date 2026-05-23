@@ -44,8 +44,10 @@ const UserState = () => {
                 orientation="vertical"
                 className="mx-4 hidden h-6! md:block"
             />
-            <RequestsPopover />
-            <UserDropdown />
+            <div className="flex gap-1">
+                <RequestsPopover />
+                <UserDropdown />
+            </div>
         </>
     )
 }
