@@ -1,5 +1,5 @@
 import { useParams } from 'react-router'
-import { selectGameStatus } from '@/entities/game/model/selectors'
+import { selectGameStatus } from '@/entities/game'
 import { useAppSelector } from '@/shared/lib/store'
 import { ActiveGameWidget } from '@/widgets/active-game'
 import { GameHeaderWidget } from '@/widgets/game-header'

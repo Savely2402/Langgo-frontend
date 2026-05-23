@@ -1,4 +1,5 @@
 import { BookOpen, Timer } from 'lucide-react'
+import { selectGameSettings } from '@/entities/game'
 import { useUser } from '@/entities/user'
 import { CopyInviteLink } from '@/features/copyInviteLink'
 import { CancelLobby } from '@/features/lobby/cancel'
@@ -15,15 +16,15 @@ export const GameLobbyWidget = () => {
 
     const me = players.find((p) => p.id === user?.id)
     const isHost = me?.isHost ?? false
-
-    const dictionaryName = 'Топ 100 Английских слов'
-    const roundsCount = 11
+    const gameSettings = useAppSelector(selectGameSettings)
+    const dictionaryName = gameSettings?.dictionaryName
+    const roundsCount = gameSettings?.roundsAmount
 
     return (
         <>
             <Header leftSlot={isHost ? <CancelLobby /> : <LeaveLobby />} />
             <div className="mx-auto max-w-[640px] px-4">
-                <h1 className="my-6 text-4xl font-black tracking-tight">
+                <h1 className="my-6 font-luckiest text-3xl tracking-wide sm:text-4xl">
                     Создание игры - лобби
                 </h1>
 

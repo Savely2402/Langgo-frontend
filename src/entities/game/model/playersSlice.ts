@@ -1,9 +1,9 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import type { Player } from './types'
 
-const playerSlice = createSlice({
+const PlayerSlice = createSlice({
     initialState: [] as Player[],
-    name: 'players',
+    name: 'Players',
     reducers: {
         setPlayers: (_, action: PayloadAction<Player[]>) => {
             return action.payload
@@ -20,7 +20,6 @@ const playerSlice = createSlice({
     },
 })
 
-export const { setPlayers, addPlayer, removePlayer, clearPlayers } =
-    playerSlice.actions
+export const { setPlayers, addPlayer, clearPlayers } = PlayerSlice.actions
 
-export default playerSlice.reducer
+export default PlayerSlice.reducer

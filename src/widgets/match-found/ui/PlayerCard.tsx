@@ -1,4 +1,4 @@
-import type { Player } from '@/entities/player'
+import type { Player } from '@/entities/game'
 import { UserAvatar } from '@/entities/user'
 import { cn } from '@/shared/lib/classNames'
 
@@ -15,9 +15,7 @@ export const PlayerCard = ({ player, isMe }: PlayerCardProps) => {
             <div
                 className={cn(
                     'rounded-full p-1',
-                    isMe
-                        ? 'border-2 border-emerald-400'
-                        : 'border-2 border-slate-200',
+                    isMe ? 'border-2 border-ring' : 'border-2 border-slate-200',
                 )}
             >
                 <UserAvatar
@@ -33,7 +31,7 @@ export const PlayerCard = ({ player, isMe }: PlayerCardProps) => {
                 <div
                     className={cn(
                         'text-sm font-medium',
-                        isMe ? 'text-emerald-600' : 'text-slate-500',
+                        isMe ? 'text-primary' : 'text-slate-500',
                     )}
                 >
                     Рейтинг: {player.rating || 0}

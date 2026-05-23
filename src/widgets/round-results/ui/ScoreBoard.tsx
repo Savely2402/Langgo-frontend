@@ -1,5 +1,5 @@
 import { Check } from 'lucide-react'
-import type { Player } from '@/entities/player'
+import type { Player } from '@/entities/game'
 import { UserAvatar } from '@/entities/user'
 import type { User } from '@/entities/user'
 import type { RoundResult, ResultConfig } from '../config/roundResultConfig'

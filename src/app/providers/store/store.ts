@@ -1,12 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { gameReducer } from '@/entities/game'
-import { playerReducer } from '@/entities/player'
+import { gameReducer, playersReducer } from '@/entities/game'
 import { baseApi } from '@/shared/api'
 import { signalrMiddleware } from './middlewares/signalrMiddleware'
 
 export const rootReducer = combineReducers({
     [baseApi.reducerPath]: baseApi.reducer,
-    players: playerReducer,
+    players: playersReducer,
     game: gameReducer,
 })
 

@@ -3,8 +3,8 @@ import {
     selectGameSettings,
     selectGameStartTime,
     selectGameStatus,
-} from '@/entities/game/model/selectors'
-import { selectPlayersForGame } from '@/entities/player'
+    selectPlayersForGame,
+} from '@/entities/game'
 import { useUser } from '@/entities/user'
 import { useCountdown } from '@/shared/lib/hooks'
 import { useAppSelector } from '@/shared/lib/store'
@@ -39,7 +39,7 @@ export const MatchFoundOverlay = () => {
             {settings && (
                 <Badge
                     variant="outline"
-                    className="mb-12 flex items-center gap-1.5 rounded-full border-emerald-100 bg-white px-4 py-1.5 text-sm font-medium text-emerald-700 shadow-sm"
+                    className="mb-12 flex items-center gap-1.5 rounded-full border-emerald-100 bg-white px-4 py-1.5 text-sm font-medium text-primary shadow-sm"
                 >
                     <BookOpen className="size-4" />
                     Словарь &quot;{settings.dictionaryName}&quot; (

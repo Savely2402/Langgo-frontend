@@ -8,17 +8,3 @@ export {
     stopConnection,
     hubConnection,
 } from './signalr/connection'
-export {
-    sendAnswerToSignalR,
-    joinRoom,
-    leaveRoom,
-    startGame,
-} from './signalr/gameApi'
-export type {
-    StartGameDto,
-    StartRoundDto,
-    RoundResultDto,
-    EndGameDto,
-    PlayerJoinedDto,
-    RoomStateDto,
-} from './signalr/types'

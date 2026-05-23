@@ -1,5 +1,4 @@
-import { selectUserScore } from '@/entities/game/model/selectors'
-import { selectPlayersForGame } from '@/entities/player'
+import { selectUserScore, selectPlayersForGame } from '@/entities/game'
 import { useUser } from '@/entities/user'
 import { UserAvatar } from '@/entities/user/ui/UserAvatar'
 import { SurrenderGameButton } from '@/features/surrender-game'

@@ -18,17 +18,17 @@ export const getTimerStatus = (
 // Выносим всю палитру таймеров в единую константу
 export const TIMER_COLORS = {
     bg: {
-        safe: '[&>div]:bg-emerald-500',
+        safe: '[&>div]:bg-primary',
         warning: '[&>div]:bg-amber-400',
         critical: '[&>div]:bg-red-500',
     },
     text: {
-        safe: 'text-emerald-500',
+        safe: 'text-primary',
         warning: 'text-amber-400',
         critical: 'text-red-500',
     },
     border: {
-        safe: 'border-emerald-500',
+        safe: 'border-primary',
         warning: 'border-amber-400',
         critical: 'border-red-500',
     },

@@ -3,6 +3,7 @@ import { Timer } from 'lucide-react'
 import {
     selectCurrentQuestion,
     selectCurrentRound,
+    selectGameSettings,
     selectRoundEndTime,
     selectRoundStatus,
     selectRoundType,
@@ -23,6 +24,8 @@ export const ActiveGameWidget = () => {
     const roundType = useAppSelector(selectRoundType)
 
     const currentRound = useAppSelector(selectCurrentRound)
+    const roundsAmount =
+        useAppSelector(selectGameSettings)?.roundsAmount ?? currentRound
     const roundStatus = useAppSelector(selectRoundStatus)
 
     const roundEndTime = useAppSelector(selectRoundEndTime)
@@ -34,21 +37,23 @@ export const ActiveGameWidget = () => {
 
     useEffect(() => {
         if (roundStatus === 'revealing') {
-            const timer1 = setTimeout(() => setIsFadingOut(true), 1500)
+            const timer1 = setTimeout(() => setIsFadingOut(true), 1000)
             const timer2 = setTimeout(() => {
-                console.log('Inter fucking mission')
-
-                dispatch(setRoundStatus('intermission'))
+                if (currentRound < roundsAmount) {
+                    dispatch(setRoundStatus('intermission'))
+                } else if (currentRound === roundsAmount) {
+                    dispatch(setRoundStatus('finished'))
+                }
 
                 setIsFadingOut(false)
-            }, 1500)
+            }, 2000)
 
             return () => {
                 clearTimeout(timer1)
                 clearTimeout(timer2)
             }
         }
-    }, [roundStatus, dispatch, currentRound])
+    }, [roundStatus, dispatch, currentRound, roundsAmount])
 
     return (
         <div
@@ -60,7 +65,7 @@ export const ActiveGameWidget = () => {
             <div className="mb-16 flex w-full flex-col items-center text-center">
                 <div className="mb-6 w-full max-w-lg">
                     <div className="mb-2 flex items-end justify-between">
-                        <div className="flex flex-col text-[10px] leading-tight font-black tracking-wider text-[#52B79A] uppercase">
+                        <div className="flex flex-col text-[10px] leading-tight font-black tracking-wider text-primary uppercase">
                             <span>Осталось</span>
                             <span>Времени</span>
                         </div>
