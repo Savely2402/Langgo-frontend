@@ -1,4 +1,4 @@
-export interface UserResponseDTO {
+export interface UserDTO {
     id: number
     email: string
     username: string
@@ -9,8 +9,8 @@ export interface UserResponseDTO {
     rating: number
 }
 
-export interface AuthResponseDto {
+export interface AuthResponse {
     accessToken: string
     refreshToken: string
-    user: UserResponseDTO
+    user: UserDTO
 }

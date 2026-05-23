@@ -8,12 +8,12 @@ import { AuthCard } from '@/widgets/auth-card'
 const RegisterCardFooter = () => {
     return (
         <>
-            Already have an account?&nbsp;
+            Уже есть аккаунт?&nbsp;
             <Link
                 className="font-bold text-primary/80 transition-all hover:text-primary"
                 to={routes.login}
             >
-                <HoverUnderline>Sign in</HoverUnderline>
+                <HoverUnderline>Войдите</HoverUnderline>
             </Link>
         </>
     )
@@ -28,8 +28,8 @@ export const RegisterPage = () => {
 
             <div className="flex min-h-dvh w-full items-center justify-center">
                 <AuthCard
-                    title="Create account"
-                    description="Create your LangGo account to start learning"
+                    title="Создать аккаунт"
+                    description="Создайте аккаунт чтобы начать игру"
                     footer={<RegisterCardFooter />}
                     socialAuthLabel="Sign up with Google"
                 >

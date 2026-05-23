@@ -1,7 +1,7 @@
-import type { UserResponseDTO } from '../api/types'
+import type { UserDTO } from '../api/types'
 import type { User } from '../model/types'
 
-export const mapAuthResponseToUser = (response: UserResponseDTO): User => {
+export const mapAuthResponseToUser = (response: UserDTO): User => {
     return {
         id: response.id,
         username: response.username,
