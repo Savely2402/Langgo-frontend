@@ -1,7 +1,12 @@
+import { cn } from '@/shared/lib/classNames'
 import { Button } from '@/shared/ui/Button'
 import { useLogoutMutation } from '../api/logoutApi'
 
-export const LogoutButton = () => {
+interface LogoutButtonProps {
+    className?: string
+}
+
+export const LogoutButton = ({ className }: LogoutButtonProps) => {
     const [logout, { isLoading }] = useLogoutMutation()
 
     const handleClickLogout = async () => {
@@ -17,8 +22,13 @@ export const LogoutButton = () => {
     }
 
     return (
-        <Button disabled={isLoading} onClick={handleClickLogout}>
-            Sign out
+        <Button
+            variant={'destructive'}
+            className={cn(className)}
+            disabled={isLoading}
+            onClick={handleClickLogout}
+        >
+            Выйти
         </Button>
     )
 }

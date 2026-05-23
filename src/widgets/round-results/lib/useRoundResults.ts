@@ -6,8 +6,8 @@ import {
     selectUserAnswer,
     selectUserScore,
     selectWinnerResponseTime,
+    selectPlayersForGame,
 } from '@/entities/game'
-import { selectPlayersForGame } from '@/entities/player'
 import { useUser } from '@/entities/user'
 import { useAppSelector } from '@/shared/lib/store'
 import type { RoundResult } from '../config/roundResultConfig'
@@ -15,7 +15,11 @@ import type { RoundResult } from '../config/roundResultConfig'
 export const useRoundResults = () => {
     const { user } = useUser()
     const winnerId = useAppSelector(selectLastRoundWinnerId)
-    const [, opponent] = useAppSelector(selectPlayersForGame)
+    const [, opponent] = useAppSelector((state) =>
+        selectPlayersForGame(state, user?.id),
+    )
+
+    console.log('Opponent: ', opponent)
 
     const myScore = useAppSelector((state) => selectUserScore(state, user?.id))
     const opponentScore = useAppSelector((state) =>

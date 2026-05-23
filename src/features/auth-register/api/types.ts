@@ -1,10 +1,10 @@
-import type { AuthLanguageCode } from '@/shared/config'
+import type { LanguageCode } from '@/shared/config'
 
 export interface RequestRegisterBody {
     fullname: string
     username: string
     email: string
     password: string
-    learningLanguage: AuthLanguageCode
-    nativeLanguage: AuthLanguageCode
+    learningLanguage: LanguageCode
+    nativeLanguage: LanguageCode
 }

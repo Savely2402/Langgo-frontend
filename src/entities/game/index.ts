@@ -1,5 +1,4 @@
 export {
-    // answerFailed,
     startNewRound,
     endRound,
     resetGame,
@@ -10,7 +9,10 @@ export {
     initGameConnection,
     closeGameConnection,
     connectionEstablished,
-} from './model/slice'
+    setGameSettings,
+    setAnswerResult,
+    clearAnswerResult,
+} from './model/gameSlice'
 
 export {
     selectCurrentRound,
@@ -31,14 +33,41 @@ export {
     selectUserAnswer,
     selectCorrectAnswer,
     selectWinnerResponseTime,
-} from './model/selectors'
+    selectRoomId,
+} from './model/gameSelectors'
 
 export { useCreateGameMutation } from './api/gameApi'
+export { subscribeGameHubEvents } from './api/realtimeEvents'
 
-export type { EndRoundPayload } from './model/types'
+export type { EndRoundPayload, Player } from './model/types'
 
-export { default as gameReducer } from './model/slice'
+export { default as gameReducer } from './model/gameSlice'
 
 export { useAnswerSubmission } from './lib/useAnswerSubmission'
 
 export type { CreateGameRequest } from './api/types'
+
+export type {
+    StartGameResponse,
+    StartRoundEventDto,
+    EndGameEventDto,
+    EndRoundEventDto,
+    RoomStateEventDto,
+    CheckAnswerRequest,
+    PlayerJoinedEventDto,
+    AnswerResultEventDto,
+} from './api/realtimeTypes'
+
+export { gameRealtimeApi } from './api/realtimeApi'
+
+export { setPlayers, addPlayer, clearPlayers } from './model/playersSlice'
+
+export { default as playersReducer } from './model/playersSlice'
+
+export {
+    selectCurrentPlayer,
+    selectPlayersForGame,
+    selectPlayersForLobby,
+} from './model/playersSelectors'
+
+export { mapPlayerDtoToPlayer } from './lib/mapPlayer'

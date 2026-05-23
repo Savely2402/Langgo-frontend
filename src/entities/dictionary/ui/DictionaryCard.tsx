@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react'
-import { useNavigate } from 'react-router'
-import { authLanguageOptions, routes } from '@/shared/config'
+import { languageOptions } from '@/shared/config'
+import { cn } from '@/shared/lib/classNames'
 import { Button } from '@/shared/ui/Button'
 import {
     Item,
@@ -14,31 +14,36 @@ import type { BaseDictionary } from '../model/types'
 
 interface DictionaryCardProps {
     dictionary: BaseDictionary
+    className?: string
     actionsSlot?: React.ReactNode
+    onClick?: () => void
 }
 
 export const DictionaryCard = ({
     dictionary,
     actionsSlot,
+    onClick,
+    className,
 }: DictionaryCardProps) => {
     const { name, langFrom, langTo, wordsAmount } = dictionary
 
     const [langFromData, langToData] = [langFrom, langTo].map((lang) =>
-        authLanguageOptions.find((option) => option.value === lang),
+        languageOptions.find((option) => option.value === lang),
     )
-
-    const navigate = useNavigate()
 
     return (
         <Button
             variant="outline"
             asChild
-            className="h-full w-full rounded-[24px] bg-white p-6"
+            className={cn(
+                'h-full w-full rounded-[24px] bg-white p-6',
+                className,
+            )}
         >
             <Item
                 variant="outline"
                 className="cursor-pointer rounded-[24px] bg-white p-6"
-                onClick={() => navigate(routes.home)}
+                onClick={onClick}
             >
                 <ItemContent>
                     <ItemTitle className="text-xl font-black">{name}</ItemTitle>

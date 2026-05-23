@@ -1,13 +1,6 @@
 import { Controller, type Control, type FieldErrors } from 'react-hook-form'
-import { authLanguageOptions } from '@/shared/config'
 import { FieldError, FieldLabel } from '@/shared/ui/Field'
-import { LanguageOptionLabel } from '@/shared/ui/LanguageOptionLabel'
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-} from '@/shared/ui/Select'
+import { LanguageSelect } from '@/shared/ui/LanguageSelect'
 import type {
     RegisterFormInput,
     RegisterFormSchema,
@@ -39,46 +32,15 @@ export const RegisterLanguageSelectField = ({
                 control={control}
                 name={fieldName}
                 render={({ field }) => {
-                    const selectedOption = authLanguageOptions.find(
-                        (option) => option.value === field.value,
-                    )
-
                     return (
-                        <Select
-                            onValueChange={field.onChange}
-                            value={field.value || undefined}
-                        >
-                            <SelectTrigger
-                                aria-invalid={!!errors[fieldName]}
-                                id={`register-${fieldName}-select`}
-                                className="h-[46px] w-full rounded-3xl bg-background transition-all hover:bg-card data-[state=open]:bg-card"
-                                onBlur={field.onBlur}
-                            >
-                                {selectedOption ? (
-                                    <LanguageOptionLabel
-                                        countryCode={selectedOption.countryCode}
-                                        label={selectedOption.label}
-                                    />
-                                ) : (
-                                    <span className="text-muted-foreground">
-                                        {placeholder}
-                                    </span>
-                                )}
-                            </SelectTrigger>
-                            <SelectContent position="popper">
-                                {authLanguageOptions.map((option) => (
-                                    <SelectItem
-                                        key={option.value}
-                                        value={option.value}
-                                    >
-                                        <LanguageOptionLabel
-                                            countryCode={option.countryCode}
-                                            label={option.label}
-                                        />
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
+                        <LanguageSelect
+                            value={field.value}
+                            onChange={field.onChange}
+                            onBlur={field.onBlur}
+                            placeholder={placeholder}
+                            hasError={!!errors[fieldName]}
+                            id={`register-${fieldName}-select`}
+                        />
                     )
                 }}
             />

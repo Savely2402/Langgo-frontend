@@ -1,6 +1,6 @@
 import { X } from 'lucide-react'
 import { useNavigate } from 'react-router'
-import { clearPlayers } from '@/entities/player'
+import { clearPlayers } from '@/entities/game'
 import { useAppDispatch } from '@/shared/lib/store'
 import { Button } from '@/shared/ui/Button'
 import { LeavePrompt } from '@/shared/ui/LeavePrompt'

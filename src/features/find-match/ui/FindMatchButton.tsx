@@ -1,12 +1,14 @@
 import { useState, type ComponentProps } from 'react'
 import { Swords } from 'lucide-react'
 import { toast } from 'sonner'
+import { cn } from '@/shared/lib/classNames'
 import { Button } from '@/shared/ui/Button'
 import { MatchToastContent } from './MatchToastContent'
 
 type FindMatchButtonProps = ComponentProps<typeof Button>
 
 export const FindMatchButton = ({
+    className,
     children,
     onClick,
     disabled,
@@ -36,11 +38,18 @@ export const FindMatchButton = ({
     }
 
     return (
-        <Button disabled={isOpen || disabled} onClick={handleClick} {...props}>
+        <Button
+            className={cn('btn-3d', className)}
+            disabled={isOpen || disabled}
+            onClick={handleClick}
+            {...props}
+        >
             {children ?? (
                 <>
                     <Swords />
-                    <span>Find match</span>
+                    <span className="font-luckiest text-lg font-normal tracking-widest">
+                        Найти матч
+                    </span>
                 </>
             )}
         </Button>

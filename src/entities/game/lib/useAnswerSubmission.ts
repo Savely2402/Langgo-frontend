@@ -4,13 +4,13 @@ import {
     selectRoundStatus,
     selectLastRoundWinnerId,
     selectUserAnswerResult,
-} from '@/entities/game/model/selectors'
-import { setUserAnswer } from '@/entities/game/model/slice'
+} from '@/entities/game/model/gameSelectors'
+import { setUserAnswer } from '@/entities/game/model/gameSlice'
 import { useAppSelector, useAppDispatch } from '@/shared/lib/store'
 
 export type FormStatus = 'idle' | 'checking' | 'error' | 'success' | 'loser'
 
-export const useAnswerSubmission = (userId: string | number | undefined) => {
+export const useAnswerSubmission = (userId?: number) => {
     const dispatch = useAppDispatch()
     const roundStatus = useAppSelector(selectRoundStatus)
     const winnerId = useAppSelector(selectLastRoundWinnerId)

@@ -1,5 +1,5 @@
 import { mapAuthResponseToUser, userApi } from '@/entities/user'
-import type { AuthResponseDto, User } from '@/entities/user'
+import type { AuthResponse, User } from '@/entities/user'
 import { baseApi } from '@/shared/api'
 import type { RequestRegisterBody } from './types'
 
@@ -11,7 +11,7 @@ const registerApi = baseApi.injectEndpoints({
                 method: 'POST',
                 body,
             }),
-            transformResponse: (response: AuthResponseDto) => {
+            transformResponse: (response: AuthResponse) => {
                 localStorage.setItem('accessToken', response.accessToken)
                 if (response.refreshToken) {
                     localStorage.setItem('refreshToken', response.refreshToken)

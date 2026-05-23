@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { AtSign, Lock, Mail, User } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { getErrorMessage } from '@/shared/api'
+import type { LanguageCode } from '@/shared/config'
 import { Button } from '@/shared/ui/Button'
 import { Field, FieldGroup } from '@/shared/ui/Field'
 import { Spinner } from '@/shared/ui/Spinner'
@@ -27,8 +28,8 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
         email: '',
         password: '',
         confirmPassword: '',
-        langFrom: '',
-        langTo: '',
+        langFrom: '' as LanguageCode,
+        langTo: '' as LanguageCode,
     }
 
     const {
@@ -71,8 +72,8 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                         control={control}
                         errors={errors}
                         fieldName="fullname"
-                        fieldLabelText="Full name"
-                        placeholder="John Doe"
+                        fieldLabelText="Имя"
+                        placeholder="Иван Иванов"
                         inputType="text"
                         autoComplete="name"
                         icon={<User className="size-5" />}
@@ -83,8 +84,8 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                         control={control}
                         errors={errors}
                         fieldName="username"
-                        fieldLabelText="Username"
-                        placeholder="john_doe"
+                        fieldLabelText="Никнейм"
+                        placeholder="ivan_ivanov"
                         inputType="text"
                         autoComplete="username"
                         icon={<AtSign className="size-5" />}
@@ -95,7 +96,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                         control={control}
                         errors={errors}
                         fieldName="email"
-                        fieldLabelText="Email address"
+                        fieldLabelText="Почта"
                         placeholder="you@example.com"
                         inputType="email"
                         autoComplete="email"
@@ -107,8 +108,8 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                         control={control}
                         errors={errors}
                         fieldName="password"
-                        fieldLabelText="Password"
-                        placeholder="Create password"
+                        fieldLabelText="Пароль"
+                        placeholder="Введите пароль..."
                         inputType="password"
                         autoComplete="new-password"
                         icon={<Lock className="size-5" />}
@@ -119,8 +120,8 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                         control={control}
                         errors={errors}
                         fieldName="confirmPassword"
-                        fieldLabelText="Confirm password"
-                        placeholder="Repeat password"
+                        fieldLabelText="Подтверждение"
+                        placeholder="Повторите пароль..."
                         inputType="password"
                         autoComplete="new-password"
                         icon={<Lock className="size-5" />}
@@ -132,8 +133,8 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                             control={control}
                             errors={errors}
                             fieldName="langFrom"
-                            fieldLabelText="Lang from"
-                            placeholder="Lang from"
+                            fieldLabelText="Родной язык"
+                            placeholder="Родной язык"
                         />
                     </Field>
                     <Field>
@@ -141,8 +142,8 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                             control={control}
                             errors={errors}
                             fieldName="langTo"
-                            fieldLabelText="Lang to"
-                            placeholder="Lang to"
+                            fieldLabelText="Изучаемый язык"
+                            placeholder="Изучаемый язык"
                         />
                     </Field>
                 </div>
@@ -151,9 +152,9 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                 <Button
                     disabled={isLoading}
                     type="submit"
-                    className="h-[42px] w-full"
+                    className="h-[42px] w-full font-luckiest text-lg tracking-widest"
                 >
-                    Create account
+                    Создать аккаунт
                     {isLoading && <Spinner />}
                 </Button>
             </Field>

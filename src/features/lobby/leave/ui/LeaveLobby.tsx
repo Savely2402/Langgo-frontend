@@ -1,13 +1,31 @@
 import { LogOut } from 'lucide-react'
 import { useNavigate } from 'react-router'
-import { clearPlayers } from '@/entities/player'
-import { useAppDispatch } from '@/shared/lib/store'
+import {
+    gameRealtimeApi,
+    resetGame,
+    selectRoomId,
+    clearPlayers,
+} from '@/entities/game'
+import { useAppDispatch, useAppSelector } from '@/shared/lib/store'
 import { Button } from '@/shared/ui/Button'
 import { LeavePrompt } from '@/shared/ui/LeavePrompt'
 
 export const LeaveLobby = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
+    const roomId = useAppSelector(selectRoomId)
+
+    const handleLeave = async () => {
+        try {
+            if (roomId) {
+                await gameRealtimeApi.leaveRoom(roomId)
+            }
+            dispatch(clearPlayers())
+            dispatch(resetGame())
+        } catch (error) {
+            console.error('Ошибка при выходе из игры: ', error)
+        }
+    }
 
     return (
         <>
@@ -19,7 +37,7 @@ export const LeaveLobby = () => {
             <LeavePrompt
                 open
                 title={`Вы действительно хотите покинуть лобби?`}
-                onConfirm={() => dispatch(clearPlayers())}
+                onConfirm={handleLeave}
             />
         </>
     )

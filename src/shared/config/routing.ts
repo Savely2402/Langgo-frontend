@@ -4,6 +4,8 @@ export const routeSegments = {
     gameSetup: 'game-setup',
     lobby: 'lobby',
     dictionaries: 'dictionaries',
+    add: 'add',
+    edit: 'edit',
     notFound: '*',
 } as const
 
@@ -14,6 +16,9 @@ export const routes = {
     gameSetup: `/${routeSegments.gameSetup}`,
     lobby: (roomId: string) => `/${routeSegments.lobby}/${roomId}`,
     dictionaries: `/${routeSegments.dictionaries}`,
+    dictionaryAdd: `/${routeSegments.dictionaries}/${routeSegments.add}`,
+    dictionaryEdit: (id: string) =>
+        `/${routeSegments.dictionaries}/${routeSegments.edit}/${id}`,
     notFound: '*',
 } as const
 

@@ -1,4 +1,6 @@
 import { Plus } from 'lucide-react'
+import { Link } from 'react-router'
+import { routes } from '@/shared/config'
 import { Button } from '@/shared/ui/Button'
 import { AppHeader } from '@/widgets/app-header'
 import { HeaderProfile } from '@/widgets/header-profile'
@@ -10,10 +12,17 @@ export const MyDictionariesPage = () => {
             <AppHeader rightSlot={<HeaderProfile />} />
             <div className="mx-auto max-w-[640px] px-4">
                 <div className="flex items-center justify-between">
-                    <h1 className="my-8 text-4xl font-black">Мои словари</h1>
-                    <Button className="btn-3d hover-elevate">
-                        <Plus />
-                        Новый словарь
+                    <h1 className="my-8 text-3xl font-black sm:text-4xl">
+                        Мои словари
+                    </h1>
+                    <Button asChild className="btn-3d hover-elevate">
+                        <Link to={routes.dictionaryAdd}>
+                            <Plus />
+                            <span className="sm:hidden">Добавить</span>
+                            <span className="hidden sm:block">
+                                Новый словарь
+                            </span>
+                        </Link>
                     </Button>
                 </div>
 

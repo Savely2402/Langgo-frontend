@@ -1,22 +1,27 @@
 import {
     selectGameSettings,
-    selectGameWinnerId,
     selectUserScore,
+    selectPlayersForGame,
 } from '@/entities/game'
-import { selectPlayersForGame } from '@/entities/player'
 import { useUser } from '@/entities/user'
 import { useAppSelector } from '@/shared/lib/store'
-import type { MatchResult } from '../config/matchResultConfig'
+import type { MatchResultType } from '../config/matchResultConfig'
 
 export const useMatchResults = () => {
     const { user } = useUser()
-    const winnerId = useAppSelector(selectGameWinnerId)
-    const [, opponent] = useAppSelector(selectPlayersForGame)
+    // const winnerId = useAppSelector(selectGameWinnerId)
+    const [, opponent] = useAppSelector((state) =>
+        selectPlayersForGame(state, user?.id),
+    )
+
+    // console.log("WINNER ID: ", winnerId)
 
     const myScore =
         useAppSelector((state) => selectUserScore(state, user?.id)) ?? 0
     const opponentScore =
         useAppSelector((state) => selectUserScore(state, opponent?.id)) ?? 0
+
+    // console.log("My SCORED: ", myScore)
 
     const gameSettings = useAppSelector(selectGameSettings)
     const ratingChange = 45
@@ -26,14 +31,19 @@ export const useMatchResults = () => {
         accuracy: '71%',
     }
 
-    if (!user || !opponent) return null
+    let result: MatchResultType
 
-    const result: MatchResult =
-        user.id === winnerId
-            ? 'win'
-            : opponent.id === winnerId
-              ? 'lose'
-              : 'draw'
+    if (!user) return null
+    if (!opponent) {
+        result = 'completed'
+    } else {
+        result =
+            myScore > opponentScore
+                ? 'win'
+                : opponentScore > myScore
+                  ? 'lose'
+                  : 'draw'
+    }
 
     return {
         user,

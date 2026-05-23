@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Play, Loader2 } from 'lucide-react'
+import { gameRealtimeApi } from '@/entities/game'
 import { useUser } from '@/entities/user'
-import { startGame } from '@/shared/api'
 import { useAppSelector } from '@/shared/lib/store'
 import { Button } from '@/shared/ui/Button'
 
@@ -18,12 +18,10 @@ export const StartGameButton = () => {
     const handleStart = async () => {
         if (!isHost || isLoading || !roomId) return
 
-        // setIsLoading(true)
         try {
-            await startGame(roomId)
-            console.log('Отправили бэкенду просьбу начать игру...')
+            await gameRealtimeApi.startGame(roomId)
         } catch (error) {
-            console.error('Не удалось достучаться до сервера:', error)
+            console.error('Ошибка при запуске игры:', error)
             setIsLoading(false)
         }
     }
@@ -44,7 +42,7 @@ export const StartGameButton = () => {
         <Button
             onClick={handleStart}
             disabled={isLoading}
-            className="btn-3d h-16 w-full rounded-3xl text-xl transition-all"
+            className="btn-3d h-16 w-full rounded-3xl font-luckiest text-xl tracking-wider transition-all"
         >
             {isLoading ? (
                 <>

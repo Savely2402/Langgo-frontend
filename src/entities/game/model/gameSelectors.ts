@@ -1,3 +1,4 @@
+export const selectRoomId = (state: RootState) => state.game.roomId
 export const selectGameStatus = (state: RootState) => state.game.status
 export const selectGameSettings = (state: RootState) => state.game.settings
 export const selectGameStartTime = (state: RootState) => state.game.startTime
@@ -17,19 +18,20 @@ export const selectWinnerResponseTime = (state: RootState) =>
 
 export const selectUserScore = (
     state: RootState,
-    userId: string | number | undefined,
+    userId: number | undefined,
 ) => {
     if (!userId) return null
-    return String(userId) in state.game.scores ? state.game.scores : 0
+    if (!state.game.scores) return 0
+    return userId in state.game.scores ? state.game.scores[userId] : 0
 }
 
 export const selectUserAnswerResult = (
     state: RootState,
-    userId: string | number | undefined,
-): boolean | undefined => {
+    userId?: number,
+): boolean | undefined | null => {
     if (!userId) return undefined
 
-    return state.game.answerResults[String(userId)]
+    return state.game.answerResults[String(userId)] ?? null
 }
 
 export const selectCurrentRound = (state: RootState) => state.game.currentRound

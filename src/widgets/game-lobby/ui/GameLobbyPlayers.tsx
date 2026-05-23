@@ -1,8 +1,9 @@
 import React from 'react' // Не забудь импортнуть для Fragment
 import { Crown, X, User } from 'lucide-react' // Добавил User для иконки заглушки
 import { ReactCountryFlag } from 'react-country-flag'
-import { selectCurrentPlayer, selectPlayersForLobby } from '@/entities/player'
+import { selectCurrentPlayer, selectPlayersForLobby } from '@/entities/game'
 import { UserAvatar, useUser } from '@/entities/user'
+import { languageOptions } from '@/shared/config'
 import { cn } from '@/shared/lib/classNames'
 import { useAppSelector } from '@/shared/lib/store'
 import { Badge } from '@/shared/ui/Badge'
@@ -43,7 +44,10 @@ export const GameLobbyPlayers = ({ className }: GameLobbyPlayersProps) => {
                         <ItemContent>
                             <ItemTitle className="text-xl font-bold">
                                 {p.username}
-                                <ReactCountryFlag countryCode="ES" svg />
+                                <ReactCountryFlag
+                                    countryCode={`${languageOptions.find((option) => option.value === p.nativeLanguage)?.countryCode}`}
+                                    svg
+                                />
                                 {p.isHost && (
                                     <Badge
                                         variant="secondary"

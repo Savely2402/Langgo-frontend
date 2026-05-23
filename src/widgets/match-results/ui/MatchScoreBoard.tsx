@@ -1,17 +1,22 @@
 import { Zap } from 'lucide-react'
-import type { Player } from '@/entities/player'
+import type { Player } from '@/entities/game'
 import type { User } from '@/entities/user'
 import { UserAvatar } from '@/entities/user/ui/UserAvatar'
-import type { MatchResult, ResultConfig } from '../config/matchResultConfig'
+import { cn } from '@/shared/lib/classNames'
+import {
+    matchResultAvatarRingVariants,
+    matchResultRatingBadgeVariants,
+} from '../config/matchResultVariants'
+import type { MatchResultType } from '../config/matchResultConfig'
 
 interface MatchScoreBoardProps {
     user: User
-    opponent: Player
+    opponent?: Player
     myScore: number
     opponentScore: number
-    result: MatchResult
+    result: MatchResultType
     ratingChange: number
-    config: ResultConfig
+    ratingPrefix: '+' | '-' | ''
 }
 
 export const MatchScoreBoard = ({
@@ -21,22 +26,32 @@ export const MatchScoreBoard = ({
     opponentScore,
     result,
     ratingChange,
-    config,
+    ratingPrefix,
 }: MatchScoreBoardProps) => {
     const displayedRatingChange = result === 'draw' ? 0 : Math.abs(ratingChange)
+    const isUserHighlighted = result === 'win' || result === 'completed'
+    const isOpponentHighlighted = result === 'lose'
 
     return (
         <div className="mb-8 flex items-start justify-between px-2">
             <div
-                className={`flex flex-col items-center transition-all ${result === 'lose' ? 'opacity-60 grayscale-[40]' : ''}`}
+                className={cn(
+                    'flex flex-col items-center transition-all',
+                    result === 'lose' && 'opacity-60 grayscale-[40]',
+                )}
             >
                 <UserAvatar
-                    username={user?.username}
-                    avatarUrl={user?.avatarUrl}
-                    className={`size-[72px] rounded-full ${result === 'win' ? `ring-4 ring-offset-2 ${config.ringColor}` : 'border-4 border-slate-100 bg-slate-50'}`}
+                    username={user.username}
+                    avatarUrl={user.avatarUrl}
+                    className={cn(
+                        'size-[72px] rounded-full',
+                        isUserHighlighted
+                            ? matchResultAvatarRingVariants({ result })
+                            : 'border-4 border-slate-100 bg-slate-50',
+                    )}
                 />
                 <span className="mt-3 text-sm font-bold text-slate-800">
-                    {user?.username}
+                    {user.username}
                 </span>
             </div>
 
@@ -46,25 +61,32 @@ export const MatchScoreBoard = ({
                     {opponentScore}
                 </div>
                 <span className="mt-1.5 text-[9px] font-black tracking-[0.2em] text-slate-400 uppercase">
-                    Final Score
+                    Финальный счет
                 </span>
 
-                <div
-                    className={`mt-4 flex items-center gap-1.5 rounded-full border-2 px-3 py-1.5 text-[11px] font-black ${config.ratingBg} ${config.ratingBorder} ${config.ratingText}`}
-                >
+                <div className={matchResultRatingBadgeVariants({ result })}>
                     <Zap className="size-3.5 fill-current" />
-                    {config.ratingPrefix}
+                    {ratingPrefix}
                     {displayedRatingChange} ОЧКОВ РЕЙТИНГА
                 </div>
             </div>
 
             <div
-                className={`flex flex-col items-center transition-all ${result === 'win' ? 'opacity-60 grayscale-40' : ''}`}
+                className={cn(
+                    'flex flex-col items-center transition-all',
+                    result === 'win' && 'opacity-60 grayscale-40',
+                    !opponent && 'invisible',
+                )}
             >
                 <UserAvatar
-                    username={opponent?.username}
+                    username={opponent?.username ?? ''}
                     avatarUrl={opponent?.avatarUrl}
-                    className={`size-[72px] rounded-full ${result === 'lose' ? `ring-4 ring-offset-2 ${config.ringColor}` : 'border-4 border-slate-100 bg-slate-50'}`}
+                    className={cn(
+                        'size-[72px] rounded-full',
+                        isOpponentHighlighted
+                            ? matchResultAvatarRingVariants({ result })
+                            : 'border-4 border-slate-100 bg-slate-50',
+                    )}
                 />
                 <span className="mt-3 text-sm font-semibold text-slate-500">
                     {opponent?.username}

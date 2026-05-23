@@ -1,43 +1,22 @@
 import * as z from 'zod'
-import { authLanguageCodes, type AuthLanguageCode } from '@/shared/config'
-
-const authLanguageCodeSchema = z
-    .string()
-    .superRefine((value, ctx) => {
-        if (!value) {
-            ctx.addIssue({
-                code: 'custom',
-                message: 'Language is required',
-            })
-
-            return
-        }
-
-        if (!authLanguageCodes.includes(value as AuthLanguageCode)) {
-            ctx.addIssue({
-                code: 'custom',
-                message: 'Select a valid language',
-            })
-        }
-    })
-    .transform((value) => value as AuthLanguageCode)
+import { languageCodeSchema } from '@/shared/config'
 
 export const registerFormSchema = z
     .object({
-        fullname: z.string().min(1, 'Full name is required'),
-        username: z.string().min(1, 'Username is required'),
-        email: z.email('Must be a valid email').min(1, 'Email is required'),
-        password: z.string().min(1, 'Password is required'),
-        confirmPassword: z.string().min(1, 'Confirm password is required'),
-        langFrom: authLanguageCodeSchema,
-        langTo: authLanguageCodeSchema,
+        fullname: z.string().min(1, 'Введите имя'),
+        username: z.string().min(1, 'Введите имя пользователя'),
+        email: z.email('Некорректный формат почты').min(1, 'Введите почту'),
+        password: z.string().min(1, 'Введите пароль'),
+        confirmPassword: z.string().min(1, 'Подтвердите пароль'),
+        langFrom: languageCodeSchema,
+        langTo: languageCodeSchema,
     })
     .superRefine(({ password, confirmPassword, langFrom, langTo }, ctx) => {
         if (password !== confirmPassword) {
             ctx.addIssue({
                 code: 'custom',
                 path: ['confirmPassword'],
-                message: 'Passwords must match',
+                message: 'Пароли должны совпадать',
             })
         }
 
@@ -45,7 +24,7 @@ export const registerFormSchema = z
             ctx.addIssue({
                 code: 'custom',
                 path: ['langTo'],
-                message: 'Languages must be different',
+                message: 'Языки не должны совпадать',
             })
         }
     })

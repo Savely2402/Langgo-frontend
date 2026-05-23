@@ -77,19 +77,22 @@ const gameSlice = createSlice({
                 action.payload.isCorrect
         },
 
+        clearAnswerResult: (state, action: PayloadAction<number>) => {
+            state.answerResults[action.payload] = null
+        },
+
         endRound: (state, action: PayloadAction<EndRoundPayload>) => {
             state.status = 'revealing'
             state.lastRoundWinnerId = action.payload.lastRoundWinnerId
             state.scores = action.payload.scores
             state.nextRoundStartTime = action.payload.nextRoundStartTime
+            state.correctAnswer = action.payload.correctAnswer
             // state.winnerResponseTime = action.payload.winnerResponseTime
         },
 
         endGame: (state, action: PayloadAction<EndGamePayload>) => {
             state.status = 'finished'
             state.scores = action.payload.scores
-
-            console.log('Scores in end: ', action.payload.scores)
             state.gameWinnerId = action.payload.gameWinnerId
         },
 
@@ -120,6 +123,9 @@ export const {
     initGameConnection,
     closeGameConnection,
     connectionEstablished,
+    setGameSettings,
+    setAnswerResult,
+    clearAnswerResult,
 } = gameSlice.actions
 
 export default gameSlice.reducer
