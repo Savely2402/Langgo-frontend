@@ -13,6 +13,8 @@ export const UserDictionaries = () => {
         user?.id ?? skipToken,
     )
 
+    console.log('Data: ', dictionaries)
+
     if (isError) {
         return <>Не удалось загрузить словари :(</>
     }

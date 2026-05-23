@@ -1,15 +1,32 @@
+import type { LanguageCode } from '@/shared/config'
 import type { BaseDictionary } from '../model/types'
 
 export interface GetDictionariesResponse {
     dictionaries: {
         id: number
         name: string
-        langFrom: string
-        langTo: string
+        langFrom: LanguageCode
+        langTo: LanguageCode
         description: string
         scope: 0 | 1
         wordsCount: number
     }[]
+}
+
+type WordDto = {
+    original: string
+    translation: string
+    example: string
+    difficulty: 0
+}
+
+export interface CreateDictionaryRequest {
+    name: string
+    langFrom: LanguageCode
+    langTo: LanguageCode
+    description: string
+    isPublic: boolean
+    wordsWithTranslations: WordDto[]
 }
 
 export type UploadDictionaryResponse = Omit<BaseDictionary, 'content'>

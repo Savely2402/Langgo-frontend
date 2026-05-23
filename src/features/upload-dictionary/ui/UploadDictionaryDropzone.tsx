@@ -45,8 +45,8 @@ export const UploadDictionaryDropzone = React.memo(
                 {status === 'success' && dictionaryData && (
                     <UploadSuccess
                         dictionaryName={dictionaryData.name}
-                        langFrom={dictionaryData.languagePair.langFrom}
-                        langTo={dictionaryData.languagePair.langTo}
+                        langFrom={dictionaryData.langFrom}
+                        langTo={dictionaryData.langTo}
                         wordsAmount={dictionaryData.wordsAmount}
                         onRemove={handleRemove}
                     />

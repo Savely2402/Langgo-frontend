@@ -2,7 +2,6 @@ import { createBrowserRouter } from 'react-router'
 import { GameSetupPage } from '@/pages/game-setup'
 import { HomePage } from '@/pages/home'
 import { MatchRoomPage } from '@/pages/match-room'
-import { MyDictionariesPage } from '@/pages/my-dictionaries'
 import { routes, routeSegments } from '@/shared/config'
 import { AppLayout } from '../layouts/AppLayout'
 import { AuthGuard } from './AuthGuard'
@@ -64,7 +63,28 @@ export const router = createBrowserRouter([
                 path: `${routeSegments.lobby}/:roomId`,
                 Component: MatchRoomPage,
             },
-            { path: routeSegments.dictionaries, Component: MyDictionariesPage },
+            {
+                path: routeSegments.dictionaries,
+                children: [
+                    {
+                        index: true,
+                        lazy: async () => {
+                            const { MyDictionariesPage } =
+                                await import('@/pages/my-dictionaries')
+                            return { Component: MyDictionariesPage }
+                        },
+                    },
+
+                    {
+                        path: routeSegments.add,
+                        lazy: async () => {
+                            const { AddDictionaryPage } =
+                                await import('@/pages/add-dictionary')
+                            return { Component: AddDictionaryPage }
+                        },
+                    },
+                ],
+            },
         ],
     },
 ])
