@@ -67,7 +67,7 @@ export const HomeModeCard = ({
                     type="button"
                     variant={mode.id === 'ranked' ? 'default' : 'outline'}
                     className={cn(
-                        'h-12 w-full rounded-4xl text-sm font-bold tracking-[0.12em]',
+                        'btn-3d h-12 w-full rounded-4xl text-sm font-bold tracking-[0.12em]',
                         mode.id === 'ranked'
                             ? 'bg-primary/90 text-white hover:bg-primary'
                             : mode.buttonClassName,
@@ -75,7 +75,7 @@ export const HomeModeCard = ({
                     onClick={handleSideButtonClick}
                 >
                     {isLocked && <Lock className="size-4" />}
-                    <span>
+                    <span className="font-luckiest">
                         {isLocked
                             ? mode.guestCtaLabel
                             : isGuestCustomMode
@@ -90,7 +90,7 @@ export const HomeModeCard = ({
             return (
                 <Button
                     type="button"
-                    className="h-[60px] w-full rounded-[24px] bg-slate-900 text-base font-black tracking-[0.14em] text-white shadow-[0_18px_40px_rgba(15,23,42,0.18)] hover:bg-slate-800"
+                    className="btn-3d h-[60px] w-full rounded-[24px] bg-slate-900 text-base tracking-[0.14em] text-white shadow-[0_18px_40px_rgba(15,23,42,0.18)] hover:bg-slate-800"
                     onClick={(event) => {
                         event.stopPropagation()
                         onOpenAuthDialog()
@@ -104,9 +104,9 @@ export const HomeModeCard = ({
 
         if (mode.id === 'ranked') {
             return (
-                <FindMatchButton className="btn-3d h-[60px] w-full rounded-[24px] text-base font-black tracking-[0.14em] shadow-[0_18px_44px_rgba(16,185,129,0.28)]">
+                <FindMatchButton className="h-[60px] w-full rounded-[24px] text-base tracking-[0.14em]">
                     <Swords className="size-5" />
-                    <span>{mode.activeCtaLabel}</span>
+                    <span className="font-luckiest">{mode.activeCtaLabel}</span>
                 </FindMatchButton>
             )
         }
@@ -115,12 +115,12 @@ export const HomeModeCard = ({
             <Button
                 asChild
                 className={cn(
-                    'btn-3d h-[60px] w-full rounded-[24px] text-base font-black tracking-[0.14em] shadow-[0_18px_40px_rgba(15,23,42,0.12)]',
+                    'btn-3d h-[60px] w-full rounded-[24px] text-base tracking-[0.14em] shadow-[0_18px_40px_rgba(15,23,42,0.12)]',
                     mode.buttonClassName,
                 )}
             >
                 <Link to={isGuestCustomMode ? routes.login : routes.gameSetup}>
-                    <span>
+                    <span className="font-luckiest">
                         {isGuestCustomMode
                             ? mode.guestCtaLabel
                             : mode.activeCtaLabel}

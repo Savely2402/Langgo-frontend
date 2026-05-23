@@ -14,7 +14,7 @@ export const MatchStats = ({ stats }: MatchStatsProps) => {
             </div>
 
             <div className="grid grid-cols-3 gap-3">
-                <div className="flex flex-col items-center justify-center rounded-2xl border-b-4 border-[#059669] bg-[#10B981] py-4 text-white shadow-lg shadow-[#10B981]/30">
+                <div className="btn-3d flex flex-col items-center justify-center rounded-2xl bg-primary py-4 text-white shadow-lg shadow-[#10B981]/30">
                     <span className="text-2xl leading-none font-black">
                         {stats.rounds}
                     </span>
@@ -23,7 +23,7 @@ export const MatchStats = ({ stats }: MatchStatsProps) => {
                     </span>
                 </div>
 
-                <div className="flex flex-col items-center justify-center rounded-2xl border-b-4 border-[#D97706] bg-[#F59E0B] py-4 text-white shadow-lg shadow-[#F59E0B]/30">
+                <div className="btn-3d flex flex-col items-center justify-center rounded-2xl bg-[#F59E0B] py-4 text-white shadow-lg shadow-[#F59E0B]/30">
                     <span className="text-2xl leading-none font-black">
                         {stats.averageTime}
                     </span>
@@ -32,7 +32,7 @@ export const MatchStats = ({ stats }: MatchStatsProps) => {
                     </span>
                 </div>
 
-                <div className="flex flex-col items-center justify-center rounded-2xl border-b-4 border-[#0891B2] bg-[#06B6D4] py-4 text-white shadow-lg shadow-[#06B6D4]/30">
+                <div className="btn-3d flex flex-col items-center justify-center rounded-2xl bg-[#06B6D4] py-4 text-white shadow-lg shadow-[#06B6D4]/30">
                     <span className="text-2xl leading-none font-black">
                         {stats.accuracy}
                     </span>

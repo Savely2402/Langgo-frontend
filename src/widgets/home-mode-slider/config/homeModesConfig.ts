@@ -42,7 +42,7 @@ export const HOME_MODES: HomeMode[] = [
             'from-emerald-100 via-white to-teal-50 text-emerald-700 ring-emerald-200/80',
         iconClassName: 'bg-emerald-100 text-emerald-600',
         buttonClassName:
-            'bg-primary text-primary-foreground hover:brightness-95',
+            'btn-3d bg-primary text-primary-foreground  hover:brightness-95',
         icon: Trophy,
         requiresAuth: true,
     },

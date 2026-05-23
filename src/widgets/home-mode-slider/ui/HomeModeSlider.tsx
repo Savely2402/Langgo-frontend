@@ -5,7 +5,6 @@ import { useUser } from '@/entities/user'
 import { AuthRequiredDialog } from '@/features/auth-required-dialog'
 import { routes } from '@/shared/config'
 import { cn } from '@/shared/lib/classNames'
-import { Badge } from '@/shared/ui/Badge'
 import { Button } from '@/shared/ui/Button'
 import {
     Carousel,
@@ -50,21 +49,10 @@ export const HomeModeSlider = () => {
                 <div className="relative mx-auto max-w-[1240px]">
                     <div className="mb-6 flex items-center justify-between gap-4 sm:mb-8">
                         <div className="space-y-3">
-                            <Badge
-                                variant="secondary"
-                                className="rounded-full bg-white/85 px-3 py-1 text-[11px] font-black tracking-[0.18em] text-slate-500 uppercase shadow-sm"
-                            >
-                                LangGo modes
-                            </Badge>
                             <div className="space-y-2">
                                 <h1 className="max-w-[14ch] text-3xl leading-none font-black tracking-tight text-slate-800 sm:text-4xl md:text-[54px]">
                                     Выберите идеальный режим для следующей игры
                                 </h1>
-                                <p className="max-w-[62ch] text-sm leading-6 text-slate-500 sm:text-base">
-                                    Листайте карточки, чтобы переключаться между
-                                    режимами. Центральная карточка всегда
-                                    открывает основной сценарий прямо с главной.
-                                </p>
                             </div>
                         </div>
 
