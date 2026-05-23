@@ -1,6 +1,7 @@
 export {
-    authLanguageCodes,
-    authLanguageOptions,
-    type AuthLanguageCode,
-} from './authLanguages'
+    languageCodes,
+    languageOptions,
+    languageCodeSchema,
+    type LanguageCode,
+} from './languages'
 export { routeSegments, routes, type Route } from './routing'
