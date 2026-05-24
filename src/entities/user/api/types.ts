@@ -2,7 +2,7 @@ export interface UserDTO {
     id: number
     email: string
     username: string
-    fullname: string
+    fullName: string
     avatar: string
     learningLanguage: string
     nativeLanguage: string

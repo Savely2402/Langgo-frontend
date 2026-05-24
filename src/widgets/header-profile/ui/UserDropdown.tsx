@@ -1,4 +1,4 @@
-import { BookOpenText, ChevronDown } from 'lucide-react'
+import { BookOpenText, ChevronDown, User } from 'lucide-react'
 import { Link } from 'react-router'
 import { UserAvatar, useUser } from '@/entities/user'
 import { LogoutButton } from '@/features/auth-logout'
@@ -27,16 +27,25 @@ export const UserDropdown = () => {
             >
                 <DropdownMenuTrigger>
                     <UserAvatar
+                        className="sm:size-9"
                         username={user.username}
                         avatarUrl={user.avatarUrl}
                     />
-                    <span className="hidden text-sm font-semibold md:block">
+                    {/* <span className="hidden text-sm font-semibold md:block">
                         {user.fullname}
-                    </span>
+                    </span> */}
                     <ChevronDown className="hidden size-4 transition-all group-data-[state=open]:rotate-180 sm:block" />
                 </DropdownMenuTrigger>
             </Button>
             <DropdownMenuContent onCloseAutoFocus={(e) => e.preventDefault()}>
+                <DropdownMenuItem>
+                    <Button variant="ghost" asChild>
+                        <Link to={routes.profile(String(user.id))}>
+                            <User />
+                            Мой профиль
+                        </Link>
+                    </Button>
+                </DropdownMenuItem>
                 <DropdownMenuItem>
                     <Button variant="ghost" asChild>
                         <Link to={routes.dictionaries}>

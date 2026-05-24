@@ -6,6 +6,8 @@ export const routeSegments = {
     dictionaries: 'dictionaries',
     add: 'add',
     edit: 'edit',
+    profile: 'profile',
+    settings: 'settings',
     notFound: '*',
 } as const
 
@@ -19,6 +21,8 @@ export const routes = {
     dictionaryAdd: `/${routeSegments.dictionaries}/${routeSegments.add}`,
     dictionaryEdit: (id: string) =>
         `/${routeSegments.dictionaries}/${routeSegments.edit}/${id}`,
+    profile: (id: string) => `/${routeSegments.profile}/${id}`,
+    profileSettings: `/${routeSegments.profile}/${routeSegments.settings}`,
     notFound: '*',
 } as const
 
