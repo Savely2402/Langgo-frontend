@@ -85,6 +85,23 @@ export const router = createBrowserRouter([
                     },
                 ],
             },
+            {
+                path: `${routeSegments.profile}/:id`,
+                lazy: async () => {
+                    const { ProfilePage } = await import('@/pages/profile')
+
+                    return { Component: ProfilePage }
+                },
+            },
+            {
+                path: `${routeSegments.profile}/${routeSegments.settings}`,
+                lazy: async () => {
+                    const { ProfileSettingsPage } =
+                        await import('@/pages/profile-settings')
+
+                    return { Component: ProfileSettingsPage }
+                },
+            },
         ],
     },
 ])

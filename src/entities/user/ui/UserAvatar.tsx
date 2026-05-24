@@ -12,6 +12,8 @@ export const UserAvatar = ({
     username,
     className,
 }: UserAvatarProps) => {
+    console.log('Avatar: ', avatarUrl)
+
     return (
         <Avatar className={cn('size-6', className)}>
             <AvatarImage src={avatarUrl} alt={username} />
