@@ -12,7 +12,7 @@ export const MyDictionariesPage = () => {
             <AppHeader rightSlot={<HeaderProfile />} />
             <div className="mx-auto max-w-[640px] px-4">
                 <div className="flex items-center justify-between">
-                    <h1 className="my-8 text-3xl font-black sm:text-4xl">
+                    <h1 className="my-8 font-luckiest text-3xl tracking-widest sm:text-4xl">
                         Мои словари
                     </h1>
                     <Button asChild className="btn-3d hover-elevate">
