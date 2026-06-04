@@ -1,3 +1,4 @@
+import { AUTH_TAG } from '@/shared/api'
 import { baseApi } from '@/shared/api/baseApi' // Твой базовый инстанс RTK Query
 import type { UpdateProfileRequest } from './types'
 
@@ -27,6 +28,7 @@ export const profileApi = baseApi.injectEndpoints({
                 method: 'PATCH',
                 body,
             }),
+            invalidatesTags: [AUTH_TAG],
         }),
     }),
 })
