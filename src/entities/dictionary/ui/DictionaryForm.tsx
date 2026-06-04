@@ -86,7 +86,7 @@ export const DictionaryForm = ({
                 </div>
             </div>
 
-            <div className="border-t pt-4">
+            <div className="max-h-[200px] overflow-auto border-t pt-4">
                 <WordPairsList />
             </div>
 

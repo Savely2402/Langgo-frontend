@@ -1,5 +1,5 @@
 export const DictionaryType = {
-    0: 'custom',
+    0: 'public',
     1: 'system',
 } as const
 

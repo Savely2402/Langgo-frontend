@@ -1,5 +1,5 @@
 import type { LanguageCode } from '@/shared/config'
-import type { BaseDictionary } from '../model/types'
+import type { BaseDictionary, DictionaryType } from '../model/types'
 
 export interface GetDictionariesResponse {
     dictionaries: {
@@ -8,7 +8,7 @@ export interface GetDictionariesResponse {
         langFrom: LanguageCode
         langTo: LanguageCode
         description: string
-        scope: 0 | 1
+        scope: (typeof DictionaryType)[keyof typeof DictionaryType]
         wordsCount: number
     }[]
 }
