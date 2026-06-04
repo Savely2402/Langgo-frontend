@@ -93,15 +93,6 @@ export const ProfileForm = () => {
 
             toast.success('Профиль успешно обновлен!')
         } catch (error) {
-            await updateProfile({
-                email: user.email,
-                username: data.username,
-                fullName: data.fullName,
-                avatar: avatarUrl || '',
-                learningLanguage: user.learningLanguage,
-                nativeLanguage: user.nativeLanguage,
-            }).unwrap()
-
             refetch()
             console.error(error)
             // toast.error('Ошибка при сохранении профиля')
