@@ -20,7 +20,9 @@ export const GameSetupPage = () => {
             />
 
             <div className="mx-auto max-w-[640px] px-4">
-                <h1 className="my-8 text-4xl font-black">Создание лобби</h1>
+                <h1 className="my-8 font-luckiest text-4xl tracking-widest">
+                    Создание лобби
+                </h1>
 
                 <GameSetupForm />
             </div>
