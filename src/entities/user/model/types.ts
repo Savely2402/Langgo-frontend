@@ -10,3 +10,13 @@ export type User = {
     nativeLanguage: LanguageCode
     rating: number
 }
+
+export interface UserProfile {
+    id: number
+    username: string
+    fullname: string
+    avatarUrl?: string
+    learningLanguage: LanguageCode
+    nativeLanguage: LanguageCode
+    rating: number
+}

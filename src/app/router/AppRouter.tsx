@@ -102,6 +102,14 @@ export const router = createBrowserRouter([
                     return { Component: ProfileSettingsPage }
                 },
             },
+            {
+                path: `${routeSegments.friends}`,
+                lazy: async () => {
+                    const { FriendsPage } = await import('@/pages/friends')
+
+                    return { Component: FriendsPage }
+                },
+            },
         ],
     },
 ])
