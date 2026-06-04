@@ -3,7 +3,10 @@ import { skipToken } from '@reduxjs/toolkit/query'
 import { Upload, Files, ArrowRight } from 'lucide-react'
 import { Controller, useForm, useWatch } from 'react-hook-form'
 import { useNavigate } from 'react-router'
-import { useGetUserDictionariesQuery } from '@/entities/dictionary'
+import {
+    useGetDictionariesQuery,
+    useGetUserDictionariesQuery,
+} from '@/entities/dictionary'
 import {
     setGameSettings,
     useCreateGameMutation,
@@ -58,8 +61,13 @@ export const GameSetupForm = () => {
         },
     })
 
-    const { data: userDicts } = useGetUserDictionariesQuery(
+    const { data: userSystemDicts } = useGetDictionariesQuery()
+
+    // user?.id ?? skipToken,
+
+    const { data: userCustomDicts } = useGetUserDictionariesQuery(
         user?.id ?? skipToken,
+        // user?.id ?? skipToken,
     )
     // const { data: systemDicts } = useGetSystemDictionariesQuery()
 
@@ -114,7 +122,7 @@ export const GameSetupForm = () => {
             />
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="flex flex-col gap-6"
+                className="flex flex-col gap-6 pb-10"
             >
                 <Card className="gap-2">
                     <CardContent>
@@ -170,7 +178,11 @@ export const GameSetupForm = () => {
                                                         Выберите из библиотеки
                                                     </FieldLabel>
                                                     <SelectableDictionaryList
-                                                        dictionaries={userDicts}
+                                                        dictionaries={userSystemDicts?.filter(
+                                                            (dict) =>
+                                                                dict.type ===
+                                                                'system',
+                                                        )}
                                                         selectedId={field.value}
                                                         onSelect={(id) => {
                                                             field.onChange(
@@ -201,7 +213,11 @@ export const GameSetupForm = () => {
                                                         Выберите свой словарь
                                                     </FieldLabel>
                                                     <SelectableDictionaryList
-                                                        dictionaries={userDicts}
+                                                        dictionaries={userCustomDicts?.filter(
+                                                            (dict) =>
+                                                                dict.type ===
+                                                                'public',
+                                                        )}
                                                         selectedId={field.value}
                                                         onSelect={(id) => {
                                                             field.onChange(
