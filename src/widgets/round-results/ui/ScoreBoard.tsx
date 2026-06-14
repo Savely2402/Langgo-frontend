@@ -56,7 +56,6 @@ export const ScoreBoard = ({
                 <div className="relative">
                     <UserAvatar
                         avatarUrl={opponent.avatarUrl}
-                        // avatarUrl="https://img.magnific.com/premium-vector/male-face-avatar-icon-set-flat-design-social-media-profiles_1281173-3806.jpg?semt=ais_hybrid&w=740&q=80"
                         username={opponent.username}
                         className={`size-[84px] rounded-full ${result === 'lose' ? 'ring-4 ring-red-500 ring-offset-4' : 'border-4 border-slate-50 bg-slate-100'}`}
                     />
