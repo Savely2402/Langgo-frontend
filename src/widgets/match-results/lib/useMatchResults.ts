@@ -25,11 +25,6 @@ export const useMatchResults = () => {
 
     const gameSettings = useAppSelector(selectGameSettings)
     const ratingChange = 45
-    const stats = {
-        rounds: 11,
-        averageTime: '1.4 с',
-        accuracy: '71%',
-    }
 
     let result: MatchResultType
 
@@ -43,6 +38,12 @@ export const useMatchResults = () => {
                 : opponentScore > myScore
                   ? 'lose'
                   : 'draw'
+    }
+
+    const stats = {
+        rounds: result === 'win' ? 2 : 1,
+        averageTime: '1.4 с',
+        accuracy: '71%',
     }
 
     return {
