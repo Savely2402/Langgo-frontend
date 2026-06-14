@@ -1,15 +1,12 @@
 import { Link } from 'react-router'
 // import { LanguageSwitchDropdown } from '@/features/language-switch'
 // import { ThemeSwitchButton } from '@/features/theme-switch'
-import LogoSvg from '@/shared/assets/icons/logo.svg?react'
 import { Header } from '@/shared/ui/Header'
-import { Icon } from '@/shared/ui/Icon'
 
 const Logo = () => {
     return (
         <Link to={'/'} className="flex items-center gap-1">
-            <Icon Svg={LogoSvg} className="size-6 min-[450px]:size-9" />
-            <span className="font-luckiest min-[450px]:text-[20px]">
+            <span className="font-luckiest min-[450px]:text-[34px]">
                 LangGo
             </span>
         </Link>
