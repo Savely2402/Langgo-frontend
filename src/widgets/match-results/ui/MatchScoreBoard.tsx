@@ -80,7 +80,10 @@ export const MatchScoreBoard = ({
             >
                 <UserAvatar
                     username={opponent?.username ?? ''}
-                    avatarUrl={opponent?.avatarUrl}
+                    avatarUrl={
+                        // 'https://img.magnific.com/premium-vector/male-face-avatar-icon-set-flat-design-social-media-profiles_1281173-3806.jpg?semt=ais_hybrid&w=740&q=80'
+                        opponent?.avatarUrl
+                    }
                     className={cn(
                         'size-[72px] rounded-full',
                         isOpponentHighlighted
