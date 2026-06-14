@@ -28,6 +28,7 @@ export const ScoreBoard = ({
             >
                 <div className="relative">
                     <UserAvatar
+                        avatarUrl={user.avatarUrl}
                         username={user.username}
                         className={`size-[84px] rounded-full ${result === 'win' ? 'ring-4 ring-[#22C55E] ring-offset-4' : 'border-4 border-slate-50 bg-slate-100'}`}
                     />
@@ -54,6 +55,7 @@ export const ScoreBoard = ({
             >
                 <div className="relative">
                     <UserAvatar
+                        avatarUrl={opponent.avatarUrl}
                         username={opponent.username}
                         className={`size-[84px] rounded-full ${result === 'lose' ? 'ring-4 ring-red-500 ring-offset-4' : 'border-4 border-slate-50 bg-slate-100'}`}
                     />

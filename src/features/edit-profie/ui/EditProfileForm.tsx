@@ -23,7 +23,7 @@ const profileSchema = z.object({
 type ProfileFormValues = z.infer<typeof profileSchema>
 
 export const ProfileForm = () => {
-    const { user } = useUser()
+    const { user, refetch } = useUser()
 
     const [avatarUrl, setAvatarUrl] = useState<string | null>(
         user?.avatarUrl ?? '',
@@ -89,10 +89,13 @@ export const ProfileForm = () => {
                 nativeLanguage: user.nativeLanguage,
             }).unwrap()
 
+            refetch()
+
             toast.success('Профиль успешно обновлен!')
         } catch (error) {
+            refetch()
             console.error(error)
-            toast.error('Ошибка при сохранении профиля')
+            // toast.error('Ошибка при сохранении профиля')
         }
     }
 

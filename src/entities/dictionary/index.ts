@@ -11,6 +11,7 @@ export {
     useGetUserDictionariesQuery,
     useUploadDictionaryMutation,
     useCreateDictionaryMutation,
+    useGetDictionariesQuery,
 } from './api/dictionaryApi'
 export { DictionaryCard } from './ui/DictionaryCard'
 export { DictionaryForm } from './ui/DictionaryForm'

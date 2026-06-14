@@ -1,4 +1,4 @@
-import { DictionaryType, type BaseDictionary } from '../model/types'
+import { type BaseDictionary } from '../model/types'
 import type { GetDictionariesResponse } from '../api/types'
 
 export const mapDictionaries = (
@@ -11,7 +11,7 @@ export const mapDictionaries = (
             langFrom: dict.langFrom,
             langTo: dict.langTo,
             wordsAmount: dict.wordsCount,
-            type: DictionaryType[dict.scope],
+            type: dict.scope,
         }
     })
 }

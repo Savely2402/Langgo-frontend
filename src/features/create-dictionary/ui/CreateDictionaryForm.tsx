@@ -1,13 +1,16 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { skipToken } from '@reduxjs/toolkit/query'
 import { useForm, FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router'
 import { toast } from 'sonner'
 import {
     DictionaryForm,
     dictionarySchema,
+    useGetUserDictionariesQuery,
     type DictionaryFormSchema,
 } from '@/entities/dictionary'
 import { useCreateDictionaryMutation } from '@/entities/dictionary'
+import { useUser } from '@/entities/user'
 import type { LanguageCode } from '@/shared/config'
 import { Button } from '@/shared/ui/Button'
 import { Spinner } from '@/shared/ui/Spinner'
@@ -15,7 +18,10 @@ import { Spinner } from '@/shared/ui/Spinner'
 export const CreateDictionaryForm = () => {
     const navigate = useNavigate()
 
+    const { user } = useUser()
+
     const [createDictionary, { isLoading }] = useCreateDictionaryMutation()
+    const { refetch } = useGetUserDictionariesQuery(user?.id ?? skipToken)
 
     const methods = useForm<DictionaryFormSchema>({
         resolver: zodResolver(dictionarySchema),
@@ -42,7 +48,7 @@ export const CreateDictionaryForm = () => {
                 langFrom: data.langFrom,
                 langTo: data.langTo,
                 description: '',
-                isPublic: false,
+                isPublic: true,
                 wordsWithTranslations: words.map((w) => ({
                     original: w.originalWord,
                     translation: w.translatedWord,
@@ -50,6 +56,8 @@ export const CreateDictionaryForm = () => {
                     difficulty: 0,
                 })),
             }).unwrap()
+
+            refetch()
 
             toast.success('Словарь успешно создан!')
             navigate('/dictionaries')

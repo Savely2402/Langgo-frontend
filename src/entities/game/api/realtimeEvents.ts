@@ -72,7 +72,6 @@ export const subscribeGameHubEvents = (
                 scores: data.scores,
                 nextRoundStartTime: data.newRoundTime,
                 correctAnswer: data.correctAnswer,
-                // winnerResponseTime: data.winnerResponseTime,
             }),
         )
     }

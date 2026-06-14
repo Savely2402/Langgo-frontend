@@ -1,4 +1,4 @@
-import { Upload } from 'lucide-react'
+import { FilePlusCorner, Upload } from 'lucide-react'
 import { CreateDictionaryForm } from '@/features/create-dictionary'
 import { UploadDictionaryDropzone } from '@/features/upload-dictionary'
 import { FormTabsList } from '@/shared/ui/FormTabsList'
@@ -22,7 +22,12 @@ export const AddDictionaryPage = () => {
                         items={[
                             {
                                 value: 'create',
-                                label: <span>Создать</span>,
+                                label: (
+                                    <>
+                                        <FilePlusCorner className="mr-2 size-4" />
+                                        Создать
+                                    </>
+                                ),
                             },
                             {
                                 value: 'upload',
