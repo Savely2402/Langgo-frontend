@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
-import { ChevronLeft, ChevronRight, LogIn, Play } from 'lucide-react'
-import { useNavigate } from 'react-router'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useUser } from '@/entities/user'
 import { AuthRequiredDialog } from '@/features/auth-required-dialog'
-import { routes } from '@/shared/config'
 import { cn } from '@/shared/lib/classNames'
 import { Button } from '@/shared/ui/Button'
 import {
@@ -16,7 +14,6 @@ import { HOME_MODES, RANKED_MODE_INDEX } from '../config/homeModesConfig'
 import { HomeModeCard } from './HomeModeCard'
 
 export const HomeModeSlider = () => {
-    const navigate = useNavigate()
     const { user } = useUser()
     const [api, setApi] = useState<CarouselApi>()
     const [activeIndex, setActiveIndex] = useState(RANKED_MODE_INDEX)
@@ -44,14 +41,13 @@ export const HomeModeSlider = () => {
                 <div className="pointer-events-none absolute top-12 left-[6%] h-56 w-56 rounded-full bg-sky-100/80 blur-3xl" />
                 <div className="pointer-events-none absolute top-8 right-[8%] h-44 w-44 rounded-full bg-amber-100/80 blur-3xl" />
                 <div className="pointer-events-none absolute bottom-0 left-1/2 h-52 w-52 -translate-x-1/2 rounded-full bg-emerald-100/60 blur-3xl" />
-                <div className="pointer-events-none absolute top-10 right-[14%] hidden size-14 rounded-full border border-sky-100/90 sm:block" />
 
                 <div className="relative mx-auto max-w-[1240px]">
                     <div className="mb-6 flex items-center justify-between gap-4 sm:mb-8">
                         <div className="space-y-3">
                             <div className="space-y-2">
-                                <h1 className="max-w-[14ch] text-3xl leading-none font-black tracking-tight text-slate-800 sm:text-4xl md:text-[54px]">
-                                    Выберите идеальный режим для следующей игры
+                                <h1 className="max-w-[14ch] font-luckiest text-3xl leading-none font-black tracking-widest text-slate-800 sm:text-4xl md:text-[50px]">
+                                    Выберите режим для следующей игры
                                 </h1>
                             </div>
                         </div>
@@ -90,8 +86,9 @@ export const HomeModeSlider = () => {
                             setApi={setApi}
                             opts={{
                                 align: 'center',
-                                loop: true,
+                                loop: false,
                                 startIndex: RANKED_MODE_INDEX,
+                                containScroll: false,
                             }}
                             className="w-full"
                         >
@@ -142,25 +139,6 @@ export const HomeModeSlider = () => {
                             />
                         ))}
                     </div>
-
-                    {!user && HOME_MODES[activeIndex]?.id === 'custom' && (
-                        <div className="mx-auto mt-8 flex max-w-[720px] items-center justify-center gap-3 rounded-full border border-white/80 bg-white/80 px-4 py-3 text-sm text-slate-600 shadow-[0_16px_30px_rgba(148,163,184,0.14)] backdrop-blur-xl">
-                            <Play className="size-4 text-primary" />
-                            <span className="text-center">
-                                Гостям уже доступна своя игра. Остальные режимы
-                                откроются после входа в аккаунт.
-                            </span>
-                            <Button
-                                type="button"
-                                variant="secondary"
-                                className="hidden rounded-full sm:inline-flex"
-                                onClick={() => navigate(routes.login)}
-                            >
-                                <LogIn className="size-4" />
-                                Войти
-                            </Button>
-                        </div>
-                    )}
                 </div>
             </section>
 
