@@ -8,6 +8,7 @@ export const routeSegments = {
     edit: 'edit',
     profile: 'profile',
     settings: 'settings',
+    friends: 'friends',
     notFound: '*',
 } as const
 
@@ -23,6 +24,7 @@ export const routes = {
         `/${routeSegments.dictionaries}/${routeSegments.edit}/${id}`,
     profile: (id: string) => `/${routeSegments.profile}/${id}`,
     profileSettings: `/${routeSegments.profile}/${routeSegments.settings}`,
+    friends: `/${routeSegments.friends}`,
     notFound: '*',
 } as const
 
