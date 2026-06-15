@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowRight, Trophy } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { languageOptions } from '@/shared/config'
 import { cn } from '@/shared/lib/classNames'
 import {
@@ -28,8 +28,7 @@ export const UserCard = ({
     className,
 }: UserCardProps) => {
     const [isPressed, setIsPressed] = useState(false)
-    const { username, avatarUrl, rating, nativeLanguage, learningLanguage } =
-        user
+    const { username, avatarUrl, nativeLanguage, learningLanguage } = user
 
     const [nativeLanguageData, learningLanguageData] = [
         nativeLanguage,
@@ -107,12 +106,12 @@ export const UserCard = ({
                             />
                         )}
                     </span>
-                    {rating !== undefined && (
+                    {/* {rating !== undefined && (
                         <span className="flex items-center gap-1.5 text-sm font-black text-emerald-600">
                             <Trophy size={16} strokeWidth={2.5} />
                             {rating.toLocaleString()} ELO
                         </span>
-                    )}
+                    )} */}
                 </ItemDescription>
             </ItemContent>
             {actionsSlot && <ItemActions>{actionsSlot}</ItemActions>}

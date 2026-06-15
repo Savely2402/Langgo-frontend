@@ -15,7 +15,7 @@ const mockFriends: MockFriend[] = [
         id: 2,
         username: 'word_wizard',
         fullname: 'Word Wizard',
-        avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=wizard',
+        avatarUrl: 'https://api.dicebear.com/10.x/avataaars/svg?seed=ehw68ff7',
         nativeLanguage: 'Ru',
         learningLanguage: 'En',
         rating: 1840,
@@ -25,7 +25,8 @@ const mockFriends: MockFriend[] = [
         id: 3,
         username: 'grammar_runner',
         fullname: 'Grammar Runner',
-        avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=runner',
+        avatarUrl:
+            'https://api.dicebear.com/10.x/avataaars/svg?eyesVariant=closed,default,happy,side,squint,wink&mouthVariant=concerned,default,disbelief,eating,serious,smile,tongue,twinkle,vomit&seed=rbige7xb',
         nativeLanguage: 'En',
         learningLanguage: 'Ru',
         rating: 1510,
@@ -35,7 +36,8 @@ const mockFriends: MockFriend[] = [
         id: 4,
         username: 'quiet_polyglot',
         fullname: 'Quiet Polyglot',
-        avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=polyglot',
+        avatarUrl:
+            'https://api.dicebear.com/10.x/avataaars/svg?eyesVariant=closed,default,happy,side,squint,wink&mouthVariant=concerned,default,disbelief,eating,serious,smile,tongue,twinkle,vomit&seed=h4k295bw',
         nativeLanguage: 'Ru',
         learningLanguage: 'En',
         rating: 1280,
