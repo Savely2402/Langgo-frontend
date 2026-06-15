@@ -3,6 +3,7 @@ import {
     InviteFriendToBattleButton,
     type FriendBattleInviteStatus,
 } from '@/features/invite-friend-to-battle'
+import { FriendRequestActions } from '@/features/respond-friend-request'
 import { FormTabsList } from '@/shared/ui/FormTabsList'
 import { Tabs, TabsContent } from '@/shared/ui/Tabs'
 import { AppHeader } from '@/widgets/app-header'
@@ -10,6 +11,10 @@ import { HeaderProfile } from '@/widgets/header-profile'
 
 type MockFriend = UserProfile & {
     status: FriendBattleInviteStatus
+}
+
+type MockFriendRequest = UserProfile & {
+    requestId: number
 }
 
 const mockFriends: MockFriend[] = [
@@ -42,6 +47,29 @@ const mockFriends: MockFriend[] = [
         learningLanguage: 'En',
         rating: 1280,
         status: 'offline',
+    },
+]
+
+const mockFriendRequests: MockFriendRequest[] = [
+    {
+        id: 5,
+        requestId: 101,
+        username: 'syntax_samurai',
+        fullname: 'Syntax Samurai',
+        avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=samurai',
+        nativeLanguage: 'En',
+        learningLanguage: 'Ru',
+        rating: 1720,
+    },
+    {
+        id: 6,
+        requestId: 102,
+        username: 'vocab_nomad',
+        fullname: 'Vocab Nomad',
+        avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=nomad',
+        nativeLanguage: 'Ru',
+        learningLanguage: 'En',
+        rating: 1395,
     },
 ]
 
@@ -92,8 +120,19 @@ export const FriendsPage = () => {
                     </TabsContent>
 
                     <TabsContent value="requests" className="mt-4">
-                        <div className="rounded-[24px] border border-dashed border-slate-200 bg-white p-8 text-center text-sm font-semibold text-slate-400">
-                            Заявки в друзья появятся здесь позже
+                        <div className="flex flex-col gap-3">
+                            {mockFriendRequests.map((request) => (
+                                <UserCard
+                                    key={request.requestId}
+                                    user={request}
+                                    actionsSlot={
+                                        <FriendRequestActions
+                                            requestId={request.requestId}
+                                            friendUsername={request.username}
+                                        />
+                                    }
+                                />
+                            ))}
                         </div>
                     </TabsContent>
                 </Tabs>
