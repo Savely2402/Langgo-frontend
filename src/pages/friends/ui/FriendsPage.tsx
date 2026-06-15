@@ -1,77 +1,10 @@
-import { UserCard, useUser, type UserProfile } from '@/entities/user'
-import {
-    InviteFriendToBattleButton,
-    type FriendBattleInviteStatus,
-} from '@/features/invite-friend-to-battle'
-import { FriendRequestActions } from '@/features/respond-friend-request'
+import { useUser } from '@/entities/user'
 import { FormTabsList } from '@/shared/ui/FormTabsList'
 import { Tabs, TabsContent } from '@/shared/ui/Tabs'
 import { AppHeader } from '@/widgets/app-header'
+import { FriendRequestsList } from '@/widgets/friend-requests-list'
+import { FriendsList } from '@/widgets/friends-list'
 import { HeaderProfile } from '@/widgets/header-profile'
-
-type MockFriend = UserProfile & {
-    status: FriendBattleInviteStatus
-}
-
-type MockFriendRequest = UserProfile & {
-    requestId: number
-}
-
-const mockFriends: MockFriend[] = [
-    {
-        id: 2,
-        username: 'word_wizard',
-        fullname: 'Word Wizard',
-        avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=wizard',
-        nativeLanguage: 'Ru',
-        learningLanguage: 'En',
-        rating: 1840,
-        status: 'online',
-    },
-    {
-        id: 3,
-        username: 'grammar_runner',
-        fullname: 'Grammar Runner',
-        avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=runner',
-        nativeLanguage: 'En',
-        learningLanguage: 'Ru',
-        rating: 1510,
-        status: 'inGame',
-    },
-    {
-        id: 4,
-        username: 'quiet_polyglot',
-        fullname: 'Quiet Polyglot',
-        avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=polyglot',
-        nativeLanguage: 'Ru',
-        learningLanguage: 'En',
-        rating: 1280,
-        status: 'offline',
-    },
-]
-
-const mockFriendRequests: MockFriendRequest[] = [
-    {
-        id: 5,
-        requestId: 101,
-        username: 'syntax_samurai',
-        fullname: 'Syntax Samurai',
-        avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=samurai',
-        nativeLanguage: 'En',
-        learningLanguage: 'Ru',
-        rating: 1720,
-    },
-    {
-        id: 6,
-        requestId: 102,
-        username: 'vocab_nomad',
-        fullname: 'Vocab Nomad',
-        avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=nomad',
-        nativeLanguage: 'Ru',
-        learningLanguage: 'En',
-        rating: 1395,
-    },
-]
 
 export const FriendsPage = () => {
     const { user } = useUser()
@@ -102,38 +35,11 @@ export const FriendsPage = () => {
                     />
 
                     <TabsContent value="friends" className="mt-4">
-                        <div className="flex flex-col gap-3">
-                            {mockFriends.map((friend) => (
-                                <UserCard
-                                    key={friend.id}
-                                    user={friend}
-                                    actionsSlot={
-                                        <InviteFriendToBattleButton
-                                            friendId={friend.id}
-                                            friendUsername={friend.username}
-                                            status={friend.status}
-                                        />
-                                    }
-                                />
-                            ))}
-                        </div>
+                        <FriendsList />
                     </TabsContent>
 
                     <TabsContent value="requests" className="mt-4">
-                        <div className="flex flex-col gap-3">
-                            {mockFriendRequests.map((request) => (
-                                <UserCard
-                                    key={request.requestId}
-                                    user={request}
-                                    actionsSlot={
-                                        <FriendRequestActions
-                                            requestId={request.requestId}
-                                            friendUsername={request.username}
-                                        />
-                                    }
-                                />
-                            ))}
-                        </div>
+                        <FriendRequestsList />
                     </TabsContent>
                 </Tabs>
             </div>
