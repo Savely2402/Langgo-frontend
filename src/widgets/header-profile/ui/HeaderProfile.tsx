@@ -1,10 +1,10 @@
 import { ArrowRight, LogIn } from 'lucide-react'
 import { Link } from 'react-router'
 import { useUser } from '@/entities/user'
-import { RequestsPopover } from '@/features/friends/manage-requests'
 import { routes } from '@/shared/config'
 import { Button } from '@/shared/ui/Button'
 import { Separator } from '@/shared/ui/Separator'
+import { FriendRequestsPopover } from './FriendRequestsPopover'
 import { UserDropdown } from './UserDropdown'
 
 const GuestState = () => {
@@ -45,7 +45,7 @@ const UserState = () => {
                 className="mx-4 hidden h-6! md:block"
             />
             <div className="flex gap-1">
-                <RequestsPopover />
+                <FriendRequestsPopover />
                 <UserDropdown />
             </div>
         </>

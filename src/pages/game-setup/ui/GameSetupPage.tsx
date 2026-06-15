@@ -1,22 +1,23 @@
 import { ArrowLeft } from 'lucide-react'
 import { useNavigate } from 'react-router'
-import { RequestsPopover } from '@/features/friends/manage-requests'
 import { Button } from '@/shared/ui/Button'
 import { Header } from '@/shared/ui/Header'
 import { GameSetupForm } from '@/widgets/game-setup-form'
+import { FriendRequestsPopover } from '@/widgets/header-profile'
 
 export const GameSetupPage = () => {
     const navigate = useNavigate()
+
     return (
         <>
             <Header
                 leftSlot={
-                    <Button variant={'ghost'} onClick={() => navigate(-1)}>
+                    <Button variant="ghost" onClick={() => navigate(-1)}>
                         <ArrowLeft />
                         Назад
                     </Button>
                 }
-                rightSlot={<RequestsPopover />}
+                rightSlot={<FriendRequestsPopover />}
             />
 
             <div className="mx-auto max-w-[640px] px-4">

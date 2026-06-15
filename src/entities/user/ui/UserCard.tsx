@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowRight, Trophy } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { languageOptions } from '@/shared/config'
 import { cn } from '@/shared/lib/classNames'
 import {
@@ -28,7 +28,7 @@ export const UserCard = ({
     className,
 }: UserCardProps) => {
     const [isPressed, setIsPressed] = useState(false)
-    const { username, avatarUrl, rating, nativeLanguage, learningLanguage } =
+    const { username, fullname, avatarUrl, nativeLanguage, learningLanguage } =
         user
 
     const [nativeLanguageData, learningLanguageData] = [
@@ -87,8 +87,15 @@ export const UserCard = ({
                     className="size-14"
                 />
             </ItemMedia>
-            <ItemContent>
-                <ItemTitle className="text-xl font-black">{username}</ItemTitle>
+            <ItemContent className="min-w-0">
+                <ItemTitle className="flex min-w-0 items-baseline gap-2 text-xl font-black">
+                    <span className="shrink-0 truncate">{username}</span>
+                    {fullname && (
+                        <span className="min-w-0 truncate text-sm font-semibold text-slate-400">
+                            {fullname}
+                        </span>
+                    )}
+                </ItemTitle>
                 <ItemDescription className="flex items-center gap-4">
                     <span className="flex items-center gap-1">
                         {nativeLanguageData && (
@@ -107,12 +114,12 @@ export const UserCard = ({
                             />
                         )}
                     </span>
-                    {rating !== undefined && (
+                    {/* {rating !== undefined && (
                         <span className="flex items-center gap-1.5 text-sm font-black text-emerald-600">
                             <Trophy size={16} strokeWidth={2.5} />
                             {rating.toLocaleString()} ELO
                         </span>
-                    )}
+                    )} */}
                 </ItemDescription>
             </ItemContent>
             {actionsSlot && <ItemActions>{actionsSlot}</ItemActions>}

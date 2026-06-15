@@ -12,8 +12,9 @@ const mockFriendRequests: MockFriendRequest[] = [
         id: 5,
         requestId: 101,
         username: 'syntax_samurai',
-        fullname: 'Syntax Samurai',
-        avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=samurai',
+        fullname: 'София',
+        avatarUrl:
+            'https://api.dicebear.com/10.x/avataaars/svg?eyesVariant=closed,default,happy,side,squint&mouthVariant=concerned,default,disbelief,eating,serious,smile,tongue,twinkle,vomit&seed=pfzzdp6z',
         nativeLanguage: 'En',
         learningLanguage: 'Ru',
         rating: 1720,
@@ -22,8 +23,9 @@ const mockFriendRequests: MockFriendRequest[] = [
         id: 6,
         requestId: 102,
         username: 'vocab_nomad',
-        fullname: 'Vocab Nomad',
-        avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=nomad',
+        fullname: 'Никита',
+        avatarUrl:
+            'https://api.dicebear.com/10.x/avataaars/svg?eyesVariant=closed,default,happy,side,squint&mouthVariant=concerned,default,disbelief,eating,serious,smile,tongue,twinkle,vomit&seed=spxr99e8',
         nativeLanguage: 'Ru',
         learningLanguage: 'En',
         rating: 1395,

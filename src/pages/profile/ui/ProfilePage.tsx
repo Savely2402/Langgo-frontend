@@ -31,7 +31,7 @@ export const ProfilePage = () => {
         userProfile = {
             id: 0,
             username: 'User',
-            fullname: 'User User',
+            fullname: 'Павел',
             avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Alex',
             email: 'user@user.com',
             nativeLanguage: 'Ru',
