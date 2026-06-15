@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router'
 import { UserCard, type UserProfile } from '@/entities/user'
+import { DeleteFriendButton } from '@/features/delete-friend'
 import {
     InviteFriendToBattleButton,
     type FriendBattleInviteStatus,
@@ -56,11 +57,17 @@ export const FriendsList = () => {
                     user={friend}
                     onClick={() => navigate(routes.profile(String(friend.id)))}
                     actionsSlot={
-                        <InviteFriendToBattleButton
-                            friendId={friend.id}
-                            friendUsername={friend.username}
-                            status={friend.status}
-                        />
+                        <div className="flex items-center gap-2">
+                            <InviteFriendToBattleButton
+                                friendId={friend.id}
+                                friendUsername={friend.username}
+                                status={friend.status}
+                            />
+                            <DeleteFriendButton
+                                friendId={friend.id}
+                                friendUsername={friend.username}
+                            />
+                        </div>
                     }
                 />
             ))}
