@@ -145,7 +145,7 @@ export const ProfileForm = () => {
                 {/* Поле Username */}
                 <div className="space-y-2">
                     <label className="text-xs font-bold tracking-wider text-slate-500 uppercase">
-                        Username
+                        Никнейм
                     </label>
                     <div className="relative">
                         <input
