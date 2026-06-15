@@ -28,7 +28,8 @@ export const UserCard = ({
     className,
 }: UserCardProps) => {
     const [isPressed, setIsPressed] = useState(false)
-    const { username, avatarUrl, nativeLanguage, learningLanguage } = user
+    const { username, fullname, avatarUrl, nativeLanguage, learningLanguage } =
+        user
 
     const [nativeLanguageData, learningLanguageData] = [
         nativeLanguage,
@@ -86,8 +87,15 @@ export const UserCard = ({
                     className="size-14"
                 />
             </ItemMedia>
-            <ItemContent>
-                <ItemTitle className="text-xl font-black">{username}</ItemTitle>
+            <ItemContent className="min-w-0">
+                <ItemTitle className="flex min-w-0 items-baseline gap-2 text-xl font-black">
+                    <span className="shrink-0 truncate">{username}</span>
+                    {fullname && (
+                        <span className="min-w-0 truncate text-sm font-semibold text-slate-400">
+                            {fullname}
+                        </span>
+                    )}
+                </ItemTitle>
                 <ItemDescription className="flex items-center gap-4">
                     <span className="flex items-center gap-1">
                         {nativeLanguageData && (

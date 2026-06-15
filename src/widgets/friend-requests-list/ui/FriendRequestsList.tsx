@@ -12,7 +12,7 @@ const mockFriendRequests: MockFriendRequest[] = [
         id: 5,
         requestId: 101,
         username: 'syntax_samurai',
-        fullname: 'Syntax Samurai',
+        fullname: 'София',
         avatarUrl:
             'https://api.dicebear.com/10.x/avataaars/svg?eyesVariant=closed,default,happy,side,squint&mouthVariant=concerned,default,disbelief,eating,serious,smile,tongue,twinkle,vomit&seed=pfzzdp6z',
         nativeLanguage: 'En',
@@ -23,7 +23,7 @@ const mockFriendRequests: MockFriendRequest[] = [
         id: 6,
         requestId: 102,
         username: 'vocab_nomad',
-        fullname: 'Vocab Nomad',
+        fullname: 'Никита',
         avatarUrl:
             'https://api.dicebear.com/10.x/avataaars/svg?eyesVariant=closed,default,happy,side,squint&mouthVariant=concerned,default,disbelief,eating,serious,smile,tongue,twinkle,vomit&seed=spxr99e8',
         nativeLanguage: 'Ru',

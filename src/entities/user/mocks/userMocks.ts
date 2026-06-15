@@ -11,7 +11,7 @@ export const MOCK_USERS: MockUser[] = [
         userData: {
             id: 1,
             username: 'john_doe',
-            fullname: 'John Doe',
+            fullname: 'Иван',
             avatar: 'https://i.pravatar.cc/150?u=1',
             learningLanguage: 'EN',
             nativeLanguage: 'RU',
@@ -24,7 +24,7 @@ export const MOCK_USERS: MockUser[] = [
         userData: {
             id: 2,
             username: 'jane_smith',
-            fullname: 'Jane Smith',
+            fullname: 'Анна',
             avatar: 'https://i.pravatar.cc/150?u=2',
             learningLanguage: 'EN',
             nativeLanguage: 'RU',
@@ -37,7 +37,7 @@ export const MOCK_USERS: MockUser[] = [
         userData: {
             id: 3,
             username: 'alex_admin',
-            fullname: 'Alex Johnson',
+            fullname: 'Александр',
             avatar: 'https://i.pravatar.cc/150?u=3',
             learningLanguage: 'EN',
             nativeLanguage: 'RU',

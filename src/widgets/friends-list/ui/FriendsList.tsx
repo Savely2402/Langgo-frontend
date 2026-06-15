@@ -14,7 +14,7 @@ const mockFriends: MockFriend[] = [
     {
         id: 2,
         username: 'word_wizard',
-        fullname: 'Word Wizard',
+        fullname: 'Алексей',
         avatarUrl: 'https://api.dicebear.com/10.x/avataaars/svg?seed=ehw68ff7',
         nativeLanguage: 'Ru',
         learningLanguage: 'En',
@@ -24,7 +24,7 @@ const mockFriends: MockFriend[] = [
     {
         id: 3,
         username: 'grammar_runner',
-        fullname: 'Grammar Runner',
+        fullname: 'Мария',
         avatarUrl:
             'https://api.dicebear.com/10.x/avataaars/svg?eyesVariant=closed,default,happy,side,squint,wink&mouthVariant=concerned,default,disbelief,eating,serious,smile,tongue,twinkle,vomit&seed=rbige7xb',
         nativeLanguage: 'En',
@@ -35,7 +35,7 @@ const mockFriends: MockFriend[] = [
     {
         id: 4,
         username: 'quiet_polyglot',
-        fullname: 'Quiet Polyglot',
+        fullname: 'Илья',
         avatarUrl:
             'https://api.dicebear.com/10.x/avataaars/svg?eyesVariant=closed,default,happy,side,squint,wink&mouthVariant=concerned,default,disbelief,eating,serious,smile,tongue,twinkle,vomit&seed=h4k295bw',
         nativeLanguage: 'Ru',

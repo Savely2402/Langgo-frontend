@@ -18,7 +18,7 @@ const mockSearchUsers: MockSearchUser[] = [
     {
         id: 2,
         username: 'word_wizard',
-        fullname: 'Word Wizard',
+        fullname: 'Алексей',
         avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=wizard',
         nativeLanguage: 'Ru',
         learningLanguage: 'En',
@@ -28,7 +28,7 @@ const mockSearchUsers: MockSearchUser[] = [
     {
         id: 3,
         username: 'grammar_runner',
-        fullname: 'Grammar Runner',
+        fullname: 'Мария',
         avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=runner',
         nativeLanguage: 'En',
         learningLanguage: 'Ru',
@@ -38,7 +38,7 @@ const mockSearchUsers: MockSearchUser[] = [
     {
         id: 7,
         username: 'tense_tactician',
-        fullname: 'Tense Tactician',
+        fullname: 'Даниил',
         avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=tactician',
         nativeLanguage: 'En',
         learningLanguage: 'Ru',
@@ -48,7 +48,7 @@ const mockSearchUsers: MockSearchUser[] = [
     {
         id: 8,
         username: 'phrase_hunter',
-        fullname: 'Phrase Hunter',
+        fullname: 'Алиса',
         avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=hunter',
         nativeLanguage: 'Ru',
         learningLanguage: 'En',
@@ -58,7 +58,7 @@ const mockSearchUsers: MockSearchUser[] = [
     {
         id: 9,
         username: 'accent_alchemist',
-        fullname: 'Accent Alchemist',
+        fullname: 'Виктория',
         avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=alchemist',
         nativeLanguage: 'En',
         learningLanguage: 'Ru',
