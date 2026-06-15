@@ -68,7 +68,9 @@ export const ChangePasswordForm = () => {
             {/* Заголовок */}
             <div className="mb-8 flex items-center gap-3">
                 <Key className="text-[#10B981]" size={24} strokeWidth={2.5} />
-                <h2 className="text-2xl font-black text-[#111827]">Security</h2>
+                <h2 className="text-2xl font-black text-[#111827]">
+                    Безопасность
+                </h2>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
