@@ -1,8 +1,10 @@
+import { useNavigate } from 'react-router'
 import { UserCard, type UserProfile } from '@/entities/user'
 import {
     InviteFriendToBattleButton,
     type FriendBattleInviteStatus,
 } from '@/features/invite-friend-to-battle'
+import { routes } from '@/shared/config'
 
 type MockFriend = UserProfile & {
     status: FriendBattleInviteStatus
@@ -42,12 +44,15 @@ const mockFriends: MockFriend[] = [
 ]
 
 export const FriendsList = () => {
+    const navigate = useNavigate()
+
     return (
         <div className="flex flex-col gap-3">
             {mockFriends.map((friend) => (
                 <UserCard
                     key={friend.id}
                     user={friend}
+                    onClick={() => navigate(routes.profile(String(friend.id)))}
                     actionsSlot={
                         <InviteFriendToBattleButton
                             friendId={friend.id}

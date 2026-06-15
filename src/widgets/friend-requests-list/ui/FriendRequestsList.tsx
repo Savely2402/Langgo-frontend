@@ -1,5 +1,7 @@
+import { useNavigate } from 'react-router'
 import { UserCard, type UserProfile } from '@/entities/user'
 import { FriendRequestActions } from '@/features/respond-friend-request'
+import { routes } from '@/shared/config'
 
 type MockFriendRequest = UserProfile & {
     requestId: number
@@ -29,12 +31,15 @@ const mockFriendRequests: MockFriendRequest[] = [
 ]
 
 export const FriendRequestsList = () => {
+    const navigate = useNavigate()
+
     return (
         <div className="flex flex-col gap-3">
             {mockFriendRequests.map((request) => (
                 <UserCard
                     key={request.requestId}
                     user={request}
+                    onClick={() => navigate(routes.profile(String(request.id)))}
                     actionsSlot={
                         <FriendRequestActions
                             requestId={request.requestId}

@@ -4,6 +4,7 @@ import { Tabs, TabsContent } from '@/shared/ui/Tabs'
 import { AppHeader } from '@/widgets/app-header'
 import { FriendRequestsList } from '@/widgets/friend-requests-list'
 import { FriendsList } from '@/widgets/friends-list'
+import { FriendsSearch } from '@/widgets/friends-search'
 import { HeaderProfile } from '@/widgets/header-profile'
 
 export const FriendsPage = () => {
@@ -20,6 +21,7 @@ export const FriendsPage = () => {
                         Мои друзья
                     </h1>
                 </div>
+                <FriendsSearch />
                 <Tabs defaultValue="friends">
                     <FormTabsList
                         items={[
