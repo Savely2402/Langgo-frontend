@@ -1,4 +1,10 @@
-import { AUTH_TAG, baseApi, isRtkQueryError } from '@/shared/api'
+import {
+    AUTH_TAG,
+    baseApi,
+    INCOMING_FRIEND_REQUESTS_TAG,
+    isRtkQueryError,
+    USER_FRIENDS_TAG,
+} from '@/shared/api'
 import {
     mapAuthResponseToUser,
     mapUserProfileDtoToUserProfile,
@@ -48,6 +54,15 @@ export const userApi = baseApi.injectEndpoints({
                 method: 'GET',
             }),
             transformResponse: mapUserProfileDtosToUserProfiles,
+            providesTags: [USER_FRIENDS_TAG],
+        }),
+        getIncomingFriendRequests: build.query<UserProfile[], void>({
+            query: () => ({
+                url: 'friends/requests/incoming',
+                method: 'GET',
+            }),
+            transformResponse: mapUserProfileDtosToUserProfiles,
+            providesTags: [INCOMING_FRIEND_REQUESTS_TAG],
         }),
     }),
 })
@@ -59,4 +74,6 @@ export const {
     useLazyGetUserByIdQuery,
     useGetUserFriendsQuery,
     useLazyGetUserFriendsQuery,
+    useGetIncomingFriendRequestsQuery,
+    useLazyGetIncomingFriendRequestsQuery,
 } = userApi

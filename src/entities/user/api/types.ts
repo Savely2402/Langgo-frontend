@@ -16,8 +16,8 @@ export interface UserProfileDto {
     username: string
     fullName: string
     avatarUrl?: string
-    learningLanguage: LanguageCode
-    nativeLanguage: LanguageCode
+    learningLanguage?: LanguageCode
+    nativeLanguage?: LanguageCode
 }
 
 export interface AuthResponse {

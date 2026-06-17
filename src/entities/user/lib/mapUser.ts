@@ -23,8 +23,8 @@ export const mapUserProfileDtoToUserProfile = (
         username: response.username,
         fullname: response.fullName,
         avatarUrl: response.avatarUrl,
-        learningLanguage: response.learningLanguage as LanguageCode,
-        nativeLanguage: response.nativeLanguage as LanguageCode,
+        learningLanguage: (response.learningLanguage ?? 'En') as LanguageCode,
+        nativeLanguage: (response.nativeLanguage ?? 'Ru') as LanguageCode,
         rating: 0,
     }
 }

@@ -1,4 +1,4 @@
-import { baseApi } from '@/shared/api'
+import { baseApi, USER_FRIENDS_TAG } from '@/shared/api'
 
 export const deleteFriendApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
@@ -7,6 +7,7 @@ export const deleteFriendApi = baseApi.injectEndpoints({
                 url: `friends/${friendId}`,
                 method: 'DELETE',
             }),
+            invalidatesTags: [USER_FRIENDS_TAG],
         }),
     }),
 })
