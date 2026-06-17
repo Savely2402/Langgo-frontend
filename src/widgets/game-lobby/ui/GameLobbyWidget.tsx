@@ -1,4 +1,5 @@
-import { BookOpen, Timer } from 'lucide-react'
+import { useState } from 'react'
+import { BookOpen, Timer, UserRoundPlus } from 'lucide-react'
 import { selectGameSettings } from '@/entities/game'
 import { useUser } from '@/entities/user'
 import { CopyInviteLink } from '@/features/copyInviteLink'
@@ -7,10 +8,15 @@ import { LeaveLobby } from '@/features/lobby/leave'
 import { StartGameButton } from '@/features/start-game'
 import { useAppSelector } from '@/shared/lib/store'
 import { Badge } from '@/shared/ui/Badge'
+import { Button } from '@/shared/ui/Button'
 import { Header } from '@/shared/ui/Header'
+import { LobbyFriendInviteDialog } from '@/widgets/lobby-friend-invite-dialog'
 import { GameLobbyPlayers } from './GameLobbyPlayers'
 
+const MAX_LOBBY_PLAYERS = 2
+
 export const GameLobbyWidget = () => {
+    const [isInviteDialogOpen, setIsInviteDialogOpen] = useState(false)
     const { user } = useUser()
     const players = useAppSelector((state) => state.players)
 
@@ -49,12 +55,35 @@ export const GameLobbyWidget = () => {
                     <CopyInviteLink />
                 </div>
 
+                <div className="mb-6 flex items-center justify-between gap-4">
+                    <h2 className="text-sm font-black tracking-wide text-slate-500 uppercase sm:text-base">
+                        Игроков в лобби ({players.length}/{MAX_LOBBY_PLAYERS})
+                    </h2>
+
+                    {isHost && (
+                        <Button
+                            type="button"
+                            variant="outline"
+                            className="btn-3d-sm rounded-2xl font-black"
+                            onClick={() => setIsInviteDialogOpen(true)}
+                        >
+                            <UserRoundPlus className="size-4" />
+                            Пригласить
+                        </Button>
+                    )}
+                </div>
+
                 <div className="mb-8">
                     <GameLobbyPlayers />
                 </div>
 
                 <StartGameButton />
             </div>
+
+            <LobbyFriendInviteDialog
+                open={isInviteDialogOpen}
+                onOpenChange={setIsInviteDialogOpen}
+            />
         </>
     )
 }

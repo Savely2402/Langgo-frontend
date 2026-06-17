@@ -1,4 +1,5 @@
 import { toast } from 'sonner'
+import { setGameInvite } from '@/entities/game'
 import {
     baseApi,
     INCOMING_FRIEND_REQUESTS_TAG,
@@ -8,6 +9,7 @@ import {
 import type {
     FriendRequestReceivedEventDto,
     FriendRequestResponseEventDto,
+    GameInviteReceivedEventDto,
 } from './realtimeTypes'
 
 export const subscribeNotificationHubEvents = (dispatch: AppDispatch) => {
@@ -35,6 +37,14 @@ export const subscribeNotificationHubEvents = (dispatch: AppDispatch) => {
         )
     }
 
+    const handleGameInviteReceived = (data: GameInviteReceivedEventDto) => {
+        dispatch(setGameInvite(data))
+    }
+
+    const handleGameInviteDeclined = () => {
+        toast.info('Пользователь отказался от приглашения')
+    }
+
     notificationsHubConnection.on(
         'FriendRequestReceived',
         handleFriendRequestReceived,
@@ -42,6 +52,14 @@ export const subscribeNotificationHubEvents = (dispatch: AppDispatch) => {
     notificationsHubConnection.on(
         'FriendRequestResponse',
         handleFriendRequestResponse,
+    )
+    notificationsHubConnection.on(
+        'GameInviteReceived',
+        handleGameInviteReceived,
+    )
+    notificationsHubConnection.on(
+        'GameInviteDeclined',
+        handleGameInviteDeclined,
     )
 
     return () => {
@@ -52,6 +70,14 @@ export const subscribeNotificationHubEvents = (dispatch: AppDispatch) => {
         notificationsHubConnection.off(
             'FriendRequestResponse',
             handleFriendRequestResponse,
+        )
+        notificationsHubConnection.off(
+            'GameInviteReceived',
+            handleGameInviteReceived,
+        )
+        notificationsHubConnection.off(
+            'GameInviteDeclined',
+            handleGameInviteDeclined,
         )
     }
 }

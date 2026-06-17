@@ -1,24 +1,27 @@
-import { useEffect, useRef } from 'react'
-import { initGameConnection, closeGameConnection } from '@/entities/game'
+import { useEffect } from 'react'
+import { closeGameConnection, initGameConnection } from '@/entities/game'
 import { useAppDispatch } from '@/shared/lib/store'
+
+let closeConnectionTimeout: ReturnType<typeof setTimeout> | null = null
 
 export const useGameConnection = (roomId?: string) => {
     const dispatch = useAppDispatch()
-    const cleanupCalled = useRef(false)
 
     useEffect(() => {
         if (!roomId) return
 
-        // Сделано против двойного монтирования от strict mode
-        if (!cleanupCalled.current) {
-            cleanupCalled.current = true
-            return
+        if (closeConnectionTimeout) {
+            clearTimeout(closeConnectionTimeout)
+            closeConnectionTimeout = null
         }
 
         dispatch(initGameConnection(roomId))
 
         return () => {
-            dispatch(closeGameConnection())
+            closeConnectionTimeout = setTimeout(() => {
+                dispatch(closeGameConnection())
+                closeConnectionTimeout = null
+            }, 100)
         }
     }, [roomId, dispatch])
 }

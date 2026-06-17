@@ -8,12 +8,14 @@ import type {
     EndGamePayload,
     AnswerResultsPayload,
     GameSettings,
+    GameInvite,
 } from './types'
 
 const initialState: GameState = {
     roomId: null,
     status: 'idle',
     settings: null,
+    invite: null,
     startTime: null,
     currentRound: 0,
     currentQuestion: null,
@@ -44,6 +46,14 @@ const gameSlice = createSlice({
 
         setGameSettings: (state, action: PayloadAction<GameSettings>) => {
             state.settings = action.payload
+        },
+
+        setGameInvite: (state, action: PayloadAction<GameInvite>) => {
+            state.invite = action.payload
+        },
+
+        clearGameInvite: (state) => {
+            state.invite = null
         },
 
         startNewRound: (state, action: PayloadAction<StartRoundPayload>) => {
@@ -124,6 +134,8 @@ export const {
     closeGameConnection,
     connectionEstablished,
     setGameSettings,
+    setGameInvite,
+    clearGameInvite,
     setAnswerResult,
     clearAnswerResult,
 } = gameSlice.actions
