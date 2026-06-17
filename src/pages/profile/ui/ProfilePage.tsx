@@ -1,6 +1,7 @@
 import { BarChart3, Flame, MonitorPlay, Pencil, Trophy } from 'lucide-react'
 import { Link, Navigate, useParams } from 'react-router'
 import { UserAvatar, useUser, type User } from '@/entities/user'
+import { DeleteFriendButton } from '@/features/delete-friend'
 import {
     InviteFriendToBattleButton,
     type FriendBattleInviteStatus,
@@ -44,11 +45,18 @@ const ProfileActions = ({
                 friendUsername={profileUsername}
                 status={inviteStatus}
             />
-            <SendFriendRequestButton
-                userId={profileUserId}
-                username={profileUsername}
-                isFriend={isFriend}
-            />
+            {isFriend ? (
+                <DeleteFriendButton
+                    friendId={profileUserId}
+                    friendUsername={profileUsername}
+                />
+            ) : (
+                <SendFriendRequestButton
+                    userId={profileUserId}
+                    username={profileUsername}
+                    isFriend={false}
+                />
+            )}
         </div>
     )
 }
