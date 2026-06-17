@@ -1,3 +1,5 @@
+import type { LanguageCode } from '@/shared/config'
+
 export interface UserDTO {
     id: number
     email: string
@@ -7,6 +9,16 @@ export interface UserDTO {
     learningLanguage: string
     nativeLanguage: string
     rating: number
+}
+
+export interface UserProfileDto {
+    id?: number
+    userId?: number
+    username: string
+    fullName: string
+    avatarUrl?: string
+    learningLanguage?: LanguageCode
+    nativeLanguage?: LanguageCode
 }
 
 export interface AuthResponse {

@@ -1,6 +1,13 @@
 import { BarChart3, Flame, MonitorPlay, Pencil, Trophy } from 'lucide-react'
 import { Link, Navigate, useParams } from 'react-router'
-import { UserAvatar, useUser, type User } from '@/entities/user'
+import {
+    UserAvatar,
+    useGetUserByIdQuery,
+    useGetUserFriendsQuery,
+    useUser,
+    type User,
+    type UserProfile,
+} from '@/entities/user'
 import { DeleteFriendButton } from '@/features/delete-friend'
 import {
     InviteFriendToBattleButton,
@@ -9,6 +16,7 @@ import {
 import { SendFriendRequestButton } from '@/features/send-friend-request'
 import { routes } from '@/shared/config'
 import { Button } from '@/shared/ui/Button'
+import { Spinner } from '@/shared/ui/Spinner'
 import { AppHeader } from '@/widgets/app-header'
 import { HeaderProfile } from '@/widgets/header-profile'
 
@@ -17,6 +25,8 @@ interface ProfileActionsProps {
     profileUsername: string
     isOwnProfile: boolean
     isFriend: boolean
+    isFriendshipLoading: boolean
+    isFriendshipError: boolean
     inviteStatus: FriendBattleInviteStatus
 }
 
@@ -25,6 +35,8 @@ const ProfileActions = ({
     profileUsername,
     isOwnProfile,
     isFriend,
+    isFriendshipLoading,
+    isFriendshipError,
     inviteStatus,
 }: ProfileActionsProps) => {
     if (isOwnProfile) {
@@ -34,6 +46,33 @@ const ProfileActions = ({
                     <Pencil size={18} />
                     <span>Изменить</span>
                 </Link>
+            </Button>
+        )
+    }
+
+    if (isFriendshipLoading) {
+        return (
+            <Button
+                type="button"
+                variant="secondary"
+                className="rounded-2xl"
+                disabled
+            >
+                <Spinner className="size-4" />
+                Проверяем статус
+            </Button>
+        )
+    }
+
+    if (isFriendshipError) {
+        return (
+            <Button
+                type="button"
+                variant="secondary"
+                className="rounded-2xl bg-slate-100 text-slate-400"
+                disabled
+            >
+                Статус недоступен
             </Button>
         )
     }
@@ -61,35 +100,77 @@ const ProfileActions = ({
     )
 }
 
+const ProfilePageSkeleton = () => {
+    return (
+        <>
+            <AppHeader rightSlot={<HeaderProfile />} />
+            <div className="mx-auto mt-10 w-full max-w-5xl rounded-[2rem] border-2 border-slate-100 bg-white p-8 shadow-sm sm:p-10">
+                <div className="flex min-h-[360px] flex-col items-center justify-center gap-4 text-center">
+                    <Spinner className="size-8 text-primary" />
+                    <p className="text-sm font-bold text-slate-400">
+                        Загружаем профиль
+                    </p>
+                </div>
+            </div>
+        </>
+    )
+}
+
 export const ProfilePage = () => {
     const { id } = useParams()
-    const { user } = useUser()
+    const { user, isLoading: isCurrentUserLoading } = useUser()
     const profileId = Number(id)
+    const isValidProfileId = Boolean(id) && !Number.isNaN(profileId)
+    const isOwnProfile = isValidProfileId && user?.id === profileId
 
-    if (!id || Number.isNaN(profileId)) {
+    const {
+        data: publicProfile,
+        isLoading: isPublicProfileLoading,
+        isFetching: isPublicProfileFetching,
+        isError: isPublicProfileError,
+    } = useGetUserByIdQuery(profileId, {
+        skip: !isValidProfileId || isCurrentUserLoading || isOwnProfile,
+    })
+
+    const {
+        data: friends = [],
+        isLoading: isFriendsLoading,
+        isFetching: isFriendsFetching,
+        isError: isFriendsError,
+    } = useGetUserFriendsQuery(user?.id ?? 0, {
+        skip:
+            !isValidProfileId ||
+            isCurrentUserLoading ||
+            isOwnProfile ||
+            !user?.id,
+    })
+
+    if (!isValidProfileId) {
         return <Navigate to={routes.notFound} replace />
     }
 
-    const isOwnProfile = user?.id === profileId
-    const mockIsFriend = profileId === 2 || profileId === 3
-    const mockInviteStatus: FriendBattleInviteStatus = mockIsFriend
+    const userProfile: User | UserProfile | undefined = isOwnProfile
+        ? user
+        : publicProfile
+
+    const isProfileLoading =
+        isCurrentUserLoading ||
+        (!isOwnProfile && (isPublicProfileLoading || isPublicProfileFetching))
+
+    if (isProfileLoading) {
+        return <ProfilePageSkeleton />
+    }
+
+    if (!userProfile || (!isOwnProfile && isPublicProfileError)) {
+        return <Navigate to={routes.notFound} replace />
+    }
+
+    const isFriend = friends.some((friend) => friend.id === profileId)
+    const isFriendshipLoading =
+        !isOwnProfile && (isFriendsLoading || isFriendsFetching)
+    const mockInviteStatus: FriendBattleInviteStatus = isFriend
         ? 'online'
         : 'offline'
-
-    const userProfile: User =
-        user && isOwnProfile
-            ? user
-            : {
-                  id: profileId,
-                  username: 'public_player',
-                  fullname: 'Андрей',
-                  avatarUrl:
-                      'https://api.dicebear.com/10.x/avataaars/svg?eyesVariant=closed,default,happy,squint&mouthVariant=twinkle&eyebrowsVariant=default,defaultNatural,flatNatural,raisedExcited,raisedExcitedNatural,unibrowNatural&facialHairVariant=&skinColor=ffdbb4,fd9841,f8d25c&seed=v33dnc3x',
-                  email: 'user@user.com',
-                  nativeLanguage: 'Ru',
-                  learningLanguage: 'En',
-                  rating: 100,
-              }
 
     const mockStats = {
         wins: 12,
@@ -105,7 +186,7 @@ export const ProfilePage = () => {
             <AppHeader rightSlot={<HeaderProfile />} />
             <div className="mx-auto mt-10 w-full max-w-5xl rounded-[2rem] border-2 border-slate-100 bg-white p-8 shadow-sm sm:p-10">
                 <div className="mb-12 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
-                    <div className="flex items-center gap-6">
+                    <div className="flex min-w-0 items-center gap-6">
                         <UserAvatar
                             className="size-16 sm:size-22 md:size-28"
                             avatarUrl={userProfile.avatarUrl}
@@ -126,7 +207,9 @@ export const ProfilePage = () => {
                         profileUserId={userProfile.id}
                         profileUsername={userProfile.username}
                         isOwnProfile={isOwnProfile}
-                        isFriend={mockIsFriend}
+                        isFriend={isFriend}
+                        isFriendshipLoading={isFriendshipLoading}
+                        isFriendshipError={isFriendsError}
                         inviteStatus={mockInviteStatus}
                     />
                 </div>

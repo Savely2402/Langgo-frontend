@@ -1,4 +1,8 @@
-import { useUser } from '@/entities/user'
+import {
+    useGetIncomingFriendRequestsQuery,
+    useGetUserFriendsQuery,
+    useUser,
+} from '@/entities/user'
 import { FormTabsList } from '@/shared/ui/FormTabsList'
 import { Tabs, TabsContent } from '@/shared/ui/Tabs'
 import { AppHeader } from '@/widgets/app-header'
@@ -7,8 +11,26 @@ import { FriendsList } from '@/widgets/friends-list'
 import { FriendsSearch } from '@/widgets/friends-search'
 import { HeaderProfile } from '@/widgets/header-profile'
 
+const renderTabLabel = (label: string, count: number) => (
+    <span className="flex items-center gap-2">
+        {label}
+        <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-black text-primary">
+            {count}
+        </span>
+    </span>
+)
+
 export const FriendsPage = () => {
     const { user } = useUser()
+    const { data: friends = [] } = useGetUserFriendsQuery(user?.id ?? 0, {
+        skip: !user,
+    })
+    const { data: friendRequests = [] } = useGetIncomingFriendRequestsQuery(
+        undefined,
+        {
+            skip: !user,
+        },
+    )
 
     if (!user) return null
 
@@ -27,11 +49,17 @@ export const FriendsPage = () => {
                         items={[
                             {
                                 value: 'friends',
-                                label: <>Мои друзья</>,
+                                label: renderTabLabel(
+                                    'Мои друзья',
+                                    friends.length,
+                                ),
                             },
                             {
                                 value: 'requests',
-                                label: <>Заявки</>,
+                                label: renderTabLabel(
+                                    'Заявки',
+                                    friendRequests.length,
+                                ),
                             },
                         ]}
                     />

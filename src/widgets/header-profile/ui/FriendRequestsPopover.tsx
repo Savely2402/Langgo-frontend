@@ -1,5 +1,9 @@
 import { Bell } from 'lucide-react'
-import { UserAvatar, type UserProfile, useUser } from '@/entities/user'
+import {
+    UserAvatar,
+    useGetIncomingFriendRequestsQuery,
+    useUser,
+} from '@/entities/user'
 import { FriendRequestActions } from '@/features/respond-friend-request'
 import { cn } from '@/shared/lib/classNames'
 import { Button } from '@/shared/ui/Button'
@@ -8,37 +12,19 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from '@/shared/ui/DropDownMenu'
-
-type MockFriendRequest = UserProfile & {
-    requestId: number
-}
-
-const mockFriendRequests: MockFriendRequest[] = [
-    {
-        id: 5,
-        requestId: 101,
-        username: 'syntax_samurai',
-        fullname: 'София',
-        avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=samurai',
-        nativeLanguage: 'En',
-        learningLanguage: 'Ru',
-        rating: 1720,
-    },
-    {
-        id: 6,
-        requestId: 102,
-        username: 'vocab_nomad',
-        fullname: 'Никита',
-        avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=nomad',
-        nativeLanguage: 'Ru',
-        learningLanguage: 'En',
-        rating: 1395,
-    },
-]
+import { Spinner } from '@/shared/ui/Spinner'
 
 export const FriendRequestsPopover = () => {
     const { user } = useUser()
-    const requestsCount = mockFriendRequests.length
+    const {
+        data: requests = [],
+        isLoading,
+        isFetching,
+        isError,
+    } = useGetIncomingFriendRequestsQuery(undefined, {
+        skip: !user,
+    })
+    const requestsCount = requests.length
 
     if (!user) {
         return null
@@ -81,11 +67,20 @@ export const FriendRequestsPopover = () => {
                     )}
                 </div>
 
-                {requestsCount > 0 ? (
+                {isLoading || isFetching ? (
+                    <div className="flex items-center justify-center gap-2 rounded-[22px] border border-dashed border-slate-200 p-6 text-sm font-semibold text-slate-400">
+                        <Spinner className="size-4" />
+                        Загружаем заявки
+                    </div>
+                ) : isError ? (
+                    <div className="rounded-[22px] border border-dashed border-destructive/30 bg-destructive/5 p-6 text-center text-sm font-semibold text-destructive">
+                        Не удалось загрузить заявки
+                    </div>
+                ) : requestsCount > 0 ? (
                     <div className="flex max-h-[360px] flex-col gap-2 overflow-y-auto">
-                        {mockFriendRequests.map((request) => (
+                        {requests.map((request) => (
                             <div
-                                key={request.requestId}
+                                key={request.id}
                                 className="flex items-center gap-3 rounded-[22px] border border-slate-100 bg-white p-3 shadow-xs"
                             >
                                 <UserAvatar
@@ -102,7 +97,7 @@ export const FriendRequestsPopover = () => {
                                     </p>
                                 </div>
                                 <FriendRequestActions
-                                    requestId={request.requestId}
+                                    requestId={request.id}
                                     friendUsername={request.username}
                                 />
                             </div>
