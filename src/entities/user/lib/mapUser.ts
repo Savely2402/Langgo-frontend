@@ -19,7 +19,7 @@ export const mapUserProfileDtoToUserProfile = (
     response: UserProfileDto,
 ): UserProfile => {
     return {
-        id: response.id,
+        id: response.id ?? response.userId ?? 0,
         username: response.username,
         fullname: response.fullName,
         avatarUrl: response.avatarUrl,

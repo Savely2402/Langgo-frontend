@@ -12,7 +12,8 @@ export interface UserDTO {
 }
 
 export interface UserProfileDto {
-    id: number
+    id?: number
+    userId?: number
     username: string
     fullName: string
     avatarUrl?: string

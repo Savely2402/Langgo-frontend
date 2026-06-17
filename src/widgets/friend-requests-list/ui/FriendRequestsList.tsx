@@ -1,50 +1,53 @@
 import { useNavigate } from 'react-router'
-import { UserCard, type UserProfile } from '@/entities/user'
+import { UserCard, useGetIncomingFriendRequestsQuery } from '@/entities/user'
 import { FriendRequestActions } from '@/features/respond-friend-request'
 import { routes } from '@/shared/config'
-
-type MockFriendRequest = UserProfile & {
-    requestId: number
-}
-
-const mockFriendRequests: MockFriendRequest[] = [
-    {
-        id: 5,
-        requestId: 101,
-        username: 'syntax_samurai',
-        fullname: 'Никита',
-        avatarUrl:
-            'https://api.dicebear.com/10.x/avataaars/svg?eyesVariant=closed,default,happy,side,squint&mouthVariant=concerned,default,disbelief,eating,serious,smile,tongue,twinkle,vomit&seed=pfzzdp6z',
-        nativeLanguage: 'En',
-        learningLanguage: 'Ru',
-        rating: 1720,
-    },
-    {
-        id: 6,
-        requestId: 102,
-        username: 'vocab_nomad',
-        fullname: 'София',
-        avatarUrl:
-            'https://api.dicebear.com/10.x/avataaars/svg?eyesVariant=closed,default,happy,side,squint&mouthVariant=concerned,default,disbelief,eating,serious,smile,tongue,twinkle,vomit&seed=spxr99e8',
-        nativeLanguage: 'Ru',
-        learningLanguage: 'En',
-        rating: 1395,
-    },
-]
+import { Spinner } from '@/shared/ui/Spinner'
 
 export const FriendRequestsList = () => {
     const navigate = useNavigate()
+    const {
+        data: requests = [],
+        isLoading,
+        isFetching,
+        isError,
+    } = useGetIncomingFriendRequestsQuery()
+
+    if (isLoading || isFetching) {
+        return (
+            <div className="flex items-center justify-center gap-2 rounded-[28px] border border-dashed border-slate-200 bg-white p-8 text-sm font-semibold text-slate-400">
+                <Spinner className="size-4" />
+                Загружаем заявки
+            </div>
+        )
+    }
+
+    if (isError) {
+        return (
+            <div className="rounded-[28px] border border-dashed border-destructive/30 bg-destructive/5 p-8 text-center text-sm font-semibold text-destructive">
+                Не удалось загрузить заявки
+            </div>
+        )
+    }
+
+    if (requests.length === 0) {
+        return (
+            <div className="rounded-[28px] border border-dashed border-slate-200 bg-white p-8 text-center text-sm font-semibold text-slate-400">
+                Новых заявок нет
+            </div>
+        )
+    }
 
     return (
         <div className="flex flex-col gap-3">
-            {mockFriendRequests.map((request) => (
+            {requests.map((request) => (
                 <UserCard
-                    key={request.requestId}
+                    key={request.id}
                     user={request}
                     onClick={() => navigate(routes.profile(String(request.id)))}
                     actionsSlot={
                         <FriendRequestActions
-                            requestId={request.requestId}
+                            requestId={request.id}
                             friendUsername={request.username}
                         />
                     }
