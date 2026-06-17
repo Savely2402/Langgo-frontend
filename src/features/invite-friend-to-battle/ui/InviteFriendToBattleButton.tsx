@@ -1,4 +1,4 @@
-import { Gamepad2, Swords, WifiOff } from 'lucide-react'
+import { Check, Gamepad2, Swords, WifiOff } from 'lucide-react'
 import { toast } from 'sonner'
 import { selectRoomId } from '@/entities/game'
 import { cn } from '@/shared/lib/classNames'
@@ -13,6 +13,9 @@ interface InviteFriendToBattleButtonProps {
     friendId: number
     friendUsername: string
     status: FriendBattleInviteStatus
+    disabled?: boolean
+    isInvited?: boolean
+    onInviteSuccess?: (friendId: number) => void
 }
 
 const statusConfig = {
@@ -48,19 +51,26 @@ export const InviteFriendToBattleButton = ({
     friendId,
     friendUsername,
     status,
+    disabled = false,
+    isInvited = false,
+    onInviteSuccess,
 }: InviteFriendToBattleButtonProps) => {
     const roomId = useAppSelector(selectRoomId)
     const [inviteFriendToBattle, { isLoading }] =
         useInviteFriendToBattleMutation()
     const config = statusConfig[status]
-    const Icon = roomId ? config.icon : Gamepad2
-    const isDisabled = config.disabled || isLoading || !roomId
-    const label = roomId ? config.label : 'Нет комнаты'
+    const Icon = isInvited ? Check : roomId ? config.icon : Gamepad2
+    const isDisabled = config.disabled || isLoading || !roomId || disabled
+    const label = isInvited
+        ? 'Приглашён'
+        : roomId
+          ? config.label
+          : 'Нет комнаты'
 
     const handleInvite = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation()
 
-        if (isDisabled || !roomId) return
+        if (isDisabled || !roomId || isInvited) return
 
         try {
             await inviteFriendToBattle({
@@ -71,6 +81,7 @@ export const InviteFriendToBattleButton = ({
             toast.success('Приглашение отправлено', {
                 description: `Приглашение для ${friendUsername} отправлено`,
             })
+            onInviteSuccess?.(friendId)
         } catch {
             toast.error('Не удалось отправить приглашение')
         }
@@ -80,16 +91,28 @@ export const InviteFriendToBattleButton = ({
         <Button
             type="button"
             size="sm"
-            disabled={isDisabled}
+            disabled={isDisabled || isInvited}
             className={cn(
                 'min-w-[112px] rounded-2xl font-luckiest tracking-wider',
-                roomId ? config.className : 'bg-slate-100 text-slate-400',
+                isInvited
+                    ? 'bg-emerald-50 text-emerald-600'
+                    : roomId
+                      ? config.className
+                      : 'bg-slate-100 text-slate-400',
             )}
-            title={!roomId ? 'Приглашение доступно только из комнаты' : label}
+            title={
+                !roomId
+                    ? 'Приглашение доступно только из комнаты'
+                    : isInvited
+                      ? `${friendUsername} уже приглашён`
+                      : label
+            }
             aria-label={
-                roomId
-                    ? `Пригласить ${friendUsername} в игру`
-                    : 'Приглашение доступно только из комнаты'
+                isInvited
+                    ? `${friendUsername} уже приглашён`
+                    : roomId
+                      ? `Пригласить ${friendUsername} в игру`
+                      : 'Приглашение доступно только из комнаты'
             }
             onClick={handleInvite}
         >
