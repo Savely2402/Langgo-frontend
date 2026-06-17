@@ -3,6 +3,7 @@ import { UserCheck, UserPlus } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/shared/ui/Button'
 import { Spinner } from '@/shared/ui/Spinner'
+import { useSendFriendRequestMutation } from '../api/sendFriendRequestApi'
 
 interface SendFriendRequestButtonProps {
     userId: number
@@ -15,9 +16,9 @@ export const SendFriendRequestButton = ({
     username,
     isFriend,
 }: SendFriendRequestButtonProps) => {
-    const [isSending, setIsSending] = useState(false)
     const [isSent, setIsSent] = useState(false)
-    const isDisabled = isFriend || isSent || isSending
+    const [sendFriendRequest, { isLoading }] = useSendFriendRequestMutation()
+    const isDisabled = isFriend || isSent || isLoading
 
     const handleSendRequest = async (
         event: React.MouseEvent<HTMLButtonElement>,
@@ -26,16 +27,17 @@ export const SendFriendRequestButton = ({
 
         if (isDisabled) return
 
-        setIsSending(true)
+        try {
+            await sendFriendRequest({ friendId: userId }).unwrap()
 
-        await new Promise((resolve) => setTimeout(resolve, 500))
+            toast.success('Заявка отправлена', {
+                description: `Заявка для ${username} отправлена`,
+            })
 
-        toast.success(`Заявка для ${username} отправлена`, {
-            description: `Mock user id: ${userId}`,
-        })
-
-        setIsSent(true)
-        setIsSending(false)
+            setIsSent(true)
+        } catch {
+            toast.error('Не удалось отправить заявку')
+        }
     }
 
     return (
@@ -51,7 +53,7 @@ export const SendFriendRequestButton = ({
             }
             onClick={handleSendRequest}
         >
-            {isSending ? (
+            {isLoading ? (
                 <Spinner className="size-4" />
             ) : isFriend || isSent ? (
                 <UserCheck className="size-4" />
