@@ -1,9 +1,11 @@
-import { useState } from 'react'
 import { Gamepad2, Swords, WifiOff } from 'lucide-react'
 import { toast } from 'sonner'
+import { selectRoomId } from '@/entities/game'
 import { cn } from '@/shared/lib/classNames'
+import { useAppSelector } from '@/shared/lib/store'
 import { Button } from '@/shared/ui/Button'
 import { Spinner } from '@/shared/ui/Spinner'
+import { useInviteFriendToBattleMutation } from '../api/inviteFriendToBattleApi'
 
 export type FriendBattleInviteStatus = 'online' | 'offline' | 'inGame'
 
@@ -47,38 +49,51 @@ export const InviteFriendToBattleButton = ({
     friendUsername,
     status,
 }: InviteFriendToBattleButtonProps) => {
-    const [isSending, setIsSending] = useState(false)
+    const roomId = useAppSelector(selectRoomId)
+    const [inviteFriendToBattle, { isLoading }] =
+        useInviteFriendToBattleMutation()
     const config = statusConfig[status]
-    const Icon = config.icon
+    const Icon = roomId ? config.icon : Gamepad2
+    const isDisabled = config.disabled || isLoading || !roomId
+    const label = roomId ? config.label : 'Нет комнаты'
 
     const handleInvite = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation()
 
-        if (config.disabled || isSending) return
+        if (isDisabled || !roomId) return
 
-        setIsSending(true)
+        try {
+            await inviteFriendToBattle({
+                roomId,
+                body: { userId: friendId },
+            }).unwrap()
 
-        await new Promise((resolve) => setTimeout(resolve, 600))
-
-        toast.success(`Приглашение для ${friendUsername} отправлено`, {
-            description: `Mock invite id: ${friendId}`,
-        })
-
-        setIsSending(false)
+            toast.success('Приглашение отправлено', {
+                description: `Приглашение для ${friendUsername} отправлено`,
+            })
+        } catch {
+            toast.error('Не удалось отправить приглашение')
+        }
     }
 
     return (
         <Button
             type="button"
             size="sm"
-            disabled={config.disabled || isSending}
+            disabled={isDisabled}
             className={cn(
                 'min-w-[112px] rounded-2xl font-luckiest tracking-wider',
-                config.className,
+                roomId ? config.className : 'bg-slate-100 text-slate-400',
             )}
+            title={!roomId ? 'Приглашение доступно только из комнаты' : label}
+            aria-label={
+                roomId
+                    ? `Пригласить ${friendUsername} в игру`
+                    : 'Приглашение доступно только из комнаты'
+            }
             onClick={handleInvite}
         >
-            {isSending ? (
+            {isLoading ? (
                 <>
                     <Spinner className="size-4" />
                     Отправляем...
@@ -86,7 +101,7 @@ export const InviteFriendToBattleButton = ({
             ) : (
                 <>
                     <Icon className="size-4" />
-                    {config.label}
+                    {label}
                 </>
             )}
         </Button>
