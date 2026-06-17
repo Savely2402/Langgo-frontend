@@ -1,10 +1,16 @@
-import { selectRoundOptions, useAnswerSubmission } from '@/entities/game' // Импортируем только то, что нужно для UI
+import {
+    gameRealtimeApi,
+    selectRoomId,
+    selectRoundOptions,
+    useAnswerSubmission,
+} from '@/entities/game'
 import { useUser } from '@/entities/user'
 import { useAppSelector } from '@/shared/lib/store'
 import { TestOptionButton, type TestOptionStatus } from './TestOptionButton'
 
 export const ChooseTestAnswerForm = () => {
     const { user } = useUser()
+    const roomId = useAppSelector(selectRoomId)
     const options = useAppSelector(selectRoundOptions) || []
 
     const { formStatus, currentAnswer, submitAnswer } = useAnswerSubmission(
@@ -28,16 +34,30 @@ export const ChooseTestAnswerForm = () => {
         return 'idle'
     }
 
-    if (!options.length) return null
+    if (!user || !roomId || !options.length) return null
+
+    const handleChooseOption = async (option: string, optionIndex: number) => {
+        if (formStatus !== 'idle') return
+
+        console.log(option)
+
+        submitAnswer(option)
+
+        try {
+            await gameRealtimeApi.sendAnswer({ roomId, answer: optionIndex })
+        } catch (error) {
+            console.error('Ошибка отправки ответа:', error)
+        }
+    }
 
     return (
         <div className="flex w-full flex-col gap-4">
-            {options.map((option) => (
+            {options.map((option, index) => (
                 <TestOptionButton
                     key={option}
                     text={option}
                     status={getButtonStatus(option)}
-                    onClick={() => submitAnswer(option)}
+                    onClick={() => handleChooseOption(option, index)}
                 />
             ))}
         </div>

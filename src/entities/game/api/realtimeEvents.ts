@@ -76,12 +76,14 @@ export const subscribeGameHubEvents = (
         )
     }
     const handleStartNewRound = (data: StartRoundEventDto) => {
+        const roundType = data.isChoiceRound ? 'test' : 'manual'
+
         store.dispatch(
             startNewRound({
-                options: data.options,
+                options: roundType === 'test' ? (data.options ?? []) : [],
                 currentQuestion: data.newWord,
                 currentRound: data.roundNumber,
-                roundType: 'manual',
+                roundType,
                 roundEndTime: data.timeForRoundSeconds,
             }),
         )
