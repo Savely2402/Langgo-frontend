@@ -1,6 +1,9 @@
 import { AUTH_TAG, baseApi, isRtkQueryError } from '@/shared/api'
-import { mapAuthResponseToUser } from '../lib/mapUser'
-import type { User } from '../model/types'
+import {
+    mapAuthResponseToUser,
+    mapUserProfileDtoToUserProfile,
+} from '../lib/mapUser'
+import type { User, UserProfile } from '../model/types'
 
 export const userApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
@@ -31,7 +34,19 @@ export const userApi = baseApi.injectEndpoints({
                 }
             },
         }),
+        getUserById: build.query<UserProfile, string | number>({
+            query: (id) => ({
+                url: `user/${id}`,
+                method: 'GET',
+            }),
+            transformResponse: mapUserProfileDtoToUserProfile,
+        }),
     }),
 })
 
-export const { useLazyGetMeQuery, useGetMeQuery } = userApi
+export const {
+    useLazyGetMeQuery,
+    useGetMeQuery,
+    useGetUserByIdQuery,
+    useLazyGetUserByIdQuery,
+} = userApi
