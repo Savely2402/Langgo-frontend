@@ -1,6 +1,7 @@
 export {
     mapAuthResponseToUser,
     mapUserProfileDtoToUserProfile,
+    mapUserProfileDtosToUserProfiles,
 } from './lib/mapUser'
 export { useUser } from './model/useUser'
 export { userApi } from './api/userApi'

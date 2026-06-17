@@ -28,3 +28,9 @@ export const mapUserProfileDtoToUserProfile = (
         rating: 0,
     }
 }
+
+export const mapUserProfileDtosToUserProfiles = (
+    response: UserProfileDto[],
+): UserProfile[] => {
+    return response.map(mapUserProfileDtoToUserProfile)
+}

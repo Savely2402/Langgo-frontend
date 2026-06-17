@@ -2,6 +2,7 @@ import { AUTH_TAG, baseApi, isRtkQueryError } from '@/shared/api'
 import {
     mapAuthResponseToUser,
     mapUserProfileDtoToUserProfile,
+    mapUserProfileDtosToUserProfiles,
 } from '../lib/mapUser'
 import type { User, UserProfile } from '../model/types'
 
@@ -41,6 +42,13 @@ export const userApi = baseApi.injectEndpoints({
             }),
             transformResponse: mapUserProfileDtoToUserProfile,
         }),
+        getUserFriends: build.query<UserProfile[], string | number>({
+            query: (userId) => ({
+                url: `friends/${userId}`,
+                method: 'GET',
+            }),
+            transformResponse: mapUserProfileDtosToUserProfiles,
+        }),
     }),
 })
 
@@ -49,4 +57,6 @@ export const {
     useGetMeQuery,
     useGetUserByIdQuery,
     useLazyGetUserByIdQuery,
+    useGetUserFriendsQuery,
+    useLazyGetUserFriendsQuery,
 } = userApi
