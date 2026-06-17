@@ -32,10 +32,18 @@ export interface GameSettings {
     roundsAmount: number
 }
 
+export interface GameInvite {
+    roomId: string
+    hostUserId: number
+    hostUsername: string
+    gameSettings: GameSettings
+}
+
 export interface GameState {
     roomId: string | null
     status: GameStatus
     settings: GameSettings | null
+    invite: GameInvite | null
     startTime: string | null
     currentRound: number
     currentQuestion: string | null

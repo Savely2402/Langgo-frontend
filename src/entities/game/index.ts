@@ -10,6 +10,8 @@ export {
     closeGameConnection,
     connectionEstablished,
     setGameSettings,
+    setGameInvite,
+    clearGameInvite,
     setAnswerResult,
     clearAnswerResult,
 } from './model/gameSlice'
@@ -19,6 +21,7 @@ export {
     selectCurrentQuestion,
     selectGameScores,
     selectGameSettings,
+    selectGameInvite,
     selectGameStartTime,
     selectGameStatus,
     selectGameWinnerId,
@@ -39,13 +42,13 @@ export {
 export { useCreateGameMutation } from './api/gameApi'
 export { subscribeGameHubEvents } from './api/realtimeEvents'
 
-export type { EndRoundPayload, Player } from './model/types'
+export type { EndRoundPayload, GameInvite, Player } from './model/types'
 
 export { default as gameReducer } from './model/gameSlice'
 
 export { useAnswerSubmission } from './lib/useAnswerSubmission'
 
-export type { CreateGameRequest } from './api/types'
+export type { CreateGameRequest, GameSettingsDto } from './api/types'
 
 export type {
     StartGameResponse,

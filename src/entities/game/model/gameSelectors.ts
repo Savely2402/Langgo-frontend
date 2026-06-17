@@ -1,6 +1,7 @@
 export const selectRoomId = (state: RootState) => state.game.roomId
 export const selectGameStatus = (state: RootState) => state.game.status
 export const selectGameSettings = (state: RootState) => state.game.settings
+export const selectGameInvite = (state: RootState) => state.game.invite
 export const selectGameStartTime = (state: RootState) => state.game.startTime
 export const selectGameScores = (state: RootState) => state.game.scores
 export const selectGameWinnerId = (state: RootState) => state.game.gameWinnerId

@@ -3,4 +3,4 @@ export type {
     RequestRespondBattleInviteBody,
     RespondBattleInviteParams,
 } from './api/types'
-export { MockBattleInviteLayer } from './ui/MockBattleInviteLayer'
+export { BattleInviteLayer } from './ui/BattleInviteLayer'
