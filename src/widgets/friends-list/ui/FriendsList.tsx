@@ -1,18 +1,9 @@
 import { useNavigate } from 'react-router'
 import { UserCard, useGetUserFriendsQuery, useUser } from '@/entities/user'
 import { DeleteFriendButton } from '@/features/delete-friend'
-import {
-    InviteFriendToBattleButton,
-    type FriendBattleInviteStatus,
-} from '@/features/invite-friend-to-battle'
+import { InviteFriendToBattleButton } from '@/features/invite-friend-to-battle'
 import { routes } from '@/shared/config'
 import { Spinner } from '@/shared/ui/Spinner'
-
-const getMockInviteStatus = (friendId: number): FriendBattleInviteStatus => {
-    const statuses: FriendBattleInviteStatus[] = ['online', 'inGame', 'offline']
-
-    return statuses[friendId % statuses.length]
-}
 
 export const FriendsList = () => {
     const navigate = useNavigate()
@@ -67,7 +58,7 @@ export const FriendsList = () => {
                             <InviteFriendToBattleButton
                                 friendId={friend.id}
                                 friendUsername={friend.username}
-                                status={getMockInviteStatus(friend.id)}
+                                status="online"
                             />
                             <DeleteFriendButton
                                 friendId={friend.id}
