@@ -10,7 +10,7 @@ import {
     setRoundStatus,
 } from '@/entities/game'
 import { ChooseTestAnswerForm } from '@/features/choose-test-answer'
-import { SendManualAnswerForm } from '@/features/send-manual-answer/'
+import { SendManualAnswerForm } from '@/features/send-manual-answer'
 import { cn } from '@/shared/lib/classNames'
 import { useCountdown } from '@/shared/lib/hooks'
 import { useAppDispatch, useAppSelector } from '@/shared/lib/store'
@@ -67,7 +67,7 @@ export const ActiveGameWidget = () => {
                     <div className="mb-2 flex items-end justify-between">
                         <div className="flex flex-col text-[10px] leading-tight font-black tracking-wider text-primary uppercase">
                             <span>Осталось</span>
-                            <span>Времени</span>
+                            <span>времени</span>
                         </div>
 
                         <div className="flex items-center gap-1 rounded-full bg-[#38BDF8] px-2.5 py-0.5 text-sm font-bold text-white shadow-sm">

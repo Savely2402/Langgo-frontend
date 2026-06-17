@@ -21,6 +21,8 @@ export const gameRealtimeApi = {
         roomId,
         answer,
     }: CheckAnswerRequest): Promise<void> => {
+        console.log('Передаваемые данные в SubmitAnswer: ', answer)
+
         await hubConnection.invoke<boolean>('SubmitAnswer', roomId, answer)
     },
 }

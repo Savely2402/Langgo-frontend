@@ -1,5 +1,5 @@
 import { memo, useState } from 'react'
-import { Send, Loader2 } from 'lucide-react'
+import { Loader2, Send } from 'lucide-react'
 import {
     clearAnswerResult,
     gameRealtimeApi,

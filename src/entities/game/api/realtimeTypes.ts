@@ -14,8 +14,9 @@ export interface RoomStateEventDto {
 export interface StartRoundEventDto {
     newWord: string
     roundNumber: number
-    roundType: 'test' | 'manual'
+    roundType?: 'test' | 'manual'
     timeForRoundSeconds: string
+    isChoiceRound: boolean
     options?: string[]
 }
 
@@ -34,7 +35,7 @@ export interface EndGameEventDto {
 
 export interface CheckAnswerRequest {
     roomId: string
-    answer: string
+    answer: string | number
 }
 
 export interface AnswerResultEventDto {
