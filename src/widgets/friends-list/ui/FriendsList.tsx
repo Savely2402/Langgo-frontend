@@ -1,57 +1,63 @@
 import { useNavigate } from 'react-router'
-import { UserCard, type UserProfile } from '@/entities/user'
+import { UserCard, useGetUserFriendsQuery, useUser } from '@/entities/user'
 import { DeleteFriendButton } from '@/features/delete-friend'
 import {
     InviteFriendToBattleButton,
     type FriendBattleInviteStatus,
 } from '@/features/invite-friend-to-battle'
 import { routes } from '@/shared/config'
+import { Spinner } from '@/shared/ui/Spinner'
 
-type MockFriend = UserProfile & {
-    status: FriendBattleInviteStatus
+const getMockInviteStatus = (friendId: number): FriendBattleInviteStatus => {
+    const statuses: FriendBattleInviteStatus[] = ['online', 'inGame', 'offline']
+
+    return statuses[friendId % statuses.length]
 }
-
-const mockFriends: MockFriend[] = [
-    {
-        id: 2,
-        username: 'word_wizard',
-        fullname: 'Алексей',
-        avatarUrl: 'https://api.dicebear.com/10.x/avataaars/svg?seed=ehw68ff7',
-        nativeLanguage: 'Ru',
-        learningLanguage: 'En',
-        rating: 1840,
-        status: 'online',
-    },
-    {
-        id: 3,
-        username: 'grammar_runner',
-        fullname: 'Мария',
-        avatarUrl:
-            'https://api.dicebear.com/10.x/avataaars/svg?eyesVariant=closed,default,happy,side,squint,wink&mouthVariant=concerned,default,disbelief,eating,serious,smile,tongue,twinkle,vomit&seed=rbige7xb',
-        nativeLanguage: 'En',
-        learningLanguage: 'Ru',
-        rating: 1510,
-        status: 'inGame',
-    },
-    {
-        id: 4,
-        username: 'quiet_polyglot',
-        fullname: 'Илья',
-        avatarUrl:
-            'https://api.dicebear.com/10.x/avataaars/svg?eyesVariant=closed,default,happy,side,squint,wink&mouthVariant=concerned,default,disbelief,eating,serious,smile,tongue,twinkle,vomit&seed=h4k295bw',
-        nativeLanguage: 'Ru',
-        learningLanguage: 'En',
-        rating: 1280,
-        status: 'offline',
-    },
-]
 
 export const FriendsList = () => {
     const navigate = useNavigate()
+    const { user } = useUser()
+    const {
+        data: friends = [],
+        isLoading,
+        isFetching,
+        isError,
+    } = useGetUserFriendsQuery(user?.id ?? 0, {
+        skip: !user,
+    })
+
+    if (!user) {
+        return null
+    }
+
+    if (isLoading || isFetching) {
+        return (
+            <div className="flex items-center justify-center gap-2 rounded-[28px] border border-dashed border-slate-200 bg-white p-8 text-sm font-semibold text-slate-400">
+                <Spinner className="size-4" />
+                Загружаем друзей
+            </div>
+        )
+    }
+
+    if (isError) {
+        return (
+            <div className="rounded-[28px] border border-dashed border-destructive/30 bg-destructive/5 p-8 text-center text-sm font-semibold text-destructive">
+                Не удалось загрузить друзей
+            </div>
+        )
+    }
+
+    if (friends.length === 0) {
+        return (
+            <div className="rounded-[28px] border border-dashed border-slate-200 bg-white p-8 text-center text-sm font-semibold text-slate-400">
+                У вас пока нет друзей
+            </div>
+        )
+    }
 
     return (
         <div className="flex flex-col gap-3">
-            {mockFriends.map((friend) => (
+            {friends.map((friend) => (
                 <UserCard
                     key={friend.id}
                     user={friend}
@@ -61,7 +67,7 @@ export const FriendsList = () => {
                             <InviteFriendToBattleButton
                                 friendId={friend.id}
                                 friendUsername={friend.username}
-                                status={friend.status}
+                                status={getMockInviteStatus(friend.id)}
                             />
                             <DeleteFriendButton
                                 friendId={friend.id}
