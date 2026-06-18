@@ -64,8 +64,6 @@ export const subscribeGameHubEvents = (
     }
 
     const handleEndRound = (data: EndRoundEventDto) => {
-        console.log('End round: ', data)
-
         store.dispatch(
             endRound({
                 lastRoundWinnerId: data.winnerId,
@@ -89,8 +87,6 @@ export const subscribeGameHubEvents = (
         )
     }
     const handleEndGame = (data: EndGameEventDto['scores']) => {
-        console.log(data)
-
         store.dispatch(
             endGame({
                 scores: data,

@@ -24,7 +24,6 @@ export const SurrenderGameButton = () => {
     const isButtonDisabled = roundStatus === 'revealing'
 
     const handleSurrender = () => {
-        console.log('Пользователь сдался!')
         setOpenedInStatus(null)
     }
 

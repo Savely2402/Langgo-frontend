@@ -39,12 +39,13 @@ export const ChooseTestAnswerForm = () => {
     const handleChooseOption = async (option: string, optionIndex: number) => {
         if (formStatus !== 'idle') return
 
-        console.log(option)
-
         submitAnswer(option)
 
         try {
-            await gameRealtimeApi.sendAnswer({ roomId, answer: optionIndex })
+            await gameRealtimeApi.sendAnswer({
+                roomId,
+                answer: String(optionIndex),
+            })
         } catch (error) {
             console.error('Ошибка отправки ответа:', error)
         }

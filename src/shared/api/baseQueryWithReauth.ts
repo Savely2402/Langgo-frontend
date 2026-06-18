@@ -45,8 +45,6 @@ export const baseQueryWithReauth: BaseQueryFn<
                     extraOptions,
                 )
 
-                console.log(refreshResult)
-
                 if (
                     refreshResult.data &&
                     typeof refreshResult.data === 'object' &&

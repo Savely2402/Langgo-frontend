@@ -21,8 +21,6 @@ export const MatchRoomPage = () => {
     }
 
     if (gameStatus === 'starting') {
-        console.log('Hello')
-
         return (
             <>
                 <MatchFoundOverlay />

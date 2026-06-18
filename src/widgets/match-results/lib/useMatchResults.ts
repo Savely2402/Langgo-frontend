@@ -14,14 +14,10 @@ export const useMatchResults = () => {
         selectPlayersForGame(state, user?.id),
     )
 
-    // console.log("WINNER ID: ", winnerId)
-
     const myScore =
         useAppSelector((state) => selectUserScore(state, user?.id)) ?? 0
     const opponentScore =
         useAppSelector((state) => selectUserScore(state, opponent?.id)) ?? 0
-
-    // console.log("My SCORED: ", myScore)
 
     const gameSettings = useAppSelector(selectGameSettings)
     const ratingChange = 45
