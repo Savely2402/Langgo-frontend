@@ -14,6 +14,8 @@ export {
     useLazyGetMeQuery,
     useLazyGetUserByIdQuery,
     useLazyGetUserFriendsQuery,
+    useLazySearchUsersQuery,
+    useSearchUsersQuery,
 } from './api/userApi'
 export type { User, UserProfile } from './model/types'
 export type { AuthResponse, UserDTO, UserProfileDto } from './api/types'
