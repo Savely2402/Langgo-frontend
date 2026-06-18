@@ -64,6 +64,14 @@ export const userApi = baseApi.injectEndpoints({
             transformResponse: mapUserProfileDtosToUserProfiles,
             providesTags: [INCOMING_FRIEND_REQUESTS_TAG],
         }),
+        searchUsers: build.query<UserProfile[], string>({
+            query: (username) => ({
+                url: 'users/search',
+                method: 'GET',
+                params: { username },
+            }),
+            transformResponse: mapUserProfileDtosToUserProfiles,
+        }),
     }),
 })
 
@@ -76,4 +84,6 @@ export const {
     useLazyGetUserFriendsQuery,
     useGetIncomingFriendRequestsQuery,
     useLazyGetIncomingFriendRequestsQuery,
+    useSearchUsersQuery,
+    useLazySearchUsersQuery,
 } = userApi
