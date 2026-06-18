@@ -18,8 +18,6 @@ export const mapAuthResponseToUser = (response: UserDTO): User => {
 export const mapUserProfileDtoToUserProfile = (
     response: UserProfileDto,
 ): UserProfile => {
-    console.log(response)
-
     return {
         id: response.id ?? response.userId ?? 0,
         username: response.username,

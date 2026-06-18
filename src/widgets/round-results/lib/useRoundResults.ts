@@ -19,8 +19,6 @@ export const useRoundResults = () => {
         selectPlayersForGame(state, user?.id),
     )
 
-    console.log('Opponent: ', opponent)
-
     const myScore = useAppSelector((state) => selectUserScore(state, user?.id))
     const opponentScore = useAppSelector((state) =>
         selectUserScore(state, opponent?.id),

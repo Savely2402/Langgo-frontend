@@ -102,8 +102,6 @@ export const GameSetupForm = () => {
         try {
             const result = await createGame(createGameBody).unwrap()
 
-            console.log(result)
-
             dispatch(setGameSettings(result.settings))
 
             navigate(routes.lobby(result.roomId))

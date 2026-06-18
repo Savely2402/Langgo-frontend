@@ -35,7 +35,7 @@ export interface EndGameEventDto {
 
 export interface CheckAnswerRequest {
     roomId: string
-    answer: string | number
+    answer: string
 }
 
 export interface AnswerResultEventDto {

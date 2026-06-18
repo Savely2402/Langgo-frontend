@@ -46,7 +46,6 @@ export const signalrMiddleware: Middleware<object, RootState> =
                         return
                     }
 
-                    console.log(`Успешный вход в комнату ${roomId}`)
                     store.dispatch(connectionEstablished())
                 })
                 .catch((error) => {

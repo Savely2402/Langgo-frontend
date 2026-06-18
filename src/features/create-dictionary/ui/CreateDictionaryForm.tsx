@@ -35,8 +35,6 @@ export const CreateDictionaryForm = () => {
 
     const onSubmit = async (data: DictionaryFormSchema) => {
         try {
-            console.log('Отправка данных на сервер:', data)
-
             const words = data.words.filter(
                 (w) =>
                     w.originalWord.trim() !== '' &&
