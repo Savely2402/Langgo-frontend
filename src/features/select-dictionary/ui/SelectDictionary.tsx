@@ -1,5 +1,7 @@
+import { skipToken } from '@reduxjs/toolkit/query'
 import { Select as SelectPrimitive } from 'radix-ui'
 import { useGetUserDictionariesQuery } from '@/entities/dictionary'
+import { useUser } from '@/entities/user'
 import { cn } from '@/shared/lib/classNames'
 import {
     Select,
@@ -19,7 +21,11 @@ export const SelectDictionary = ({
     hasError,
     ...props
 }: SelectDictionaryProps) => {
-    const { data, isLoading, isError } = useGetUserDictionariesQuery()
+    const { user } = useUser()
+
+    const { data, isLoading, isError } = useGetUserDictionariesQuery(
+        user?.id ?? skipToken,
+    )
 
     const renderContent = () => {
         if (isLoading) {

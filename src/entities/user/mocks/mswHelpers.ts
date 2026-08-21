@@ -1,14 +1,12 @@
 import { HttpResponse } from 'msw'
 import { type MockUser } from './userMocks'
-import type { AuthResponseDTO } from '../api/types'
+import type { UserResponseDTO } from '../api/types'
 
 export function sendUserData(user: MockUser) {
-    const response = HttpResponse.json<AuthResponseDTO>(
+    const response = HttpResponse.json<UserResponseDTO>(
         {
-            user: {
-                ...user.userData,
-                email: user.email,
-            },
+            ...user.userData,
+            email: user.email,
         },
         {
             status: 200,

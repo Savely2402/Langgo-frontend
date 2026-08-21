@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router'
 import { GameSetupPage } from '@/pages/game-setup'
 import { HomePage } from '@/pages/home'
+import { MatchRoomPage } from '@/pages/match-room'
 import { routes, routeSegments } from '@/shared/config'
 import { AppLayout } from '../layouts/AppLayout'
 import { AuthGuard } from './AuthGuard'
@@ -39,10 +40,75 @@ export const router = createBrowserRouter([
                     }
                 },
             },
+            {
+                path: routeSegments.register,
+                lazy: async () => {
+                    const { RegisterPage } = await import('@/pages/register')
+
+                    return {
+                        Component: () => (
+                            <AuthGuard>
+                                <RegisterPage />
+                            </AuthGuard>
+                        ),
+                    }
+                },
+            },
 
             {
                 path: routeSegments.gameSetup,
                 Component: GameSetupPage,
+            },
+            {
+                path: `${routeSegments.lobby}/:roomId`,
+                Component: MatchRoomPage,
+            },
+            {
+                path: routeSegments.dictionaries,
+                children: [
+                    {
+                        index: true,
+                        lazy: async () => {
+                            const { MyDictionariesPage } =
+                                await import('@/pages/my-dictionaries')
+                            return { Component: MyDictionariesPage }
+                        },
+                    },
+
+                    {
+                        path: routeSegments.add,
+                        lazy: async () => {
+                            const { AddDictionaryPage } =
+                                await import('@/pages/add-dictionary')
+                            return { Component: AddDictionaryPage }
+                        },
+                    },
+                ],
+            },
+            {
+                path: `${routeSegments.profile}/:id`,
+                lazy: async () => {
+                    const { ProfilePage } = await import('@/pages/profile')
+
+                    return { Component: ProfilePage }
+                },
+            },
+            {
+                path: `${routeSegments.profile}/${routeSegments.settings}`,
+                lazy: async () => {
+                    const { ProfileSettingsPage } =
+                        await import('@/pages/profile-settings')
+
+                    return { Component: ProfileSettingsPage }
+                },
+            },
+            {
+                path: `${routeSegments.friends}`,
+                lazy: async () => {
+                    const { FriendsPage } = await import('@/pages/friends')
+
+                    return { Component: FriendsPage }
+                },
             },
         ],
     },

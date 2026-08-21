@@ -4,7 +4,7 @@ import { sendUserData } from './mswHelpers'
 import { MOCK_USERS } from './userMocks'
 
 export const userHandlers = [
-    http.get('/api/user/me', ({ cookies }) => {
+    http.get('/api/user/profile', ({ cookies }) => {
         if (cookies.accessToken) {
             const user = MOCK_USERS.find(
                 (user) => user.userData.id === Number(cookies.accessToken),

@@ -1,12 +1,22 @@
-import { AUTH_TAG, baseApi, isRtkQueryError } from '@/shared/api'
-import { mapAuthResponseToUser } from '../lib/mapUser'
-import type { User } from '../model/types'
+import {
+    AUTH_TAG,
+    baseApi,
+    INCOMING_FRIEND_REQUESTS_TAG,
+    isRtkQueryError,
+    USER_FRIENDS_TAG,
+} from '@/shared/api'
+import {
+    mapAuthResponseToUser,
+    mapUserProfileDtoToUserProfile,
+    mapUserProfileDtosToUserProfiles,
+} from '../lib/mapUser'
+import type { User, UserProfile } from '../model/types'
 
 export const userApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         getMe: build.query<User | null, void>({
             query: () => ({
-                url: 'api/user/me',
+                url: 'user/profile',
                 method: 'GET',
             }),
             providesTags: (result) => (result ? [AUTH_TAG] : []),
@@ -31,7 +41,49 @@ export const userApi = baseApi.injectEndpoints({
                 }
             },
         }),
+        getUserById: build.query<UserProfile, string | number>({
+            query: (id) => ({
+                url: `user/${id}`,
+                method: 'GET',
+            }),
+            transformResponse: mapUserProfileDtoToUserProfile,
+        }),
+        getUserFriends: build.query<UserProfile[], string | number>({
+            query: (userId) => ({
+                url: `friends/${userId}`,
+                method: 'GET',
+            }),
+            transformResponse: mapUserProfileDtosToUserProfiles,
+            providesTags: [USER_FRIENDS_TAG],
+        }),
+        getIncomingFriendRequests: build.query<UserProfile[], void>({
+            query: () => ({
+                url: 'friends/requests/incoming',
+                method: 'GET',
+            }),
+            transformResponse: mapUserProfileDtosToUserProfiles,
+            providesTags: [INCOMING_FRIEND_REQUESTS_TAG],
+        }),
+        searchUsers: build.query<UserProfile[], string>({
+            query: (username) => ({
+                url: 'users/search',
+                method: 'GET',
+                params: { username },
+            }),
+            transformResponse: mapUserProfileDtosToUserProfiles,
+        }),
     }),
 })
 
-export const { useLazyGetMeQuery, useGetMeQuery } = userApi
+export const {
+    useLazyGetMeQuery,
+    useGetMeQuery,
+    useGetUserByIdQuery,
+    useLazyGetUserByIdQuery,
+    useGetUserFriendsQuery,
+    useLazyGetUserFriendsQuery,
+    useGetIncomingFriendRequestsQuery,
+    useLazyGetIncomingFriendRequestsQuery,
+    useSearchUsersQuery,
+    useLazySearchUsersQuery,
+} = userApi

@@ -21,7 +21,7 @@ const ForgotPasswordLink = () => {
                 className="group relative text-sm font-semibold text-primary/80 transition-colors hover:text-primary"
                 to={'/'}
             >
-                <HoverUnderline>Forgot Password?</HoverUnderline>
+                <HoverUnderline>Забыли пароль?</HoverUnderline>
             </Link>
         </div>
     )
@@ -72,7 +72,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
                         control={control}
                         errors={errors}
                         fieldType="email"
-                        fieldLabelText="Email address"
+                        fieldLabelText="Почта"
                         placeholder="you@example.com"
                         autoComplete="email"
                         icon={<Icon Svg={EmailSvg} />}
@@ -83,8 +83,8 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
                         control={control}
                         errors={errors}
                         fieldType="password"
-                        fieldLabelText="Password"
-                        placeholder="Enter password"
+                        fieldLabelText="Пароль"
+                        placeholder="Введите пароль..."
                         autoComplete="off"
                         icon={<Icon Svg={LockSvg} />}
                     />
@@ -95,9 +95,9 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
                 <Button
                     disabled={isLoading}
                     type="submit"
-                    className="h-[42px] w-full"
+                    className="h-[42px] w-full font-luckiest text-lg tracking-widest"
                 >
-                    Sign in
+                    Войти
                     {isLoading && <Spinner />}
                 </Button>
             </Field>

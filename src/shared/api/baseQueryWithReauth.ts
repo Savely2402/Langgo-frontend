@@ -19,7 +19,7 @@ export const baseQueryWithReauth: BaseQueryFn<
 
     const url = typeof args === 'string' ? args : args.url
 
-    const AUTH_ENDPOINTS = ['api/auth/login', 'api/auth/register']
+    const AUTH_ENDPOINTS = ['auth/login', 'auth/register']
 
     if (
         result.error &&
@@ -29,12 +29,38 @@ export const baseQueryWithReauth: BaseQueryFn<
         if (!mutex.isLocked()) {
             const release = await mutex.acquire()
             try {
+                const refreshToken = localStorage.getItem('refreshToken')
+
+                if (!refreshToken) {
+                    return result
+                }
+
                 const refreshResult = await baseQuery(
-                    { url: 'api/auth/refresh', method: 'POST' },
+                    {
+                        url: 'auth/refresh',
+                        method: 'POST',
+                        body: { token: refreshToken },
+                    },
                     api,
                     extraOptions,
                 )
-                if (refreshResult.data) {
+
+                if (
+                    refreshResult.data &&
+                    typeof refreshResult.data === 'object' &&
+                    'accessToken' in refreshResult.data &&
+                    'refreshToken' in refreshResult.data &&
+                    typeof refreshResult.data.accessToken === 'string' &&
+                    typeof refreshResult.data.refreshToken === 'string'
+                ) {
+                    localStorage.setItem(
+                        'refreshToken',
+                        refreshResult.data.refreshToken,
+                    )
+                    localStorage.setItem(
+                        'accessToken',
+                        refreshResult.data.accessToken,
+                    )
                     result = await baseQuery(args, api, extraOptions)
                 }
             } finally {

@@ -1,1 +1,1 @@
-export { FindMatchButton } from './ui/FindMatchButton/FindMatchButton'
+export { FindMatchButton } from './ui/FindMatchButton'

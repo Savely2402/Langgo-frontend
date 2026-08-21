@@ -1,5 +1,5 @@
 import { mapAuthResponseToUser, userApi } from '@/entities/user'
-import type { User } from '@/entities/user'
+import type { AuthResponse, User } from '@/entities/user'
 import { baseApi } from '@/shared/api'
 import { type RequestLoginBody } from './types'
 
@@ -7,14 +7,22 @@ const loginApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         login: build.mutation<User, RequestLoginBody>({
             query: (body) => ({
-                url: 'api/auth/login',
+                url: 'auth/auth',
                 method: 'POST',
                 body,
             }),
-            transformResponse: mapAuthResponseToUser,
+            transformResponse: (response: AuthResponse) => {
+                localStorage.setItem('accessToken', response.accessToken)
+                if (response.refreshToken) {
+                    localStorage.setItem('refreshToken', response.refreshToken)
+                }
+
+                return mapAuthResponseToUser(response.user)
+            },
             async onQueryStarted(_, { dispatch, queryFulfilled }) {
                 try {
                     const { data: user } = await queryFulfilled
+
                     dispatch(
                         userApi.util.upsertQueryData('getMe', undefined, user),
                     )

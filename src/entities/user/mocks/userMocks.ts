@@ -1,7 +1,7 @@
-import type { User } from '../model/types'
+import type { UserResponseDTO } from '../api/types'
 
 export type MockUser = {
-    userData: Omit<User, 'email'>
+    userData: Omit<UserResponseDTO, 'email'>
     email: string
     password: string
 }
@@ -11,8 +11,11 @@ export const MOCK_USERS: MockUser[] = [
         userData: {
             id: 1,
             username: 'john_doe',
-            fullname: 'John Doe',
-            avatarUrl: 'https://i.pravatar.cc/150?u=1',
+            fullname: 'Иван',
+            avatar: 'https://i.pravatar.cc/150?u=1',
+            learningLanguage: 'EN',
+            nativeLanguage: 'RU',
+            rating: 0,
         },
         email: 'user@gmail.com',
         password: 'user123',
@@ -21,8 +24,11 @@ export const MOCK_USERS: MockUser[] = [
         userData: {
             id: 2,
             username: 'jane_smith',
-            fullname: 'Jane Smith',
-            avatarUrl: 'https://i.pravatar.cc/150?u=2',
+            fullname: 'Анна',
+            avatar: 'https://i.pravatar.cc/150?u=2',
+            learningLanguage: 'EN',
+            nativeLanguage: 'RU',
+            rating: 0,
         },
         email: 'jane@gmail.com',
         password: 'jane123',
@@ -31,8 +37,11 @@ export const MOCK_USERS: MockUser[] = [
         userData: {
             id: 3,
             username: 'alex_admin',
-            fullname: 'Alex Johnson',
-            avatarUrl: 'https://i.pravatar.cc/150?u=3',
+            fullname: 'Александр',
+            avatar: 'https://i.pravatar.cc/150?u=3',
+            learningLanguage: 'EN',
+            nativeLanguage: 'RU',
+            rating: 0,
         },
         email: 'alex@gmail.com',
         password: 'alex123',

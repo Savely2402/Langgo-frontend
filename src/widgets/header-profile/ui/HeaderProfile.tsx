@@ -1,10 +1,11 @@
 import { ArrowRight, LogIn } from 'lucide-react'
 import { Link } from 'react-router'
 import { useUser } from '@/entities/user'
-import { RequestsPopover } from '@/features/friends/manage-requests'
+import { routes } from '@/shared/config'
 import { Button } from '@/shared/ui/Button'
 import { Separator } from '@/shared/ui/Separator'
-import { UserDropdown } from '@/widgets/user-dropdown'
+import { FriendRequestsPopover } from './FriendRequestsPopover'
+import { UserDropdown } from './UserDropdown'
 
 const GuestState = () => {
     return (
@@ -14,7 +15,7 @@ const GuestState = () => {
                 className="mx-4 hidden h-6! md:block"
             />
             <Button className="md:hidden" asChild>
-                <Link to={'/login'}>
+                <Link to={routes.login}>
                     <LogIn />
                 </Link>
             </Button>
@@ -24,10 +25,10 @@ const GuestState = () => {
                     className="hover:text-primary"
                     asChild
                 >
-                    <Link to={'/login'}>Login</Link>
+                    <Link to={routes.login}>Login</Link>
                 </Button>
                 <Button variant={'default'} asChild>
-                    <Link to={'/login'}>
+                    <Link to={routes.register}>
                         Register <ArrowRight color="white" />
                     </Link>
                 </Button>
@@ -43,8 +44,10 @@ const UserState = () => {
                 orientation="vertical"
                 className="mx-4 hidden h-6! md:block"
             />
-            <RequestsPopover />
-            <UserDropdown />
+            <div className="flex gap-1">
+                <FriendRequestsPopover />
+                <UserDropdown />
+            </div>
         </>
     )
 }
